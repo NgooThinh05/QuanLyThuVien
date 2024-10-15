@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -13,7 +14,7 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="brandingImageView" fitHeight="407.0" fitWidth="724.0" layoutX="-123.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="brandingImageView" fitHeight="443.0" fitWidth="764.0" layoutX="-163.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../../image/bgrlogin.jpg" />
                </image>
@@ -26,9 +27,9 @@
                      </font>
                   </Label>
                   <TextField fx:id="usernametextfield" layoutX="35.0" layoutY="108.0" prefHeight="26.0" prefWidth="150.0" promptText="username" />
-                  <TextField fx:id="enterpasswordfield" layoutX="35.0" layoutY="154.0" prefHeight="26.0" prefWidth="150.0" promptText="password" />
+                  <PasswordField fx:id="enterpasswordfield" layoutX="35.0" layoutY="154.0" prefHeight="26.0" prefWidth="150.0" promptText="password" />
                   <Button fx:id="loginButton" layoutX="35.0" layoutY="202.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="26.0" prefWidth="71.0" text="Log in" textAlignment="CENTER" />
-                  <Button fx:id="Signupbutton" layoutX="115.0" layoutY="201.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" text="Sign up" textAlignment="CENTER" />
+                  <Button fx:id="Signupbutton" layoutX="115.0" layoutY="201.0" mnemonicParsing="false" onAction="#signupButtonOnAction" prefHeight="26.0" prefWidth="71.0" text="Sign up" textAlignment="CENTER" />
                   <Button fx:id="Cancelbutton" layoutX="37.0" layoutY="240.0" mnemonicParsing="false" onAction="#CancelbuttonOnAction" prefHeight="26.0" prefWidth="145.0" text="Cancel" />
                   <Label fx:id="loginMessagelabel" layoutX="36.0" layoutY="274.0" onDragDetected="#loginButtonOnAction" prefHeight="31.0" prefWidth="158.0" textFill="WHITE" />
                </children>

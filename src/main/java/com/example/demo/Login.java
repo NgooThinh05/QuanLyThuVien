@@ -1,7 +1,9 @@
 package com.example.demo;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
@@ -11,12 +13,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ResourceBundle;
 
 
@@ -31,10 +32,8 @@ public class Login implements Initializable{
     @FXML
     private TextField usernametextfield;
     @FXML
-    private TextField enterpasswordfield;
+    private PasswordField enterpasswordfield;
     @FXML
-    private PasswordField enterpasswordfield1;
-
     private Button loginbutton;
     @FXML
     private Button signupbutton;
@@ -46,9 +45,10 @@ public class Login implements Initializable{
         brandingImageView.setImage(brandingImage);
     }
 
-    public void loginButtonOnAction(ActionEvent event) {
-        if (usernametextfield.getText().isBlank() == false && enterpasswordfield1.getText().isBlank() == false) {
-            loginMessagelabel.setText("Invalid login. Please try again!");
+    public void loginButtonOnAction(ActionEvent event) throws SQLException {
+        if (usernametextfield.getText().isBlank() == false && enterpasswordfield.getText().isBlank() == false) {
+            /*createAccountForm();*/
+            validateLogin();
         } else {
             loginMessagelabel.setText("Invalid login. Please try again!");
         }
@@ -59,27 +59,47 @@ public class Login implements Initializable{
         stage.close();
     }
 
-    public void validateLogin() {
+    public void validateLogin() throws SQLException {
         DatabaseConnection connecnow = new DatabaseConnection();
         Connection connectiBD = connecnow.getConnection();
 
-        String verifylogin = "SELECT count(1) FROM username = '" + usernametextfield + "'AND password= '" + enterpasswordfield.getText() + "'";
+        String verifylogin = "SELECT id FROM account_user WHERE user_name = ? AND pass_word = ?";
 
         try {
-            Statement statement = connectiBD.createStatement();
-            ResultSet resultSet = statement.executeQuery(verifylogin);
+            PreparedStatement preparedStatement = connectiBD.prepareStatement(verifylogin);
+            preparedStatement.setString(1, usernametextfield.getText());
+            preparedStatement.setString(2, enterpasswordfield.getText());
 
-            while (resultSet.next()) {
-                if (resultSet.getInt(1) == 1) {
-                    loginMessagelabel.setText("Congratulations! You are logged in!");
-                } else {
-                    loginMessagelabel.setText("Invalid login. Please try again!");
-                }
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                loginMessagelabel.setText("Congratulations!");
+            } else {
+                loginMessagelabel.setText("Invalid login. Please try again!");
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             e.getCause();
         }
+    }
+
+    public void createAccountForm(){
+        try {
+
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("signup.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 520, 400);
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
+
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void signupButtonOnAction(ActionEvent event) {
+        createAccountForm();
     }
 }
