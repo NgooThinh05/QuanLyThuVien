@@ -1,8 +1,10 @@
 package com.example.demo;
 
+import com.sun.javafx.iio.ImageLoader;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
@@ -11,7 +13,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -38,6 +39,8 @@ public class Login implements Initializable{
     @FXML
     private Button signupbutton;
 
+    private ImageLoader loader;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         File brandingFile = new File("image/bgrlogin.jpg");
@@ -49,6 +52,7 @@ public class Login implements Initializable{
         if (usernametextfield.getText().isBlank() == false && enterpasswordfield.getText().isBlank() == false) {
             /*createAccountForm();*/
             validateLogin();
+
         } else {
             loginMessagelabel.setText("Invalid login. Please try again!");
         }
@@ -63,7 +67,7 @@ public class Login implements Initializable{
         DatabaseConnection connecnow = new DatabaseConnection();
         Connection connectiBD = connecnow.getConnection();
 
-        String verifylogin = "SELECT id FROM account_user WHERE user_name = ? AND pass_word = ?";
+        String verifylogin = "SELECT id FROM user WHERE username = ? AND password = ?";
 
         try {
             PreparedStatement preparedStatement = connectiBD.prepareStatement(verifylogin);
@@ -73,7 +77,8 @@ public class Login implements Initializable{
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                loginMessagelabel.setText("Congratulations!");
+                getdata.username = usernametextfield.getText();
+                Home();
             } else {
                 loginMessagelabel.setText("Invalid login. Please try again!");
             }
@@ -86,14 +91,28 @@ public class Login implements Initializable{
 
     public void createAccountForm(){
         try {
-
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("signup.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 520, 400);
-            Stage stage = new Stage();
-            stage.initStyle(StageStyle.UNDECORATED);
+            Scene scene = new Scene(fxmlLoader.load(), 1200, 720);
+            Stage stage1 = new Stage();
+            stage1.initStyle(StageStyle.UNDECORATED);
+            stage1.setScene(scene);
+            stage1.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-            stage.setScene(scene);
-            stage.show();
+    public void Home(){
+        try {
+
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/com/example/demo/Home.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 1200, 720);
+            scene.getStylesheets().add(Main.class.getResource("/dashboarddesign.css").toExternalForm());
+            Stage stage1 = new Stage();
+            stage1.initStyle(StageStyle.UNDECORATED);
+            stage1.setScene(scene);
+            stage1.show();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
