@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import com.sun.javafx.iio.ImageLoader;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -39,7 +38,6 @@ public class Login implements Initializable{
     @FXML
     private Button signupbutton;
 
-    private ImageLoader loader;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

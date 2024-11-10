@@ -28,10 +28,10 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button fx:id="Setting" layoutX="2.0" layoutY="531.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="75.0" prefWidth="200.0" styleClass="nav-btn" stylesheets="@../../../dashboarddesign.css" text="Setting" />
+            <Button fx:id="Setting" layoutX="2.0" layoutY="531.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="75.0" prefWidth="200.0" styleClass="nav-btn" stylesheets="@../../../dashboarddesign.css" text="Settings" />
             <Label layoutX="76.0" layoutY="668.0" prefHeight="30.0" prefWidth="51.0" styleClass="labelSignout" stylesheets="@../../../dashboarddesign.css" text="SignOut" textFill="WHITE" />
             <Label fx:id="hello" layoutX="76.0" layoutY="32.0" prefHeight="27.0" prefWidth="126.0" styleClass="labelSignout" stylesheets="@../../../dashboarddesign.css" />
-            <Button fx:id="profile" layoutX="8.0" layoutY="13.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../../../dashboarddesign.css">
+            <Button fx:id="profile" layoutX="8.0" layoutY="13.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="56.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../../../dashboarddesign.css">
                <graphic>
                   <ImageView fx:id="Avatar" fitHeight="46.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -45,7 +45,7 @@
    <center>
       <AnchorPane prefHeight="722.0" prefWidth="1010.0" stylesheets="@../../../dashboarddesign.css" BorderPane.alignment="CENTER">
          <children>
-            <Pane fx:id="topForm" layoutX="31.0" layoutY="-2.0" prefHeight="59.0" prefWidth="976.0" styleClass="top-form" stylesheets="@../../../dashboarddesign.css">
+            <Pane fx:id="topForm" layoutX="24.0" layoutY="-2.0" prefHeight="59.0" prefWidth="990.0" styleClass="top-form" stylesheets="@../../../dashboarddesign.css">
                <children>
                   <Label fx:id="nameapp" layoutX="349.0" layoutY="-2.0" prefHeight="46.0" prefWidth="278.0" text="Management library" textAlignment="CENTER" textFill="#2a34c1">
                      <font>
@@ -64,7 +64,7 @@
                   </Button>
                </children>
             </Pane>
-            <AnchorPane fx:id="DashBoardForm" layoutX="28.0" layoutY="57.0" prefHeight="664.0" prefWidth="980.0" visible="false">
+            <AnchorPane fx:id="DashBoardForm" layoutX="28.0" layoutY="57.0" prefHeight="664.0" prefWidth="980.0">
                <children>
                   <TextField fx:id="addressBar" layoutX="260.0" layoutY="17.0" onKeyPressed="#keyHandler" prefHeight="36.0" prefWidth="558.0" promptText="Seach..." />
                   <ImageView fx:id="search" fitHeight="29.0" fitWidth="34.0" layoutX="211.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
@@ -76,11 +76,65 @@
                   <AnchorPane layoutX="13.0" layoutY="341.0" prefHeight="322.0" prefWidth="958.0" styleClass="bgr-while" stylesheets="@../../../dashboarddesign.css" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="AddBookForm" layoutY="57.0" prefHeight="662.0" prefWidth="1037.0">
+            <AnchorPane fx:id="AddBookForm" layoutY="57.0" prefHeight="662.0" prefWidth="1037.0" visible="false">
                <children>
                   <Label layoutX="469.0" layoutY="20.0" prefHeight="42.0" prefWidth="100.0" text="Add Book">
                      <font>
                         <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="borrow" layoutX="21.0" layoutY="57.0" prefHeight="665.0" prefWidth="994.0" visible="false">
+               <children>
+                  <Label layoutX="446.0" layoutY="14.0" prefHeight="56.0" prefWidth="87.0" text="Borrow">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="returnbook" layoutX="24.0" layoutY="57.0" prefHeight="666.0" prefWidth="992.0" visible="false">
+               <children>
+                  <Label layoutX="413.0" layoutY="5.0" prefHeight="48.0" prefWidth="136.0" text="ReturnBook">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="delete" layoutX="24.0" layoutY="57.0" prefHeight="664.0" prefWidth="989.0" visible="false">
+               <children>
+                  <Label layoutX="425.0" layoutY="14.0" prefHeight="54.0" prefWidth="138.0" text="Delete Book">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="user" layoutX="24.0" layoutY="57.0" prefHeight="664.0" prefWidth="989.0" visible="false">
+               <children>
+                  <Label layoutX="467.0" layoutY="14.0" prefHeight="50.0" prefWidth="55.0" text="User">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="settings" layoutX="24.0" layoutY="57.0" prefHeight="666.0" prefWidth="990.0" visible="false">
+               <children>
+                  <Label layoutX="451.0" layoutY="14.0" prefHeight="42.0" prefWidth="87.0" text="Settings">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="profileform" layoutX="24.0" layoutY="57.0" prefHeight="666.0" prefWidth="990.0" visible="false">
+               <children>
+                  <Label layoutX="457.0" layoutY="14.0" prefHeight="48.0" prefWidth="75.0" text="Profile">
+                     <font>
+                        <Font size="24.0" />
                      </font>
                   </Label>
                </children>
