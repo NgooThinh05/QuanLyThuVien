@@ -10,6 +10,10 @@ module com.example.demo {
     requires javafx.web;
     requires com.fasterxml.jackson.core;
     requires java.desktop;
+    requires com.google.api.client;
+    requires com.google.api.client.json.jackson2;
+    requires com.google.api.services.books;
+    requires google.api.client;
 
     opens com.example.demo to javafx.fxml;
     exports com.example.demo;

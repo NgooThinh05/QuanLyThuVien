@@ -14,7 +14,6 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1200, 720);
         stage.initStyle(StageStyle.UNDECORATED);
-
         stage.setScene(scene);
         stage.show();
     }
