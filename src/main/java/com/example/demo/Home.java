@@ -72,7 +72,18 @@ public class Home implements Initializable {
     private AnchorPane DashBoardForm;
     @FXML
     private AnchorPane AddBookForm;
-
+    @FXML
+    private AnchorPane borrow;
+    @FXML
+    private AnchorPane returnbook;
+    @FXML
+    private AnchorPane delete;
+    @FXML
+    private AnchorPane user;
+    @FXML
+    private AnchorPane settings;
+    @FXML
+    private AnchorPane profileform;
 
 
     @Override
@@ -82,7 +93,7 @@ public class Home implements Initializable {
         Avatar.setImage(brandingImage);
 
         File brandingFile1 = new File("image/log-out.png");
-        Image brandingImage1 = new Image(brandingFile.toURI().toString());
+        Image brandingImage1 = new Image(brandingFile1.toURI().toString());
         SignOutImage.setImage(brandingImage1);
 
         Name();
@@ -93,11 +104,91 @@ public class Home implements Initializable {
         if (event.getSource() == DashBoard) {
             DashBoardForm.setVisible(true);
             AddBookForm.setVisible(false);
+            borrow.setVisible(false);
+            returnbook.setVisible(false);
+            delete.setVisible(false);
+            user.setVisible(false);
+            settings.setVisible(false);
+            profileform.setVisible(false);
         }
+
         if (event.getSource() == AddBook) {
-            AddBookForm.setVisible(true);
             DashBoardForm.setVisible(false);
+            AddBookForm.setVisible(true);
+            borrow.setVisible(false);
+            returnbook.setVisible(false);
+            delete.setVisible(false);
+            user.setVisible(false);
+            settings.setVisible(false);
+            profileform.setVisible(false);
         }
+
+        if (event.getSource() == BorrowBook) {
+            DashBoardForm.setVisible(false);
+            AddBookForm.setVisible(false);
+            borrow.setVisible(true);
+            returnbook.setVisible(false);
+            delete.setVisible(false);
+            user.setVisible(false);
+            settings.setVisible(false);
+            profileform.setVisible(false);
+        }
+
+        if (event.getSource() == ReturnBook) {
+            DashBoardForm.setVisible(false);
+            AddBookForm.setVisible(false);
+            borrow.setVisible(false);
+            returnbook.setVisible(true);
+            delete.setVisible(false);
+            user.setVisible(false);
+            settings.setVisible(false);
+            profileform.setVisible(false);
+        }
+
+        if (event.getSource() == Delete) {
+            DashBoardForm.setVisible(false);
+            AddBookForm.setVisible(false);
+            borrow.setVisible(false);
+            returnbook.setVisible(false);
+            delete.setVisible(true);
+            user.setVisible(false);
+            settings.setVisible(false);
+            profileform.setVisible(false);
+        }
+
+        if (event.getSource() == User) {
+            DashBoardForm.setVisible(false);
+            AddBookForm.setVisible(false);
+            borrow.setVisible(false);
+            returnbook.setVisible(false);
+            delete.setVisible(false);
+            user.setVisible(true);
+            settings.setVisible(false);
+            profileform.setVisible(false);
+        }
+
+        if (event.getSource() == Setting) {
+            DashBoardForm.setVisible(false);
+            AddBookForm.setVisible(false);
+            borrow.setVisible(false);
+            returnbook.setVisible(false);
+            delete.setVisible(false);
+            user.setVisible(false);
+            settings.setVisible(true);
+            profileform.setVisible(false);
+        }
+
+        if (event.getSource() == profile) {
+            DashBoardForm.setVisible(false);
+            AddBookForm.setVisible(false);
+            borrow.setVisible(false);
+            returnbook.setVisible(false);
+            delete.setVisible(false);
+            user.setVisible(false);
+            settings.setVisible(false);
+            profileform.setVisible(true);
+        }
+
     }
 
     public void keyHandler(KeyEvent event) {
