@@ -4,9 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
@@ -14,61 +14,64 @@ import javafx.scene.shape.Rectangle;
 public class homePageController {
 
     @FXML
-    private Button LogOutClickButton;
-
-    @FXML
     private Button AddBooksClickButton;
-
-    @FXML
-    private ImageView AddBooksImage;
 
     @FXML
     private Rectangle AddBooksLabel;
 
     @FXML
+    private AnchorPane AddBooksPane;
+
+    @FXML
     private ImageView BackgroundLieBraRy;
+
+    @FXML
+    private Label BooksOnShelfLabel;
+
+    @FXML
+    private AnchorPane BooksOnShelfPane;
 
     @FXML
     private Button BorrowBooksClickButton;
 
     @FXML
-    private ImageView BorrowBooksImage;
+    private Label BorrowLabel;
 
     @FXML
-    private Label BorrowLabel;
+    private AnchorPane BorrowPane;
 
     @FXML
     private Button DashBoardClickButton;
 
     @FXML
-    private ImageView DashboardImage;
+    private Label DashboardLabel;
 
     @FXML
-    private Label DashboardLabel;
+    private AnchorPane DashboardPane;
 
     @FXML
     private Button InventoryClickButton;
 
     @FXML
-    private ImageView InventoryImage;
+    private Label InventoryLabel;
 
     @FXML
-    private Label InventoryLabel;
+    private AnchorPane InventoryPane;
+
+    @FXML
+    private Button LogOutClickButton;
 
     @FXML
     private StackPane MainViewStack;
 
     @FXML
-    private Rectangle MenuBackground;
-
-    @FXML
     private Button ReturnBooksClickButton;
 
     @FXML
-    private ImageView ReturnBooksImage;
+    private Label ReturnLabel;
 
     @FXML
-    private Label ReturnLabel;
+    private AnchorPane ReturnPane;
 
     @FXML
     private TextField SearchBox;
@@ -77,10 +80,10 @@ public class homePageController {
     private Button SettingsClickButton;
 
     @FXML
-    private ImageView SettingsImage;
+    private Label SettingsLabel;
 
     @FXML
-    private Label SettingsLabel;
+    private AnchorPane SettingsPane;
 
     @FXML
     private VBox VBoxOff;
@@ -89,103 +92,103 @@ public class homePageController {
     private VBox VBoxOn;
 
     @FXML
-    void closeAddBooksImage(MouseEvent event) {
-        AddBooksImage.setVisible(false);
+    void closeAddBooksPane(MouseEvent event) {
+        AddBooksPane.setVisible(false);
     }
 
     @FXML
-    void closeDashboardImage(MouseEvent event) {
-        DashboardImage.setVisible(false);
+    void closeDashboardPane(MouseEvent event) {
+        DashboardPane.setVisible(false);
     }
 
     @FXML
-    void closeBorrowBooksImage(MouseEvent event) {
-        BorrowBooksImage.setVisible(false);
+    void closeBorrowBooksPane(MouseEvent event) {
+        BorrowPane.setVisible(false);
     }
 
     @FXML
-    void closeReturnBooksImage(MouseEvent event) {
-        ReturnBooksImage.setVisible(false);
+    void closeReturnBooksPane(MouseEvent event) {
+        ReturnPane.setVisible(false);
     }
 
     @FXML
-    void closeInventoryImage(MouseEvent event) {
-        InventoryImage.setVisible(false);
+    void closeInventoryPane(MouseEvent event) {
+        InventoryPane.setVisible(false);
     }
 
     @FXML
-    void closeSettingsImage(MouseEvent event) {
-        SettingsImage.setVisible(false);
+    void closeSettingsPane(MouseEvent event) {
+        SettingsPane.setVisible(false);
     }
 
     @FXML
     void showAddBooksImage(MouseEvent event) {
-        InventoryImage.setVisible(false);
-        SettingsImage.setVisible(false);
-        DashboardImage.setVisible(false);
-        ReturnBooksImage.setVisible(false);
-        BorrowBooksImage.setVisible(false);
-        AddBooksImage.setVisible(true);
+        InventoryPane.setVisible(false);
+        SettingsPane.setVisible(false);
+        ReturnPane.setVisible(false);
+        BorrowPane.setVisible(false);
+        DashboardPane.setVisible(false);
+        AddBooksPane.setVisible(true);
     }
 
     @FXML
     void showDashboardImage(MouseEvent event) {
-        InventoryImage.setVisible(false);
-        AddBooksImage.setVisible(false);
-        SettingsImage.setVisible(false);
-        BorrowBooksImage.setVisible(false);
-        ReturnBooksImage.setVisible(false);
-        DashboardImage.setVisible(true);
+        InventoryPane.setVisible(false);
+        SettingsPane.setVisible(false);
+        ReturnPane.setVisible(false);
+        BorrowPane.setVisible(false);
+        AddBooksPane.setVisible(false);
+        DashboardPane.setVisible(true);
     }
 
     @FXML
     void showBorrowBooksImage(MouseEvent event) {
-        InventoryImage.setVisible(false);
-        SettingsImage.setVisible(false);
-        AddBooksImage.setVisible(false);
-        DashboardImage.setVisible(false);
-        ReturnBooksImage.setVisible(false);
-        BorrowBooksImage.setVisible(true);
+        InventoryPane.setVisible(false);
+        SettingsPane.setVisible(false);
+        ReturnPane.setVisible(false);
+        AddBooksPane.setVisible(false);
+        DashboardPane.setVisible(false);
+        BorrowPane.setVisible(true);
     }
 
     @FXML
     void showReturnBooksImage(MouseEvent event) {
-        InventoryImage.setVisible(false);
-        SettingsImage.setVisible(false);
-        AddBooksImage.setVisible(false);
-        DashboardImage.setVisible(false);
-        BorrowBooksImage.setVisible(false);
-        ReturnBooksImage.setVisible(true);
+        InventoryPane.setVisible(false);
+        SettingsPane.setVisible(false);
+        BorrowPane.setVisible(false);
+        AddBooksPane.setVisible(false);
+        DashboardPane.setVisible(false);
+        ReturnPane.setVisible(true);
     }
 
     @FXML
     void showInventoryImage(MouseEvent event) {
-        SettingsImage.setVisible(false);
-        AddBooksImage.setVisible(false);
-        DashboardImage.setVisible(false);
-        BorrowBooksImage.setVisible(false);
-        ReturnBooksImage.setVisible(false);
-        InventoryImage.setVisible(true);
+        SettingsPane.setVisible(false);
+        ReturnPane.setVisible(false);
+        BorrowPane.setVisible(false);
+        AddBooksPane.setVisible(false);
+        DashboardPane.setVisible(false);
+        InventoryPane.setVisible(true);
     }
 
     @FXML
     void showSettingsImage(MouseEvent event) {
-        AddBooksImage.setVisible(false);
-        DashboardImage.setVisible(false);
-        BorrowBooksImage.setVisible(false);
-        ReturnBooksImage.setVisible(false);
-        InventoryImage.setVisible(false);
-        SettingsImage.setVisible(true);
+        InventoryPane.setVisible(false);
+        ReturnPane.setVisible(false);
+        BorrowPane.setVisible(false);
+        AddBooksPane.setVisible(false);
+        DashboardPane.setVisible(false);
+        SettingsPane.setVisible(true);
     }
 
     @FXML
     void BackToBackground(MouseEvent event) {
-        InventoryImage.setVisible(false);
-        SettingsImage.setVisible(false);
-        AddBooksImage.setVisible(false);
-        DashboardImage.setVisible(false);
-        BorrowBooksImage.setVisible(false);
-        ReturnBooksImage.setVisible(false);
+        InventoryPane.setVisible(false);
+        SettingsPane.setVisible(false);
+        ReturnPane.setVisible(false);
+        BorrowPane.setVisible(false);
+        AddBooksPane.setVisible(false);
+        DashboardPane.setVisible(false);
     }
 
 }
