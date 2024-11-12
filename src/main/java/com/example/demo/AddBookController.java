@@ -1,9 +1,10 @@
 package com.example.demo;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class AddBookController {
 
@@ -11,27 +12,28 @@ public class AddBookController {
     private TextField AuthorLabel;
 
     @FXML
-    private TextField BookIDLabel;
+    private TextField BookIdLabel;
 
     @FXML
     private TextField BookTitleLabel;
 
     @FXML
-    private Button CancelAddBookButton;
+    private Button CancelButton;
 
     @FXML
     private TextField PublisherLabel;
 
     @FXML
-    private Button SaveAddBookButton;
+    private Button SaveButton;
 
     @FXML
-    void CancelBookAction(MouseEvent event) {
-
+    void CancelAction(ActionEvent event) {
+        Stage stage = (Stage) CancelButton.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
-    void SaveBookAction(MouseEvent event) {
+    void SaveAction(ActionEvent event) {
 
     }
 
