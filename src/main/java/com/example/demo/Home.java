@@ -195,6 +195,20 @@ public class Home implements Initializable {
 
     }
 
+    @FXML
+    void showAddBookPopup(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddBook.fxml"));
+            Scene addBookScene = new Scene(fxmlLoader.load(), 450, 300);
+            Stage addBookStage = new Stage();
+            addBookStage.initStyle(StageStyle.UNDECORATED);
+            addBookStage.setScene(addBookScene);
+            addBookStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void exit() {
         System.exit(0);
     }

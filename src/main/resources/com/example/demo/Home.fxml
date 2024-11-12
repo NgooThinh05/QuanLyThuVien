@@ -15,7 +15,7 @@
       <AnchorPane prefHeight="726.0" prefWidth="210.0" styleClass="form" stylesheets="@../../../dashboarddesign.css" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="DashBoard" layoutX="5.0" layoutY="75.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="75.0" prefWidth="200.0" styleClass="nav-btn" stylesheets="@../../../dashboarddesign.css" text="DashBoard" />
-            <Button fx:id="AddBook" layoutX="5.0" layoutY="151.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="75.0" prefWidth="200.0" styleClass="nav-btn" stylesheets="@../../../dashboarddesign.css" text="AddBook" />
+            <Button fx:id="AddBook" layoutX="5.0" layoutY="151.0" mnemonicParsing="false" onAction="#showAddBookPopup" prefHeight="75.0" prefWidth="200.0" styleClass="nav-btn" stylesheets="@../../../dashboarddesign.css" text="AddBook" />
             <Button fx:id="BorrowBook" layoutX="5.0" layoutY="227.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="75.0" prefWidth="200.0" styleClass="nav-btn" stylesheets="@../../../dashboarddesign.css" text="BorrowBook" />
             <Button fx:id="ReturnBook" layoutX="2.0" layoutY="303.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="75.0" prefWidth="200.0" styleClass="nav-btn" stylesheets="@../../../dashboarddesign.css" text="ReturnBook" />
             <Button fx:id="Delete" layoutX="5.0" layoutY="379.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="75.0" prefWidth="200.0" styleClass="nav-btn" stylesheets="@../../../dashboarddesign.css" text="Delete" />
