@@ -87,6 +87,7 @@ public class Home implements Initializable {
     private AnchorPane settings;
     @FXML
     private AnchorPane profileform;
+
     @FXML
     private ImageView search;
 
