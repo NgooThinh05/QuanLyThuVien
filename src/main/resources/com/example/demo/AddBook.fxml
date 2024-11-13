@@ -8,11 +8,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="300.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.AddBookController">
+
+<AnchorPane prefHeight="300.0" prefWidth="450.0" style="-fx-background-color: #51A7bf;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.AddBooks">
    <children>
       <VBox prefHeight="250.0" prefWidth="450.0">
          <children>
-            <TextField fx:id="BookIdLabel" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="430.0" promptText="Book ID" style="-fx-background-color: #cfe7ea;">
+            <TextField minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="430.0" promptText="Book ID" style="-fx-background-color: #428da1;">
                <font>
                   <Font name="Times New Roman Italic" size="20.0" />
                </font>
@@ -20,7 +21,7 @@
                   <Insets left="10.0" right="10.0" top="20.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="BookTitleLabel" prefHeight="40.0" promptText="Book Title" style="-fx-background-color: #cfe7ea;">
+            <TextField prefHeight="40.0" promptText="Book Title" style="-fx-background-color: #428da1;">
                <font>
                   <Font name="Times New Roman Italic" size="20.0" />
                </font>
@@ -28,7 +29,7 @@
                   <Insets left="10.0" right="10.0" top="15.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="AuthorLabel" prefHeight="40.0" promptText="Author" style="-fx-background-color: #cfe7ea;">
+            <TextField prefHeight="40.0" promptText="Author" style="-fx-background-color: #428da1;">
                <font>
                   <Font name="Times New Roman Italic" size="20.0" />
                </font>
@@ -36,7 +37,7 @@
                   <Insets left="10.0" right="10.0" top="15.0" />
                </VBox.margin>
             </TextField>
-            <TextField fx:id="PublisherLabel" prefHeight="40.0" promptText="Publisher" style="-fx-background-color: #cfe7ea;">
+            <TextField prefHeight="40.0" promptText="Publisher" style="-fx-background-color: #428da1;">
                <font>
                   <Font name="Times New Roman Italic" size="20.0" />
                </font>
@@ -48,12 +49,12 @@
       </VBox>
       <HBox layoutY="250.0" prefHeight="50.0" prefWidth="450.0">
          <children>
-            <Button fx:id="SaveButton" mnemonicParsing="false" onAction="#SaveAction" prefHeight="50.0" prefWidth="225.0" style="-fx-background-color: #51a7bf;" text="Save" textFill="#daf4ff">
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="225.0" style="-fx-background-color: #51a7bf;" text="Save" textFill="#daf4ff">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="CancelButton" mnemonicParsing="false" onAction="#CancelAction" prefHeight="50.0" prefWidth="225.0" style="-fx-background-color: #51a7bf;" text="Cancel" textFill="#daf4ff">
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="225.0" style="-fx-background-color: #51a7bf;" text="Cancel" textFill="#daf4ff">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
