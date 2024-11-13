@@ -76,7 +76,7 @@
                   <AnchorPane layoutX="13.0" layoutY="341.0" prefHeight="322.0" prefWidth="958.0" styleClass="bgr-while" stylesheets="@../../../dashboarddesign.css" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="AddBookForm" layoutY="57.0" prefHeight="662.0" prefWidth="1037.0">
+            <AnchorPane fx:id="AddBookForm" layoutY="57.0" prefHeight="662.0" prefWidth="1037.0" visible="false">
                <children>
                   <Label layoutX="469.0" layoutY="20.0" prefHeight="42.0" prefWidth="100.0" text="Add Book">
                      <font>
@@ -157,13 +157,32 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="profileform" layoutX="24.0" layoutY="57.0" prefHeight="666.0" prefWidth="990.0" visible="false">
+            <AnchorPane fx:id="profileform" layoutX="24.0" layoutY="57.0" prefHeight="666.0" prefWidth="990.0">
                <children>
                   <Label layoutX="457.0" layoutY="14.0" prefHeight="48.0" prefWidth="75.0" text="Profile">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
+                  <Pane layoutX="75.0" layoutY="76.0" prefHeight="234.0" prefWidth="234.0">
+                     <children>
+                        <ImageView fitHeight="234.0" fitWidth="290.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../image/avatar.jpg" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Button layoutX="351.0" layoutY="262.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="79.0" text="edit" />
+                  <TextField layoutX="75.0" layoutY="383.0" prefHeight="30.0" prefWidth="236.0" />
+                  <TextField layoutX="395.0" layoutY="383.0" prefHeight="30.0" prefWidth="255.0" />
+                  <TextField layoutX="75.0" layoutY="525.0" prefHeight="30.0" prefWidth="584.0" />
+                  <TextField layoutX="707.0" layoutY="386.0" prefHeight="30.0" prefWidth="229.0" />
+                  <Button layoutX="457.0" layoutY="597.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="126.0" text="Update" />
+                  <Label layoutX="75.0" layoutY="358.0" prefHeight="26.0" prefWidth="45.0" text="HoTen" />
+                  <Label layoutX="395.0" layoutY="363.0" text="CCCD" />
+                  <Label layoutX="707.0" layoutY="360.0" prefHeight="22.0" prefWidth="36.0" text="sodt" />
+                  <Label layoutX="75.0" layoutY="504.0" prefHeight="22.0" prefWidth="46.0" text="DiaChi" />
                </children>
             </AnchorPane>
          </children></AnchorPane>
