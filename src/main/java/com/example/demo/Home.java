@@ -13,6 +13,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -20,10 +21,12 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.stage.StageStyle;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.security.GeneralSecurityException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -60,6 +63,8 @@ public class Home implements Initializable {
     @FXML
     private Button Setting;
     @FXML
+    private Button searchButton;
+    @FXML
     private Label hello;
     @FXML
     private TextField addressBar;
@@ -89,7 +94,11 @@ public class Home implements Initializable {
     private AnchorPane profileform;
     @FXML
     private ImageView search;
+    @FXML
+    private GridPane bookapi;
 
+    private List<Book> databaseSearchResults;
+    private List<Book> apiSearchResults;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -101,7 +110,7 @@ public class Home implements Initializable {
         Image brandingImage1 = new Image(brandingFile1.toURI().toString());
         SignOutImage.setImage(brandingImage1);
 
-        File brandingFile2 = new File("image/kinhlup");
+        File brandingFile2 = new File("image/kinhlup.png");
         Image brandingImage2 = new Image(brandingFile2.toURI().toString());
         search.setImage(brandingImage2);
 
@@ -200,9 +209,6 @@ public class Home implements Initializable {
 
     }
 
-    public void keyHandler(KeyEvent event) {
-
-    }
 
     public void exit() {
         System.exit(0);
@@ -237,28 +243,81 @@ public class Home implements Initializable {
         stage.setIconified(true);
     }
 
-    public void keyHandler(javafx.scene.input.KeyEvent keyEvent) {
+    public void setSearchResults(/*List<Book> databaseResults,*/ List<Book> apiResults) {
+        /*this.databaseSearchResults = databaseResults;*/
+        this.apiSearchResults = apiResults;
+        /*displayDatabaseResults();*/
+        displayApiResults();
+    }
+
+    // Display the database results in the first GridPane
+   /* private void displayDatabaseResults() {
+        databaseResults.getChildren().clear();
+        int columns = 6;
+        int rows = 6;
+        int bookCount = 0;
+
+        if (databaseSearchResults == null || databaseSearchResults.isEmpty()) {
+            System.out.println("No books available to display.");
+            return;
+        }
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                if (bookCount >= databaseSearchResults.size()) {
+                    break;
+                }
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource(""));
+                    Pane bookPane = loader.load();
+                    BookUnitController controller = loader.getController();
+                    // setDataAll is a method for book from database
+                    controller.setDataAll(databaseSearchResults.get(bookCount));
+                    databaseResults.add(bookPane, col, row);
+                    bookCount++;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }*/
+
+    // Display the API results in the second GridPane
+    private void displayApiResults() {
+        bookapi.getChildren().clear(); // Xóa các sách hiển thị trước đó
+        int columns = 6;
+        int rows = 6;
+        int bookCount = 0;
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                if (bookCount >= apiSearchResults.size()) {
+                    break;
+                }
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("book.fxml"));
+                    Pane bookPane = loader.load();
+                    Bookapi controller = loader.getController();
+                    controller.setDataAll(apiSearchResults.get(bookCount));
+                    bookapi.add(bookPane, col, row);
+                    bookCount++;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public static ScrollPane staticMainScrollPane;
+    @FXML
+    void searchButton(ActionEvent event) throws IOException, GeneralSecurityException {
+        List<Book> ApiResult = ApiBook.searchbook(addressBar.getText());
+        setSearchResults(ApiResult);
     }
 
 
-    /*@FXML
-    void searchButton(ActionEvent event) throws IOException {
-        List<Book> ApiResult = ApiBook.searchbook(addressBar.getText());
-        List<Book> databaseResult = DatabaseConnection.searchBook(addressBar.getText());
 
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(""));
-            Parent homeView = loader.load();
-
-            // Get the controller instance
-            SearchPageController searchPageController = loader.getController();
-            searchPageController.setSearchResults(databaseResult, ApiResult);
-
-            setMainContent(homeView);
-            staticMainScrollPane.setFitToWidth(true);
-            staticMainScrollPane.setFitToHeight(true);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
 }
+
+
+
