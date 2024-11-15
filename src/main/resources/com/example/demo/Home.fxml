@@ -2,11 +2,13 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
@@ -64,16 +66,23 @@
                   </Button>
                </children>
             </Pane>
-            <AnchorPane fx:id="DashBoardForm" layoutX="28.0" layoutY="57.0" prefHeight="664.0" prefWidth="980.0" visible="false">
+            <AnchorPane fx:id="DashBoardForm" layoutX="28.0" layoutY="57.0" prefHeight="664.0" prefWidth="980.0">
                <children>
-                  <TextField fx:id="addressBar" layoutX="260.0" layoutY="17.0" onKeyPressed="#keyHandler" prefHeight="36.0" prefWidth="558.0" promptText="Seach..." />
-                  <ImageView fx:id="search" fitHeight="29.0" fitWidth="34.0" layoutX="211.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../image/kinhlup.png" />
-                     </image>
-                  </ImageView>
-                  <AnchorPane layoutX="14.0" layoutY="110.0" prefHeight="200.0" prefWidth="958.0" styleClass="bgr-while" stylesheets="@../../../dashboarddesign.css" />
-                  <AnchorPane layoutX="13.0" layoutY="341.0" prefHeight="322.0" prefWidth="958.0" styleClass="bgr-while" stylesheets="@../../../dashboarddesign.css" />
+                  <TextField fx:id="addressBar" layoutX="260.0" layoutY="17.0" prefHeight="36.0" prefWidth="558.0" promptText="Seach..." />
+                  <ScrollPane layoutX="62.0" layoutY="86.0" prefHeight="546.0" prefWidth="871.0">
+                     <content>
+                        <GridPane fx:id="bookapi" prefWidth="1000.0" />
+                     </content>
+                  </ScrollPane>
+                  <Button fx:id="searchButton" layoutX="194.0" layoutY="17.0" mnemonicParsing="false" onAction="#searchButton" styleClass="minus" stylesheets="@../../../dashboarddesign.css">
+                     <graphic>
+                        <ImageView fx:id="search" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../image/kinhlup.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="AddBookForm" layoutY="57.0" prefHeight="662.0" prefWidth="1037.0" visible="false">
@@ -157,7 +166,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="profileform" layoutX="24.0" layoutY="57.0" prefHeight="666.0" prefWidth="990.0">
+            <AnchorPane fx:id="profileform" layoutX="24.0" layoutY="57.0" prefHeight="666.0" prefWidth="990.0" visible="false">
                <children>
                   <Label layoutX="457.0" layoutY="14.0" prefHeight="48.0" prefWidth="75.0" text="Profile">
                      <font>
