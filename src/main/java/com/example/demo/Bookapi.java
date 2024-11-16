@@ -33,14 +33,21 @@ public class Bookapi extends Node {
 
 
    public void setData(Book book) {
-        this.currentBook = book;
-        namebook.setText(book.getTitle());
-        author.setText(book.getAuthor());
-        if (book.getImage() != null) {
-            imageview.setImage(new Image(book.getImage()));
-        } else {
-            imageview.setImage(new Image(getClass().getResourceAsStream("/image/logo.png")));
-        }
+       this.currentBook = book;
+       namebook.setText(book.getTitle());
+       author.setText(book.getAuthor());
+
+       String imagePath = book.getImage();
+       try {
+           if (imagePath != null && !imagePath.isEmpty()) {
+               imageview.setImage(new Image(imagePath));
+           } else {
+               imageview.setImage(new Image(getClass().getResourceAsStream("/Image/logo.png")));
+           }
+       } catch (Exception e) {
+           imageview.setImage(new Image(getClass().getResourceAsStream("/Image/logo.png")));
+           System.out.println("Error loading image: " + e.getMessage());
+       }
     }
 
 
@@ -48,14 +55,16 @@ public class Bookapi extends Node {
         this.currentBook = book;
         namebook.setText(book.getTitle());
         author.setText(book.getAuthor());
+        String imagePath = book.getImage();
         try {
-            if (book.getImage() != null) {
-                imageview.setImage(new Image(book.getImage()));
+            if (imagePath != null && !imagePath.isEmpty()) {
+                imageview.setImage(new Image(imagePath));
             } else {
-                imageview.setImage(new Image(getClass().getResourceAsStream("/image/logo.png")));
+                imageview.setImage(new Image(getClass().getResourceAsStream("/Image/logo.png")));
             }
         } catch (Exception e) {
-            imageview.setImage(new Image(getClass().getResourceAsStream("/image/logo.png")));
+            imageview.setImage(new Image(getClass().getResourceAsStream("/Image/logo.png")));
+            System.out.println("Error loading image: " + e.getMessage());
         }
     }
 

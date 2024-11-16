@@ -26,9 +26,9 @@ public class ApiBook {
                 .build();
 
         Books.Volumes.List volumesList = booksApi.volumes().list(searchQuery);
-        volumesList.setKey(API_KEY); // Đặt API key vào đây
+        volumesList.setKey(API_KEY);
 
-        Volumes volumes = volumesList.execute(); // Đối tượng trả về là kiểu com.google.api.services.books.v1.model.Volumes
+        Volumes volumes = volumesList.execute();
 
         if (volumes.getItems() != null) {
             for (Volume volume : volumes.getItems()) {
@@ -38,13 +38,12 @@ public class ApiBook {
                 String author = volumeInfo.getAuthors() != null ? volumeInfo.getAuthors().get(0) : "Unknown";
                 String category = volumeInfo.getCategories() != null ? volumeInfo.getCategories().get(0) : "Unknown";
                 String description = volumeInfo.getDescription() != null ? volumeInfo.getDescription() : "No description available";
-                String language = volumeInfo.getLanguage();
                 String publisher = volumeInfo.getPublisher() != null ? volumeInfo.getPublisher() : "Unknown";
                 String bookPath  = null;
                 String image = volumeInfo.getImageLinks() != null ? volumeInfo.getImageLinks().getThumbnail() : null;
                 String review = volumeInfo.getPreviewLink() != null ? volumeInfo.getPreviewLink() : "Unknown";
 
-                Book book = new Book (isbn, title, author, publisher, category, description, language, image, review);
+                Book book = new Book (isbn, title, author, publisher, category, description, image, review);
                 books.add(book);
             }
         }

@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Home">
@@ -69,11 +70,6 @@
             <AnchorPane fx:id="DashBoardForm" layoutX="28.0" layoutY="57.0" prefHeight="664.0" prefWidth="980.0">
                <children>
                   <TextField fx:id="addressBar" layoutX="260.0" layoutY="17.0" prefHeight="36.0" prefWidth="558.0" promptText="Seach..." />
-                  <ScrollPane layoutX="62.0" layoutY="86.0" prefHeight="546.0" prefWidth="871.0">
-                     <content>
-                        <GridPane fx:id="bookapi" prefWidth="1000.0" />
-                     </content>
-                  </ScrollPane>
                   <Button fx:id="searchButton" layoutX="194.0" layoutY="17.0" mnemonicParsing="false" onAction="#searchButton" styleClass="minus" stylesheets="@../../../dashboarddesign.css">
                      <graphic>
                         <ImageView fx:id="search" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
@@ -83,6 +79,30 @@
                         </ImageView>
                      </graphic>
                   </Button>
+                  <VBox layoutX="94.0" layoutY="114.0" prefHeight="501.0" prefWidth="842.0">
+                     <children>
+                        <Label prefHeight="36.0" prefWidth="66.0" text="Library">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <ScrollPane prefHeight="281.0" prefWidth="842.0">
+                           <content>
+                              <GridPane fx:id="bookdata" prefWidth="850.0" />
+                           </content>
+                        </ScrollPane>
+                        <Label text="Google Book">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <ScrollPane prefHeight="287.0" prefWidth="842.0">
+                           <content>
+                              <GridPane fx:id="bookapi" prefWidth="850.0" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </VBox>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="AddBookForm" layoutY="57.0" prefHeight="662.0" prefWidth="1037.0" visible="false">
