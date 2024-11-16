@@ -96,6 +96,8 @@ public class Home implements Initializable {
     private ImageView search;
     @FXML
     private GridPane bookapi;
+    @FXML
+    private GridPane bookdata;
 
     private List<Book> databaseSearchResults;
     private List<Book> apiSearchResults;
@@ -243,16 +245,15 @@ public class Home implements Initializable {
         stage.setIconified(true);
     }
 
-    public void setSearchResults(/*List<Book> databaseResults,*/ List<Book> apiResults) {
-        /*this.databaseSearchResults = databaseResults;*/
+    public void setSearchResults(List<Book> databaseResults, List<Book> apiResults) {
+        this.databaseSearchResults = databaseResults;
         this.apiSearchResults = apiResults;
-        /*displayDatabaseResults();*/
+        displayDatabaseResults();
         displayApiResults();
     }
 
-    // Display the database results in the first GridPane
-   /* private void displayDatabaseResults() {
-        databaseResults.getChildren().clear();
+    private void displayDatabaseResults() {
+        bookapi.getChildren().clear();
         int columns = 6;
         int rows = 6;
         int bookCount = 0;
@@ -268,21 +269,19 @@ public class Home implements Initializable {
                     break;
                 }
                 try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource(""));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("book.fxml"));
                     Pane bookPane = loader.load();
-                    BookUnitController controller = loader.getController();
-                    // setDataAll is a method for book from database
+                    Bookapi controller = loader.getController();
                     controller.setDataAll(databaseSearchResults.get(bookCount));
-                    databaseResults.add(bookPane, col, row);
+                    bookdata.add(bookPane, col, row);
                     bookCount++;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
-    }*/
+    }
 
-    // Display the API results in the second GridPane
     private void displayApiResults() {
         bookapi.getChildren().clear(); // Xóa các sách hiển thị trước đó
         int columns = 6;
@@ -298,7 +297,7 @@ public class Home implements Initializable {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("book.fxml"));
                     Pane bookPane = loader.load();
                     Bookapi controller = loader.getController();
-                    controller.setDataAll(apiSearchResults.get(bookCount));
+                    controller.setData(apiSearchResults.get(bookCount));
                     bookapi.add(bookPane, col, row);
                     bookCount++;
                 } catch (IOException e) {
@@ -310,9 +309,10 @@ public class Home implements Initializable {
 
     public static ScrollPane staticMainScrollPane;
     @FXML
-    void searchButton(ActionEvent event) throws IOException, GeneralSecurityException {
+    void searchButton(ActionEvent event) throws IOException, GeneralSecurityException, SQLException {
         List<Book> ApiResult = ApiBook.searchbook(addressBar.getText());
-        setSearchResults(ApiResult);
+        List<Book> databaseResult = DatabaseConnection.searchbookdata(addressBar.getText());
+        setSearchResults(databaseResult, ApiResult);
     }
 
 

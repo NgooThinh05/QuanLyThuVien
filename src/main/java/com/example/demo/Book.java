@@ -7,34 +7,31 @@ public class Book {
     private String Publisher;
     private String theloai;
     private String  mota;
-    private String ngonngu;
     private String image;
-    private String rivew;
+    private String review;
     private int soluong;
 
 
-    public Book (String ISBN, String Title, String Author, String Publisher, String theloai, String mota, String ngonngu, String image, String rivew ) {
+    public Book (String ISBN, String Title, String Author, String Publisher, String theloai, String mota, String image, String rivew ) {
         this.ISBN = ISBN;
         this.Title = Title;
         this.Author = Author;
         this.Publisher = Publisher;
         this.theloai = theloai;
         this.mota = mota;
-        this.ngonngu = ngonngu;
         this.image = image;
-        this.rivew = rivew;
+        this.review = rivew;
     }
 
-    public Book (String ISBN, String Title, String Author, String Publisher, String theloai, String mota, String ngonngu, String image, String rivew, int soluong ) {
+    public Book (String ISBN, String Title, String Author, String Publisher, String theloai, String mota, String image, String rivew, int soluong ) {
         this.ISBN = ISBN;
         this.Title = Title;
         this.Author = Author;
         this.Publisher = Publisher;
         this.theloai = theloai;
         this.mota = mota;
-        this.ngonngu = ngonngu;
         this.image = image;
-        this.rivew = rivew;
+        this.review = rivew;
         this.soluong = soluong;
     }
 
@@ -87,11 +84,11 @@ public class Book {
     }
 
     public String getRivew() {
-        return rivew;
+        return review;
     }
 
     public void setRivew(String rivew) {
-        this.rivew = rivew;
+        this.review = rivew;
     }
 
     public String getImage() {
@@ -110,13 +107,6 @@ public class Book {
         this.theloai = theloai;
     }
 
-    public String getNgonngu() {
-        return ngonngu;
-    }
-
-    public void setNgonngu(String ngonngu) {
-        this.ngonngu = ngonngu;
-    }
 
 
 }
