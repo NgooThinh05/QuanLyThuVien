@@ -98,6 +98,16 @@ public class Home implements Initializable {
     private GridPane bookapi;
     @FXML
     private GridPane bookdata;
+    @FXML
+    private ImageView searchaddimage;
+    @FXML
+    private TextField searchadd;
+    @FXML
+    private GridPane bookaddapi;
+
+    @FXML
+    private Button searchaddbutton;
+
 
     private List<Book> databaseSearchResults;
     private List<Book> apiSearchResults;
@@ -115,6 +125,10 @@ public class Home implements Initializable {
         File brandingFile2 = new File("image/kinhlup.png");
         Image brandingImage2 = new Image(brandingFile2.toURI().toString());
         search.setImage(brandingImage2);
+
+        File brandingFile3 = new File("image/kinhlup.png");
+        Image brandingImage3 = new Image(brandingFile2.toURI().toString());
+        searchaddimage.setImage(brandingImage2);
 
         Name();
 
@@ -315,6 +329,40 @@ public class Home implements Initializable {
         setSearchResults(databaseResult, ApiResult);
     }
 
+    public void setSearchaddbookResults(List<Book> apiResults) {
+        this.apiSearchResults = apiResults;
+        displayApiaddbookResults();
+    }
+    private void displayApiaddbookResults() {
+        bookaddapi.getChildren().clear();
+        int columns = 6;
+        int rows = 6;
+        int bookCount = 0;
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                if (bookCount >= apiSearchResults.size()) {
+                    break;
+                }
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("bookadd.fxml"));
+                    Pane bookPane = loader.load();
+                    Bookapi controller = loader.getController();
+                    controller.setData(apiSearchResults.get(bookCount));
+                    bookaddapi.add(bookPane, col, row);
+                    bookCount++;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    @FXML
+    void searchaddbookButton(ActionEvent event) throws IOException, GeneralSecurityException, SQLException {
+        List<Book> ApiResult = ApiBook.searchbook(searchadd.getText());
+        setSearchaddbookResults(ApiResult);
+    }
 
 
 }
