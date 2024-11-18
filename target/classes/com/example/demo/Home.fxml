@@ -78,7 +78,7 @@
                   </Button>
                </children>
             </Pane>
-            <AnchorPane fx:id="DashBoardPane" layoutY="60.0" prefHeight="660.0" prefWidth="1000.0" style="-fx-background-color: #f2f4f6;">
+            <AnchorPane fx:id="DashBoardPane" layoutY="60.0" prefHeight="660.0" prefWidth="1000.0" style="-fx-background-color: #f2f4f6;" visible="false">
                <children>
                   <TextField fx:id="addressBar" layoutX="260.0" layoutY="17.0" prefHeight="36.0" prefWidth="558.0" promptText="Seach..." />
                   <Button fx:id="searchButton" layoutX="194.0" layoutY="17.0" mnemonicParsing="false" onAction="#searchButton" styleClass="minus" stylesheets="@../../../dashboarddesign.css">

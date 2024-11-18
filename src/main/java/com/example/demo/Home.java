@@ -4,6 +4,7 @@ package com.example.demo;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,6 +13,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -19,72 +21,127 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.stage.StageStyle;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.security.GeneralSecurityException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class Home implements Initializable {
 
-    @FXML
-    private Button minimize;
+        @FXML
+        private Button AddBook;
 
-    @FXML
-    private Button exit;
+        @FXML
+        private AnchorPane AddBookPane;
 
-    @FXML
-    private Button SignOut;
+        @FXML
+        private ImageView Avatar;
 
-    @FXML
-    private Button profile;
+        @FXML
+        private Button BorrowBook;
 
-    @FXML
-    private Button DashBoard;
+        @FXML
+        private AnchorPane BorrowBookPane;
 
-    @FXML
-    private Button AddBook;
-    @FXML
-    private Button BorrowBook;
-    @FXML
-    private Button ReturnBook;
-    @FXML
-    private Button Delete;
-    @FXML
-    private Button User;
-    @FXML
-    private Button Setting;
-    @FXML
-    private Label hello;
-    @FXML
-    private TextField addressBar;
-    @FXML
-    private Pane topForm;
+        @FXML
+        private Button DashBoard;
 
-    @FXML
-    private ImageView Avatar;
-    @FXML
-    private ImageView SignOutImage;
+        @FXML
+        private AnchorPane DashBoardPane;
 
-    @FXML
-    private AnchorPane DashBoardForm;
-    @FXML
-    private AnchorPane AddBookForm;
-    @FXML
-    private AnchorPane borrow;
-    @FXML
-    private AnchorPane returnbook;
-    @FXML
-    private AnchorPane delete;
-    @FXML
-    private AnchorPane user;
-    @FXML
-    private AnchorPane settings;
-    @FXML
-    private AnchorPane profileform;
+        @FXML
+        private Button Delete;
 
+        @FXML
+        private AnchorPane DeleteBookPane;
+
+        @FXML
+        private AnchorPane ProfileForm;
+
+        @FXML
+        private Button ReturnBook;
+
+        @FXML
+        private AnchorPane ReturnBookPane;
+
+        @FXML
+        private Button Setting;
+
+        @FXML
+        private AnchorPane SettingsPane;
+
+        @FXML
+        private Button SignOut;
+
+        @FXML
+        private ImageView SignOutImage;
+
+        @FXML
+        private Button User;
+
+        @FXML
+        private AnchorPane UserPane;
+
+        @FXML
+        private TextField addressBar;
+
+        @FXML
+        private Label appName;
+
+        @FXML
+        private GridPane bookApi;
+
+        @FXML
+        private GridPane bookData;
+
+        @FXML
+        private Button exitButton;
+
+        @FXML
+        private Label helloUserLabel;
+
+        @FXML
+        private AnchorPane mainAnchorPane;
+
+        @FXML
+        private AnchorPane menuAnchorPane;
+
+        @FXML
+        private Button minimizeButton;
+
+        @FXML
+        private Button profile;
+
+        @FXML
+        private ImageView searchBorrowBook;
+
+        @FXML
+        private ImageView searchAddBook;
+
+        @FXML
+        private Button searchButton;
+
+        @FXML
+        private ImageView searchDashboard;
+
+        @FXML
+        private TextField searchReturnBook;
+
+        @FXML
+        private Button searchReturnBookButton;
+
+        @FXML
+        private Pane topForm;
+
+    private List<Book> databaseSearchResults;
+    private List<Book> apiSearchResults;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -96,118 +153,105 @@ public class Home implements Initializable {
         Image brandingImage1 = new Image(brandingFile1.toURI().toString());
         SignOutImage.setImage(brandingImage1);
 
+        File brandingFile2 = new File("image/kinhlup.png");
+        Image brandingImage2 = new Image(brandingFile2.toURI().toString());
+        searchDashboard.setImage(brandingImage2);
+
         Name();
 
     }
 
     public void switchForm(ActionEvent event) {
         if (event.getSource() == DashBoard) {
-            DashBoardForm.setVisible(true);
-            AddBookForm.setVisible(false);
-            borrow.setVisible(false);
-            returnbook.setVisible(false);
-            delete.setVisible(false);
-            user.setVisible(false);
-            settings.setVisible(false);
-            profileform.setVisible(false);
+            DashBoardPane.setVisible(true);
+            AddBookPane.setVisible(false);
+            BorrowBookPane.setVisible(false);
+            ReturnBookPane.setVisible(false);
+            DeleteBookPane.setVisible(false);
+            UserPane.setVisible(false);
+            SettingsPane.setVisible(false);
+            ProfileForm.setVisible(false);
         }
 
         if (event.getSource() == AddBook) {
-            DashBoardForm.setVisible(false);
-            AddBookForm.setVisible(true);
-            borrow.setVisible(false);
-            returnbook.setVisible(false);
-            delete.setVisible(false);
-            user.setVisible(false);
-            settings.setVisible(false);
-            profileform.setVisible(false);
+            DashBoardPane.setVisible(false);
+            AddBookPane.setVisible(true);
+            BorrowBookPane.setVisible(false);
+            ReturnBookPane.setVisible(false);
+            DeleteBookPane.setVisible(false);
+            UserPane.setVisible(false);
+            SettingsPane.setVisible(false);
+            ProfileForm.setVisible(false);
         }
 
         if (event.getSource() == BorrowBook) {
-            DashBoardForm.setVisible(false);
-            AddBookForm.setVisible(false);
-            borrow.setVisible(true);
-            returnbook.setVisible(false);
-            delete.setVisible(false);
-            user.setVisible(false);
-            settings.setVisible(false);
-            profileform.setVisible(false);
+            DashBoardPane.setVisible(false);
+            AddBookPane.setVisible(false);
+            BorrowBookPane.setVisible(true);
+            ReturnBookPane.setVisible(false);
+            DeleteBookPane.setVisible(false);
+            UserPane.setVisible(false);
+            SettingsPane.setVisible(false);
+            ProfileForm.setVisible(false);
         }
 
         if (event.getSource() == ReturnBook) {
-            DashBoardForm.setVisible(false);
-            AddBookForm.setVisible(false);
-            borrow.setVisible(false);
-            returnbook.setVisible(true);
-            delete.setVisible(false);
-            user.setVisible(false);
-            settings.setVisible(false);
-            profileform.setVisible(false);
+            DashBoardPane.setVisible(false);
+            AddBookPane.setVisible(false);
+            BorrowBookPane.setVisible(false);
+            ReturnBookPane.setVisible(true);
+            DeleteBookPane.setVisible(false);
+            UserPane.setVisible(false);
+            SettingsPane.setVisible(false);
+            ProfileForm.setVisible(false);
         }
 
         if (event.getSource() == Delete) {
-            DashBoardForm.setVisible(false);
-            AddBookForm.setVisible(false);
-            borrow.setVisible(false);
-            returnbook.setVisible(false);
-            delete.setVisible(true);
-            user.setVisible(false);
-            settings.setVisible(false);
-            profileform.setVisible(false);
+            DashBoardPane.setVisible(false);
+            AddBookPane.setVisible(false);
+            BorrowBookPane.setVisible(false);
+            ReturnBookPane.setVisible(false);
+            DeleteBookPane.setVisible(true);
+            UserPane.setVisible(false);
+            SettingsPane.setVisible(false);
+            ProfileForm.setVisible(false);
         }
 
         if (event.getSource() == User) {
-            DashBoardForm.setVisible(false);
-            AddBookForm.setVisible(false);
-            borrow.setVisible(false);
-            returnbook.setVisible(false);
-            delete.setVisible(false);
-            user.setVisible(true);
-            settings.setVisible(false);
-            profileform.setVisible(false);
+            DashBoardPane.setVisible(false);
+            AddBookPane.setVisible(false);
+            BorrowBookPane.setVisible(false);
+            ReturnBookPane.setVisible(false);
+            DeleteBookPane.setVisible(false);
+            UserPane.setVisible(true);
+            SettingsPane.setVisible(false);
+            ProfileForm.setVisible(false);
         }
 
         if (event.getSource() == Setting) {
-            DashBoardForm.setVisible(false);
-            AddBookForm.setVisible(false);
-            borrow.setVisible(false);
-            returnbook.setVisible(false);
-            delete.setVisible(false);
-            user.setVisible(false);
-            settings.setVisible(true);
-            profileform.setVisible(false);
+            DashBoardPane.setVisible(false);
+            AddBookPane.setVisible(false);
+            BorrowBookPane.setVisible(false);
+            ReturnBookPane.setVisible(false);
+            DeleteBookPane.setVisible(false);
+            UserPane.setVisible(false);
+            SettingsPane.setVisible(true);
+            ProfileForm.setVisible(false);
         }
 
         if (event.getSource() == profile) {
-            DashBoardForm.setVisible(false);
-            AddBookForm.setVisible(false);
-            borrow.setVisible(false);
-            returnbook.setVisible(false);
-            delete.setVisible(false);
-            user.setVisible(false);
-            settings.setVisible(false);
-            profileform.setVisible(true);
+            DashBoardPane.setVisible(false);
+            AddBookPane.setVisible(false);
+            BorrowBookPane.setVisible(false);
+            ReturnBookPane.setVisible(false);
+            DeleteBookPane.setVisible(false);
+            UserPane.setVisible(false);
+            SettingsPane.setVisible(false);
+            ProfileForm.setVisible(true);
         }
 
     }
 
-    public void keyHandler(KeyEvent event) {
-
-    }
-
-    @FXML
-    void showAddBookPopup(ActionEvent event) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("AddBook.fxml"));
-            Scene addBookScene = new Scene(fxmlLoader.load(), 450, 300);
-            Stage addBookStage = new Stage();
-            addBookStage.initStyle(StageStyle.UNDECORATED);
-            addBookStage.setScene(addBookScene);
-            addBookStage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public void exit() {
         System.exit(0);
@@ -228,7 +272,7 @@ public class Home implements Initializable {
     }
 
     public void Name() {
-        hello.setText("Hello, " + getdata.username);
+        helloUserLabel.setText("Hello, " + getdata.username);
     }
 
     public void SignOut() {
@@ -242,7 +286,79 @@ public class Home implements Initializable {
         stage.setIconified(true);
     }
 
-
-    public void keyHandler(javafx.scene.input.KeyEvent keyEvent) {
+    public void setSearchResults(List<Book> databaseResults, List<Book> apiResults) {
+        this.databaseSearchResults = databaseResults;
+        this.apiSearchResults = apiResults;
+        displayDatabaseResults();
+        displayApiResults();
     }
+
+    private void displayDatabaseResults() {
+        bookApi.getChildren().clear();
+        int columns = 6;
+        int rows = 6;
+        int bookCount = 0;
+
+        if (databaseSearchResults == null || databaseSearchResults.isEmpty()) {
+            System.out.println("No books available to display.");
+            return;
+        }
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                if (bookCount >= databaseSearchResults.size()) {
+                    break;
+                }
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("book.fxml"));
+                    Pane bookPane = loader.load();
+                    Bookapi controller = loader.getController();
+                    controller.setDataAll(databaseSearchResults.get(bookCount));
+                    bookData.add(bookPane, col, row);
+                    bookCount++;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private void displayApiResults() {
+        bookApi.getChildren().clear(); // Xóa các sách hiển thị trước đó
+        int columns = 6;
+        int rows = 6;
+        int bookCount = 0;
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                if (bookCount >= apiSearchResults.size()) {
+                    break;
+                }
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("book.fxml"));
+                    Pane bookPane = loader.load();
+                    Bookapi controller = loader.getController();
+                    controller.setData(apiSearchResults.get(bookCount));
+                    bookApi.add(bookPane, col, row);
+                    bookCount++;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public static ScrollPane staticMainScrollPane;
+    @FXML
+    void searchButton(ActionEvent event) throws IOException, GeneralSecurityException, SQLException {
+        List<Book> ApiResult = ApiBook.searchbook(addressBar.getText());
+        List<Book> databaseResult = DatabaseConnection.searchbookdata(addressBar.getText());
+        setSearchResults(databaseResult, ApiResult);
+    }
+
+
+
 }
+
+
+
