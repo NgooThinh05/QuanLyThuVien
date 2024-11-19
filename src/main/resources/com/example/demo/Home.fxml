@@ -67,7 +67,7 @@
                   </Button>
                </children>
             </Pane>
-            <AnchorPane fx:id="DashBoardForm" layoutX="28.0" layoutY="57.0" prefHeight="664.0" prefWidth="980.0" visible="false">
+            <AnchorPane fx:id="DashBoardForm" layoutX="28.0" layoutY="57.0" prefHeight="664.0" prefWidth="980.0">
                <children>
                   <TextField fx:id="addressBar" layoutX="260.0" layoutY="17.0" prefHeight="36.0" prefWidth="558.0" promptText="Seach..." />
                   <Button fx:id="searchButton" layoutX="194.0" layoutY="17.0" mnemonicParsing="false" onAction="#searchButton" styleClass="minus" stylesheets="@../../../dashboarddesign.css">
@@ -79,33 +79,67 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <VBox layoutX="94.0" layoutY="114.0" prefHeight="501.0" prefWidth="842.0">
+                  <AnchorPane fx:id="Anchorpanesearch" layoutX="51.0" layoutY="95.0" prefHeight="540.0" prefWidth="882.0" visible="false">
                      <children>
-                        <Label prefHeight="36.0" prefWidth="66.0" text="Library">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                        <ScrollPane prefHeight="281.0" prefWidth="842.0">
+                        <VBox prefHeight="502.0" prefWidth="877.0">
+                           <children>
+                              <Label prefHeight="36.0" prefWidth="66.0" text="Library">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <ScrollPane prefHeight="281.0" prefWidth="842.0">
+                                 <content>
+                                    <GridPane fx:id="bookdata" prefWidth="850.0" />
+                                 </content>
+                              </ScrollPane>
+                              <Label text="Google Book">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <ScrollPane prefHeight="287.0" prefWidth="842.0">
+                                 <content>
+                                    <GridPane fx:id="bookapi" prefWidth="850.0" />
+                                 </content>
+                              </ScrollPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="dashboard1" layoutX="13.0" layoutY="85.0" prefHeight="566.0" prefWidth="950.0">
+                     <children>
+                        <ScrollPane prefHeight="566.0" prefWidth="954.0">
                            <content>
-                              <GridPane fx:id="bookdata" prefWidth="850.0" />
-                           </content>
-                        </ScrollPane>
-                        <Label text="Google Book">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                        <ScrollPane prefHeight="287.0" prefWidth="842.0">
-                           <content>
-                              <GridPane fx:id="bookapi" prefWidth="850.0" />
+                              <VBox prefHeight="566.0" prefWidth="950.0">
+                                 <children>
+                                    <Label prefHeight="30.0" prefWidth="297.0" text="New Book" textFill="#cf1616">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <GridPane fx:id="newbook" prefWidth="850.0" />
+                                    <Label text="short story">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <GridPane fx:id="shortstory" prefWidth="850.0" />
+                                    <Label text="Education">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <GridPane fx:id="education" prefWidth="850.0" />
+                                 </children>
+                              </VBox>
                            </content>
                         </ScrollPane>
                      </children>
-                  </VBox>
+                  </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="AddBookForm" layoutY="57.0" prefHeight="662.0" prefWidth="1037.0">
+            <AnchorPane fx:id="AddBookForm" layoutY="57.0" prefHeight="662.0" prefWidth="1037.0" visible="false">
                <children>
                   <Label layoutX="469.0" layoutY="20.0" prefHeight="42.0" prefWidth="100.0" text="Add Book">
                      <font>
