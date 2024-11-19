@@ -33,8 +33,6 @@ public class Bookdetail {
     @FXML
     private ImageView imagebook;
     @FXML
-    private Button back;
-    @FXML
     private Text theloai;
 
 

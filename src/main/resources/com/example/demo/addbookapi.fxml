@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Addbookapi">
+   <content>
+      <AnchorPane fx:id="anchorpane1" prefHeight="395.0" prefWidth="598.0">
+         <children>
+            <ImageView fx:id="imagebook1" fitHeight="93.0" fitWidth="138.0" layoutX="24.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Image/logo.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="title1" layoutX="210.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title" wrappingWidth="370.13665771484375">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Text>
+            <Text fx:id="author1" layoutX="212.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Arthor" wrappingWidth="311.7366943359375" />
+            <Text fx:id="nxb1" layoutX="210.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NXB" wrappingWidth="298.13671875" />
+            <Text fx:id="theloai1" layoutX="211.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TheLoai" wrappingWidth="313.044921875" />
+            <TextField fx:id="sl" layoutX="212.0" layoutY="190.0" prefHeight="26.0" prefWidth="34.0" promptText="SL" />
+            <VBox layoutX="14.0" layoutY="245.0" prefHeight="78.0" prefWidth="576.0">
+               <children>
+                  <Text fx:id="linkimage" strokeType="OUTSIDE" strokeWidth="0.0" text="linkimage" wrappingWidth="559.7367706298828" />
+                  <Text fx:id="linkreview" strokeType="OUTSIDE" strokeWidth="0.0" text="linkreview" wrappingWidth="566.1369171142578" />
+                  <Text fx:id="describe1" strokeType="OUTSIDE" strokeWidth="0.0" text="MoTa" wrappingWidth="573.3992309570312" />
+                  <Button fx:id="buttonaccept" mnemonicParsing="false" onAction="#buttonaccept" styleClass="chitiet" stylesheets="@../../../book.css" text="Accept" textAlignment="CENTER" />
+               </children>
+            </VBox>
+            <Text fx:id="isbn" layoutX="212.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN" wrappingWidth="330.13673400878906" />
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>

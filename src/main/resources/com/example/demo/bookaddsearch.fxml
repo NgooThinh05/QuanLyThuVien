@@ -18,7 +18,7 @@
             </ImageView>
             <Label fx:id="namebook" prefHeight="18.0" prefWidth="151.0" text="namebook" />
             <Label fx:id="author" prefHeight="18.0" prefWidth="147.0" text="tac gia" textAlignment="CENTER" />
-            <Button fx:id="addbook" mnemonicParsing="false" styleClass="chitiet" stylesheets="@../../../book.css" text="add" textAlignment="CENTER" />
+            <Button fx:id="addbook" mnemonicParsing="false" onAction="#addbookbutton" styleClass="chitiet" stylesheets="@../../../book.css" text="add" textAlignment="CENTER" />
          </children>
       </VBox>
    </children>

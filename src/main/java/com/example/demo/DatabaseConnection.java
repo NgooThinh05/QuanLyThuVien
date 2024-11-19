@@ -17,7 +17,7 @@ public class DatabaseConnection {
     public static void addbookdata(Book book) throws SQLException {
         Connection connection = getConnection();
         Statement statement = connection.createStatement();
-        String addsql = "INSERT INTO book(IBSN, Title, Author, Publisher, mota, theloai, image, review, soluong) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String addsql = "INSERT INTO book(ISBN, Title, Author, Publisher, mota, theloai, image, review, soluong) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         PreparedStatement preparedStatement = connection.prepareStatement(addsql);
 

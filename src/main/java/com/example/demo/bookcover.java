@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 
-public class coverbook extends Node {
+public class BookCover extends Node {
 
     @FXML
     private Label author;
@@ -27,9 +27,6 @@ public class coverbook extends Node {
     @FXML
     private Label namebook;
     private Book book;
-
-    @FXML
-    private Button chitiet;
 
 
     public void setData(Book book) {
@@ -51,7 +48,7 @@ public class coverbook extends Node {
     }
 
 
-    public void setDataAll(Book book) {
+    public void setDataApi(Book book) {
         this.book = book;
         namebook.setText(book.getTitle());
         author.setText(book.getAuthor());
@@ -70,12 +67,29 @@ public class coverbook extends Node {
 
     public void chitiet(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/bookdetail.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("bookdetail.fxml"));
             Parent root = loader.load();
             Bookdetail controller = loader.getController();
             controller.bookdetail(book);
+            Scene scene = new Scene(root);
             Stage stage = new Stage();
-            stage.setScene(new Scene(root));
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            System.err.println("Error loading detailed view: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void addbookbutton(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("addbookapi.fxml"));
+            Parent root1 = loader.load();
+            Addbookapi controller = loader.getController();
+            controller.addbookapi(book);
+            Scene scene = new Scene(root1);
+            Stage stage = new Stage();
+            stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
             System.err.println("Error loading detailed view: " + e.getMessage());

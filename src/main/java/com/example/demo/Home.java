@@ -104,9 +104,28 @@ public class Home implements Initializable {
     private TextField searchadd;
     @FXML
     private GridPane bookaddapi;
-
     @FXML
     private Button searchaddbutton;
+    @FXML
+    private Button acceptbutton;
+    @FXML
+    private TextField addtitle;
+    @FXML
+    private TextField addauthor;
+    @FXML
+    private TextField addmota;
+    @FXML
+    private TextField addISBN;
+    @FXML
+    private TextField addnxb;
+    @FXML
+    private TextField addsl;
+    @FXML
+    private TextField addtheloai;
+    @FXML
+    private TextField linkimage;
+    @FXML
+    private TextField linkreview;
 
 
     private List<Book> databaseSearchResults;
@@ -285,8 +304,8 @@ public class Home implements Initializable {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("book.fxml"));
                     Pane bookPane = loader.load();
-                    Bookapi controller = loader.getController();
-                    controller.setDataAll(databaseSearchResults.get(bookCount));
+                    BookCover controller = loader.getController();
+                    controller.setDataApi(databaseSearchResults.get(bookCount));
                     bookdata.add(bookPane, col, row);
                     bookCount++;
                 } catch (IOException e) {
@@ -310,7 +329,7 @@ public class Home implements Initializable {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("book.fxml"));
                     Pane bookPane = loader.load();
-                    Bookapi controller = loader.getController();
+                    BookCover controller = loader.getController();
                     controller.setData(apiSearchResults.get(bookCount));
                     bookapi.add(bookPane, col, row);
                     bookCount++;
@@ -333,6 +352,7 @@ public class Home implements Initializable {
         this.apiSearchResults = apiResults;
         displayApiaddbookResults();
     }
+
     private void displayApiaddbookResults() {
         bookaddapi.getChildren().clear();
         int columns = 6;
@@ -345,9 +365,9 @@ public class Home implements Initializable {
                     break;
                 }
                 try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("bookadd.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("bookaddsearch.fxml"));
                     Pane bookPane = loader.load();
-                    Bookapi controller = loader.getController();
+                    BookCover controller = loader.getController();
                     controller.setData(apiSearchResults.get(bookCount));
                     bookaddapi.add(bookPane, col, row);
                     bookCount++;
@@ -362,6 +382,21 @@ public class Home implements Initializable {
     void searchaddbookButton(ActionEvent event) throws IOException, GeneralSecurityException, SQLException {
         List<Book> ApiResult = ApiBook.searchbook(searchadd.getText());
         setSearchaddbookResults(ApiResult);
+    }
+
+    public void acceptbutton(ActionEvent event) throws IOException, GeneralSecurityException, SQLException {
+        Book addbook = new Book();
+        addbook.setTitle(addtitle.getText());
+        addbook.setAuthor(addauthor.getText());
+        addbook.setTheloai(addtheloai.getText());
+        addbook.setISBN(addISBN.getText());
+        addbook.setMota(addmota.getText());
+        addbook.setImage(linkimage.getText());
+        addbook.setPublisher(addnxb.getText());
+        int soluong = Integer.parseInt(addsl.getText());
+        addbook.setSoluong(soluong);
+        addbook.setRivew(linkreview.getText());
+        DatabaseConnection.addbookdata(addbook);
     }
 
 
