@@ -13,11 +13,10 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 
-import java.io.File;
 import java.io.IOException;
 
 
-public class Bookapi extends Node {
+public class BookCover extends Node {
 
     @FXML
     private Label author;
@@ -28,9 +27,6 @@ public class Bookapi extends Node {
     @FXML
     private Label namebook;
     private Book book;
-
-    @FXML
-    private Button chitiet;
 
 
     public void setData(Book book) {
@@ -52,7 +48,7 @@ public class Bookapi extends Node {
     }
 
 
-    public void setDataAll(Book book) {
+    public void setDataApi(Book book) {
         this.book = book;
         namebook.setText(book.getTitle());
         author.setText(book.getAuthor());
@@ -76,6 +72,22 @@ public class Bookapi extends Node {
             Bookdetail controller = loader.getController();
             controller.bookdetail(book);
             Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            System.err.println("Error loading detailed view: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void addbookbutton(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("addbookapi.fxml"));
+            Parent root1 = loader.load();
+            Addbookapi controller = loader.getController();
+            controller.addbookapi(book);
+            Scene scene = new Scene(root1);
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.show();
