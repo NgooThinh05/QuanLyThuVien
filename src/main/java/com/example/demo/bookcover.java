@@ -13,11 +13,10 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 
-import java.io.File;
 import java.io.IOException;
 
 
-public class Bookapi extends Node {
+public class coverbook extends Node {
 
     @FXML
     private Label author;
@@ -71,13 +70,12 @@ public class Bookapi extends Node {
 
     public void chitiet(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("bookdetail.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/bookdetail.fxml"));
             Parent root = loader.load();
             Bookdetail controller = loader.getController();
             controller.bookdetail(book);
-            Scene scene = new Scene(root);
             Stage stage = new Stage();
-            stage.setScene(scene);
+            stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
             System.err.println("Error loading detailed view: " + e.getMessage());
