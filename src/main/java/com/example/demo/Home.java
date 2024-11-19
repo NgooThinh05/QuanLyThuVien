@@ -126,10 +126,23 @@ public class Home implements Initializable {
     private TextField linkimage;
     @FXML
     private TextField linkreview;
+    @FXML
+    private GridPane newbook;
+    @FXML
+    private GridPane shortstory;
+    @FXML
+    private GridPane education;
+    @FXML
+    private AnchorPane Anchorpanesearch;
+    @FXML
+    private AnchorPane dashboard1;
 
 
     private List<Book> databaseSearchResults;
     private List<Book> apiSearchResults;
+    private List<Book> newbooks;
+    private List<Book> shortstorybook;
+    private List<Book> educationbooks;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -151,11 +164,20 @@ public class Home implements Initializable {
 
         Name();
 
+        try {
+            dashbordresult();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
     }
 
     public void switchForm(ActionEvent event) {
         if (event.getSource() == DashBoard) {
             DashBoardForm.setVisible(true);
+            dashboard1.setVisible(true);
+            Anchorpanesearch.setVisible(false);
             AddBookForm.setVisible(false);
             borrow.setVisible(false);
             returnbook.setVisible(false);
@@ -316,9 +338,9 @@ public class Home implements Initializable {
     }
 
     private void displayApiResults() {
-        bookapi.getChildren().clear(); // Xóa các sách hiển thị trước đó
-        int columns = 6;
-        int rows = 6;
+        bookapi.getChildren().clear();
+        int columns = 10;
+        int rows = 10;
         int bookCount = 0;
 
         for (int row = 0; row < rows; row++) {
@@ -343,6 +365,8 @@ public class Home implements Initializable {
     public static ScrollPane staticMainScrollPane;
     @FXML
     void searchButton(ActionEvent event) throws IOException, GeneralSecurityException, SQLException {
+        Anchorpanesearch.setVisible(true);
+        dashboard1.setVisible(false);
         List<Book> ApiResult = ApiBook.searchbook(addressBar.getText());
         List<Book> databaseResult = DatabaseConnection.searchbookdata(addressBar.getText());
         setSearchResults(databaseResult, ApiResult);
@@ -399,7 +423,111 @@ public class Home implements Initializable {
         DatabaseConnection.addbookdata(addbook);
     }
 
+    public void setdashboardbook(List<Book> newbooks, List<Book> shortstory, List<Book> educationbooks) {
+        this.newbooks = newbooks;
+        this.shortstorybook = shortstory;
+        this.educationbooks = educationbooks;
+        displayDatabasenewbook();
+        displayDatabaseshortstory();
+        displayDatabaseeducationbook();
+    }
 
+    private void displayDatabasenewbook() {
+        newbook.getChildren().clear();
+        int columns = 6;
+        int rows = 6;
+        int bookCount = 0;
+
+        if (newbooks == null || newbooks.isEmpty()) {
+            System.out.println("No books available to display.");
+            return;
+        }
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                if (bookCount >= newbooks.size()) {
+                    break;
+                }
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("book.fxml"));
+                    Pane bookPane = loader.load();
+                    BookCover controller = loader.getController();
+                    controller.setDataApi(newbooks.get(bookCount));
+                    newbook.add(bookPane, col, row);
+                    bookCount++;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private void displayDatabaseshortstory() {
+        shortstory.getChildren().clear();
+        int columns = 6;
+        int rows = 6;
+        int bookCount = 0;
+
+        if (shortstorybook == null || shortstorybook.isEmpty()) {
+            System.out.println("No books available to display.");
+            return;
+        }
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                if (bookCount >= shortstorybook.size()) {
+                    break;
+                }
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("book.fxml"));
+                    Pane bookPane = loader.load();
+                    BookCover controller = loader.getController();
+                    controller.setDataApi(shortstorybook.get(bookCount));
+                    shortstory.add(bookPane, col, row);
+                    bookCount++;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private void displayDatabaseeducationbook() {
+        education.getChildren().clear();
+        int columns = 6;
+        int rows = 6;
+        int bookCount = 0;
+
+        if (educationbooks == null || educationbooks.isEmpty()) {
+            System.out.println("No books available to display.");
+            return;
+        }
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                if (bookCount >= educationbooks.size()) {
+                    break;
+                }
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("book.fxml"));
+                    Pane bookPane = loader.load();
+                    BookCover controller = loader.getController();
+                    controller.setDataApi(educationbooks.get(bookCount));
+                    education.add(bookPane, col, row);
+                    bookCount++;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private void dashbordresult() throws SQLException {
+        List<Book> newbooks  = DatabaseConnection.searchBookDataNew();
+        List<Book> shortstorybook = DatabaseConnection.searchbookdata("Short storis");
+        List<Book> educationbook = DatabaseConnection.searchbookdata("Education");
+        setdashboardbook(newbooks, shortstorybook, educationbook );
+    }
 }
 
 

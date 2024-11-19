@@ -40,11 +40,11 @@ public class Addbookapi {
 
     public void addbookapi(Book book) {
         this.book = book;
-        isbn.setText("ISBN: " + book.getISBN());
+        isbn.setText(book.getISBN());
         title1.setText(book.getTitle());
-        author1.setText("Author: " + book.getAuthor());
-        nxb1.setText("Publisher: " + book.getPublisher());
-        theloai1.setText("Category: " + book.getTheloai());
+        author1.setText(book.getAuthor());
+        nxb1.setText(book.getPublisher());
+        theloai1.setText(book.getTheloai());
         linkimage.setText(book.getImage());
         linkreview.setText(book.getRivew());
 
