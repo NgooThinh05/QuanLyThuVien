@@ -524,7 +524,7 @@ public class Home implements Initializable {
 
     private void dashbordresult() throws SQLException {
         List<Book> newbooks  = DatabaseConnection.searchBookDataNew();
-        List<Book> shortstorybook = DatabaseConnection.searchbookdata("Short storis");
+        List<Book> shortstorybook = DatabaseConnection.searchbookdata("Comics");
         List<Book> educationbook = DatabaseConnection.searchbookdata("Education");
         setdashboardbook(newbooks, shortstorybook, educationbook );
     }
