@@ -5,42 +5,44 @@ import java.util.List;
 import java.sql.*;
 
 public class DatabaseConnection {
-    private static final String DATABASE_URL = "jdbc:mysql://127.0.0.1:3306/library";
-    private static final String DATABASE_USER = "root";
-    private static final String DATABASE_PASSWORD = "123456";
+    private static final String DATABASE_URL = "jdbc:sqlite:library.db";
 
     public static Connection getConnection() throws SQLException {
-        Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
+        Connection connection = DriverManager.getConnection(DATABASE_URL);
+        try (Statement stmt = connection.createStatement()) {
+            stmt.execute("PRAGMA busy_timeout = 5000;");
+        }
         return connection;
     }
 
+
     public static void addbookdata(Book book) throws SQLException {
-        Connection connection = getConnection();
-        Statement statement = connection.createStatement();
-        String addsql = "INSERT INTO book(ISBN, Title, Author, Publisher, mota, theloai, image, review, soluong) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        PreparedStatement preparedStatement = connection.prepareStatement(addsql);
+        String addsql = "INSERT INTO book(ISBN, Title, Author, Publisher, mota, theloai, image, review, soluong) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        preparedStatement.setString(1, book.getISBN());
-        preparedStatement.setString(2, book.getTitle());
-        preparedStatement.setString(3, book.getAuthor());
-        preparedStatement.setString(4, book.getPublisher());
-        preparedStatement.setString(5, book.getMota());
-        preparedStatement.setString(6, book.getTheloai());
-        preparedStatement.setString(7, book.getImage());
-        preparedStatement.setString(8, book.getRivew());
-        preparedStatement.setInt(9, book.getSoluong());
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(addsql)) {
 
-        int rowsAffected = preparedStatement.executeUpdate();
-
-        if (rowsAffected > 0) {
-            System.out.println("Thêm sách thành công!");
-        } else {
-            System.out.println("Thêm sách thất bại.");
+            preparedStatement.setString(1, book.getISBN());
+            preparedStatement.setString(2, book.getTitle());
+            preparedStatement.setString(3, book.getAuthor());
+            preparedStatement.setString(4, book.getPublisher());
+            preparedStatement.setString(5, book.getMota());
+            preparedStatement.setString(6, book.getTheloai());
+            preparedStatement.setString(7, book.getImage());
+            preparedStatement.setString(8, book.getRivew());
+            preparedStatement.setInt(9, book.getSoluong());
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Thêm sách thành công!");
+            } else {
+                System.out.println("Thêm sách thất bại.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Lỗi khi thêm sách: " + e.getMessage());
+            throw e;
         }
-
-        preparedStatement.close();
-        connection.close();
     }
 
     public static List<Book> searchbookdata(String search) throws SQLException {
@@ -82,7 +84,7 @@ public class DatabaseConnection {
 
     public static List<Book> searchBookDataNew() throws SQLException {
         List<Book> books = new ArrayList<>();
-        String query = "SELECT * FROM book ORDER BY stt DESC LIMIT 10";
+        String query = "SELECT * FROM book ORDER BY stt DESC LIMIT 6";
         try (
                 Connection connection = getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)

@@ -125,7 +125,7 @@
                                        </font>
                                     </Label>
                                     <GridPane fx:id="newbook" prefWidth="850.0" />
-                                    <Label text="short story">
+                                    <Label text="Comics">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
@@ -189,12 +189,12 @@
             </AnchorPane>
             <AnchorPane fx:id="borrow" layoutX="28.0" layoutY="57.0" prefHeight="666.0" prefWidth="944.0">
                <children>
-                  <AnchorPane layoutX="500.0" layoutY="5.0" prefHeight="655.0" prefWidth="477.0" style="-fx-background-color: #f2f4f6;" styleClass="bgr-while" stylesheets="@../../../../../../../../Users/Victus/Downloads/QuanLyThuVien-Tu/QuanLyThuVien-Tu/src/main/resources/dashboarddesign.css">
+                  <AnchorPane layoutX="500.0" layoutY="5.0" prefHeight="655.0" prefWidth="477.0" style="-fx-background-color: #f2f4f6;" styleClass="bgr-while" stylesheets="@../../../dashboarddesign.css">
                      <children>
                         <TextField layoutX="84.0" layoutY="14.0" prefHeight="26.0" prefWidth="353.0" promptText="Search" />
                         <ImageView fx:id="searchBorrowBook" fitHeight="29.0" fitWidth="34.0" layoutX="50.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../../../Users/Victus/Downloads/QuanLyThuVien-Tu/QuanLyThuVien-Tu/image/kinhlup.png" />
+                              <Image url="@../../../../../../image/kinhlup.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -206,7 +206,7 @@
                               <Insets left="125.0" top="20.0" />
                            </VBox.margin>
                            <image>
-                              <Image url="@../../../../../../../../Users/Victus/Downloads/QuanLyThuVien-Tu/QuanLyThuVien-Tu/image/bookCover.jpeg" />
+                              <Image url="@../../../../../../image/bookCover.jpeg" />
                            </image>
                         </ImageView>
                         <TextField prefHeight="50.0" promptText="Book ID" style="-fx-background-color: #cfe7ea;">
@@ -265,7 +265,7 @@
                   </VBox>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="returnbook" layoutX="24.0" layoutY="58.0" prefHeight="666.0" prefWidth="988.0" style="-fx-background-color: #f2f4f6;">
+            <AnchorPane fx:id="returnbook" layoutX="24.0" layoutY="58.0" prefHeight="666.0" prefWidth="988.0" style="-fx-background-color: #f2f4f6;" stylesheets="@../../../dashboarddesign.css" visible="false">
                <children>
                   <TextField fx:id="searchReturnBook" layoutX="400.0" layoutY="40.0" prefHeight="30.0" prefWidth="250.0" promptText="Search" />
                   <ScrollPane layoutX="115.0" layoutY="100.0" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #ffffff;">
@@ -298,7 +298,7 @@
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../../../Users/Victus/Downloads/QuanLyThuVien-Tu/QuanLyThuVien-Tu/image/kinhlup.png" />
+                              <Image url="@../../../../../../image/kinhlup.png" />
                            </image>
                         </ImageView>
                      </graphic>

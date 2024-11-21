@@ -65,7 +65,7 @@ public class Login implements Initializable{
         DatabaseConnection connecnow = new DatabaseConnection();
         Connection connectiBD = connecnow.getConnection();
 
-        String verifylogin = "SELECT id FROM user WHERE username = ? AND password = ?";
+        String verifylogin = "SELECT id FROM users WHERE username = ? AND password = ?";
 
         try {
             PreparedStatement preparedStatement = connectiBD.prepareStatement(verifylogin);

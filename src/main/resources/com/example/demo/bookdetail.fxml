@@ -11,7 +11,7 @@
    <content>
       <AnchorPane fx:id="anchorpanedetail" prefHeight="395.0" prefWidth="598.0">
          <children>
-            <ImageView fx:id="imagebook" fitHeight="93.0" fitWidth="138.0" layoutX="24.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imagebook" fitHeight="93.0" fitWidth="138.0" layoutX="21.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../Image/logo.png" />
                </image>
@@ -24,7 +24,7 @@
             <Text fx:id="author" layoutX="212.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Arthor" wrappingWidth="311.7366943359375" />
             <Text fx:id="nxb" layoutX="210.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NXB" wrappingWidth="298.13671875" />
             <Text fx:id="theloai" layoutX="211.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TheLoai" wrappingWidth="313.044921875" />
-            <Text fx:id="describe" layoutX="24.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MoTa" wrappingWidth="555.7992553710938" />
+            <Text fx:id="describe" layoutX="21.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MoTa" wrappingWidth="555.7992553710938" />
          </children>
       </AnchorPane>
    </content>
