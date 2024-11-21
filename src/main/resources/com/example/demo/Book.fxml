@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="200.0" prefWidth="150.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Bookapi">
+<AnchorPane prefHeight="200.0" prefWidth="150.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.BookCover">
    <children>
       <VBox layoutX="-1.0" prefHeight="200.0" prefWidth="150.0">
          <children>
@@ -18,7 +18,7 @@
             </ImageView>
             <Label fx:id="namebook" prefHeight="18.0" prefWidth="151.0" text="namebook" textAlignment="CENTER" />
             <Label fx:id="author" prefHeight="18.0" prefWidth="147.0" text="tac gia" textAlignment="CENTER" />
-            <Button fx:id="chitiet" mnemonicParsing="false" styleClass="chitiet" stylesheets="@../../../book.css" text="chi tiet" textAlignment="CENTER" />
+            <Button fx:id="chitiet" mnemonicParsing="false" onAction="#chitiet" styleClass="chitiet" stylesheets="@../../../book.css" text="chi tiet" textAlignment="CENTER" />
          </children>
       </VBox>
    </children>

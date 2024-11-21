@@ -17,7 +17,7 @@ public class DatabaseConnection {
     public static void addbookdata(Book book) throws SQLException {
         Connection connection = getConnection();
         Statement statement = connection.createStatement();
-        String addsql = "INSERT INTO book(IBSN, Title, Author, Publisher, mota, theloai, image, review, soluong) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String addsql = "INSERT INTO book(ISBN, Title, Author, Publisher, mota, theloai, image, review, soluong) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         PreparedStatement preparedStatement = connection.prepareStatement(addsql);
 
@@ -77,6 +77,32 @@ public class DatabaseConnection {
             if (preparedStatement != null) preparedStatement.close();
             if (connection != null) connection.close();
         }
+        return books;
+    }
+
+    public static List<Book> searchBookDataNew() throws SQLException {
+        List<Book> books = new ArrayList<>();
+        String query = "SELECT * FROM book ORDER BY stt DESC LIMIT 10";
+        try (
+                Connection connection = getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(query)
+        ) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    String ISBN = resultSet.getString("ISBN");
+                    String title = resultSet.getString("Title");
+                    String author = resultSet.getString("Author");
+                    String theloai = resultSet.getString("theloai");
+                    String publisher = resultSet.getString("Publisher");
+                    String mota = resultSet.getString("mota");
+                    String image = resultSet.getString("image");
+                    String review = resultSet.getString("review");
+                    Book book = new Book(ISBN, title, author, publisher, mota, theloai, image, review);
+                    books.add(book);
+                }
+            }
+        }
+
         return books;
     }
 }

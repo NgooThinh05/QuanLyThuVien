@@ -23,7 +23,7 @@ public class Book {
         this.review = rivew;
     }
 
-    public Book (String ISBN, String Title, String Author, String Publisher, String theloai, String mota, String image, String rivew, int soluong ) {
+    public Book () {
         this.ISBN = ISBN;
         this.Title = Title;
         this.Author = Author;
@@ -31,7 +31,7 @@ public class Book {
         this.theloai = theloai;
         this.mota = mota;
         this.image = image;
-        this.review = rivew;
+        this.review = review;
         this.soluong = soluong;
     }
 

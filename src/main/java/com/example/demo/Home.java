@@ -35,113 +35,114 @@ import java.util.ResourceBundle;
 
 public class Home implements Initializable {
 
-        @FXML
-        private Button AddBook;
+    @FXML
+    private Button minimize;
 
-        @FXML
-        private AnchorPane AddBookPane;
+    @FXML
+    private Button exit;
 
-        @FXML
-        private ImageView Avatar;
+    @FXML
+    private Button SignOut;
 
-        @FXML
-        private Button BorrowBook;
+    @FXML
+    private Button profile;
 
-        @FXML
-        private AnchorPane BorrowBookPane;
+    @FXML
+    private Button DashBoard;
 
-        @FXML
-        private Button DashBoard;
+    @FXML
+    private Button AddBook;
+    @FXML
+    private Button BorrowBook;
+    @FXML
+    private Button ReturnBook;
+    @FXML
+    private Button Delete;
+    @FXML
+    private Button User;
+    @FXML
+    private Button Setting;
+    @FXML
+    private Button searchButton;
+    @FXML
+    private Label hello;
+    @FXML
+    private TextField addressBar;
+    @FXML
+    private Pane topForm;
 
-        @FXML
-        private AnchorPane DashBoardPane;
+    @FXML
+    private ImageView Avatar;
+    @FXML
+    private ImageView SignOutImage;
 
-        @FXML
-        private Button Delete;
+    @FXML
+    private AnchorPane DashBoardForm;
+    @FXML
+    private AnchorPane AddBookForm;
+    @FXML
+    private AnchorPane BorrowBookForm;
+    @FXML
+    private AnchorPane ReturnBookForm;
+    @FXML
+    private AnchorPane DeleteBookForm;
+    @FXML
+    private AnchorPane UserForm;
+    @FXML
+    private AnchorPane SettingsForm;
+    @FXML
+    private AnchorPane ProfileForm;
+    @FXML
+    private ImageView search;
+    @FXML
+    private GridPane bookapi;
+    @FXML
+    private GridPane bookdata;
+    @FXML
+    private ImageView searchaddimage;
+    @FXML
+    private TextField searchadd;
+    @FXML
+    private GridPane bookaddapi;
+    @FXML
+    private Button searchaddbutton;
+    @FXML
+    private Button acceptbutton;
+    @FXML
+    private TextField addtitle;
+    @FXML
+    private TextField addauthor;
+    @FXML
+    private TextField addmota;
+    @FXML
+    private TextField addISBN;
+    @FXML
+    private TextField addnxb;
+    @FXML
+    private TextField addsl;
+    @FXML
+    private TextField addtheloai;
+    @FXML
+    private TextField linkimage;
+    @FXML
+    private TextField linkreview;
+    @FXML
+    private GridPane newbook;
+    @FXML
+    private GridPane shortstory;
+    @FXML
+    private GridPane education;
+    @FXML
+    private AnchorPane Anchorpanesearch;
+    @FXML
+    private AnchorPane dashboard1;
 
-        @FXML
-        private AnchorPane DeleteBookPane;
-
-        @FXML
-        private AnchorPane ProfileForm;
-
-        @FXML
-        private Button ReturnBook;
-
-        @FXML
-        private AnchorPane ReturnBookPane;
-
-        @FXML
-        private Button Setting;
-
-        @FXML
-        private AnchorPane SettingsPane;
-
-        @FXML
-        private Button SignOut;
-
-        @FXML
-        private ImageView SignOutImage;
-
-        @FXML
-        private Button User;
-
-        @FXML
-        private AnchorPane UserPane;
-
-        @FXML
-        private TextField addressBar;
-
-        @FXML
-        private Label appName;
-
-        @FXML
-        private GridPane bookApi;
-
-        @FXML
-        private GridPane bookData;
-
-        @FXML
-        private Button exitButton;
-
-        @FXML
-        private Label helloUserLabel;
-
-        @FXML
-        private AnchorPane mainAnchorPane;
-
-        @FXML
-        private AnchorPane menuAnchorPane;
-
-        @FXML
-        private Button minimizeButton;
-
-        @FXML
-        private Button profile;
-
-        @FXML
-        private ImageView searchBorrowBook;
-
-        @FXML
-        private ImageView searchAddBook;
-
-        @FXML
-        private Button searchButton;
-
-        @FXML
-        private ImageView searchDashboard;
-
-        @FXML
-        private TextField searchReturnBook;
-
-        @FXML
-        private Button searchReturnBookButton;
-
-        @FXML
-        private Pane topForm;
 
     private List<Book> databaseSearchResults;
     private List<Book> apiSearchResults;
+    private List<Book> newbooks;
+    private List<Book> shortstorybook;
+    private List<Book> educationbooks;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -155,98 +156,111 @@ public class Home implements Initializable {
 
         File brandingFile2 = new File("image/kinhlup.png");
         Image brandingImage2 = new Image(brandingFile2.toURI().toString());
-        searchDashboard.setImage(brandingImage2);
+        search.setImage(brandingImage2);
+
+        File brandingFile3 = new File("image/kinhlup.png");
+        Image brandingImage3 = new Image(brandingFile2.toURI().toString());
+        searchaddimage.setImage(brandingImage2);
 
         Name();
+
+        try {
+            dashbordresult();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
 
     public void switchForm(ActionEvent event) {
         if (event.getSource() == DashBoard) {
-            DashBoardPane.setVisible(true);
-            AddBookPane.setVisible(false);
-            BorrowBookPane.setVisible(false);
-            ReturnBookPane.setVisible(false);
-            DeleteBookPane.setVisible(false);
-            UserPane.setVisible(false);
-            SettingsPane.setVisible(false);
+            DashBoardForm.setVisible(true);
+            dashboard1.setVisible(true);
+            Anchorpanesearch.setVisible(false);
+            AddBookForm.setVisible(false);
+            BorrowBookForm.setVisible(false);
+            ReturnBookForm.setVisible(false);
+            DeleteBookForm.setVisible(false);
+            UserForm.setVisible(false);
+            SettingsForm.setVisible(false);
             ProfileForm.setVisible(false);
         }
 
         if (event.getSource() == AddBook) {
-            DashBoardPane.setVisible(false);
-            AddBookPane.setVisible(true);
-            BorrowBookPane.setVisible(false);
-            ReturnBookPane.setVisible(false);
-            DeleteBookPane.setVisible(false);
-            UserPane.setVisible(false);
-            SettingsPane.setVisible(false);
+            DashBoardForm.setVisible(false);
+            AddBookForm.setVisible(true);
+            BorrowBookForm.setVisible(false);
+            ReturnBookForm.setVisible(false);
+            DeleteBookForm.setVisible(false);
+            UserForm.setVisible(false);
+            SettingsForm.setVisible(false);
             ProfileForm.setVisible(false);
         }
 
         if (event.getSource() == BorrowBook) {
-            DashBoardPane.setVisible(false);
-            AddBookPane.setVisible(false);
-            BorrowBookPane.setVisible(true);
-            ReturnBookPane.setVisible(false);
-            DeleteBookPane.setVisible(false);
-            UserPane.setVisible(false);
-            SettingsPane.setVisible(false);
+            DashBoardForm.setVisible(false);
+            AddBookForm.setVisible(false);
+            BorrowBookForm.setVisible(true);
+            ReturnBookForm.setVisible(false);
+            DeleteBookForm.setVisible(false);
+            UserForm.setVisible(false);
+            SettingsForm.setVisible(false);
             ProfileForm.setVisible(false);
         }
 
         if (event.getSource() == ReturnBook) {
-            DashBoardPane.setVisible(false);
-            AddBookPane.setVisible(false);
-            BorrowBookPane.setVisible(false);
-            ReturnBookPane.setVisible(true);
-            DeleteBookPane.setVisible(false);
-            UserPane.setVisible(false);
-            SettingsPane.setVisible(false);
+            DashBoardForm.setVisible(false);
+            AddBookForm.setVisible(false);
+            BorrowBookForm.setVisible(false);
+            ReturnBookForm.setVisible(true);
+            DeleteBookForm.setVisible(false);
+            UserForm.setVisible(false);
+            SettingsForm.setVisible(false);
             ProfileForm.setVisible(false);
         }
 
         if (event.getSource() == Delete) {
-            DashBoardPane.setVisible(false);
-            AddBookPane.setVisible(false);
-            BorrowBookPane.setVisible(false);
-            ReturnBookPane.setVisible(false);
-            DeleteBookPane.setVisible(true);
-            UserPane.setVisible(false);
-            SettingsPane.setVisible(false);
+            DashBoardForm.setVisible(false);
+            AddBookForm.setVisible(false);
+            BorrowBookForm.setVisible(false);
+            ReturnBookForm.setVisible(false);
+            DeleteBookForm.setVisible(true);
+            UserForm.setVisible(false);
+            SettingsForm.setVisible(false);
             ProfileForm.setVisible(false);
         }
 
         if (event.getSource() == User) {
-            DashBoardPane.setVisible(false);
-            AddBookPane.setVisible(false);
-            BorrowBookPane.setVisible(false);
-            ReturnBookPane.setVisible(false);
-            DeleteBookPane.setVisible(false);
-            UserPane.setVisible(true);
-            SettingsPane.setVisible(false);
+            DashBoardForm.setVisible(false);
+            AddBookForm.setVisible(false);
+            BorrowBookForm.setVisible(false);
+            ReturnBookForm.setVisible(false);
+            DeleteBookForm.setVisible(false);
+            UserForm.setVisible(true);
+            SettingsForm.setVisible(false);
             ProfileForm.setVisible(false);
         }
 
         if (event.getSource() == Setting) {
-            DashBoardPane.setVisible(false);
-            AddBookPane.setVisible(false);
-            BorrowBookPane.setVisible(false);
-            ReturnBookPane.setVisible(false);
-            DeleteBookPane.setVisible(false);
-            UserPane.setVisible(false);
-            SettingsPane.setVisible(true);
+            DashBoardForm.setVisible(false);
+            AddBookForm.setVisible(false);
+            BorrowBookForm.setVisible(false);
+            ReturnBookForm.setVisible(false);
+            DeleteBookForm.setVisible(false);
+            UserForm.setVisible(false);
+            SettingsForm.setVisible(true);
             ProfileForm.setVisible(false);
         }
 
         if (event.getSource() == profile) {
-            DashBoardPane.setVisible(false);
-            AddBookPane.setVisible(false);
-            BorrowBookPane.setVisible(false);
-            ReturnBookPane.setVisible(false);
-            DeleteBookPane.setVisible(false);
-            UserPane.setVisible(false);
-            SettingsPane.setVisible(false);
+            DashBoardForm.setVisible(false);
+            AddBookForm.setVisible(false);
+            BorrowBookForm.setVisible(false);
+            ReturnBookForm.setVisible(false);
+            DeleteBookForm.setVisible(false);
+            UserForm.setVisible(false);
+            SettingsForm.setVisible(false);
             ProfileForm.setVisible(true);
         }
 
@@ -272,7 +286,7 @@ public class Home implements Initializable {
     }
 
     public void Name() {
-        helloUserLabel.setText("Hello, " + getdata.username);
+        hello.setText("Hello, " + getdata.username);
     }
 
     public void SignOut() {
@@ -294,7 +308,7 @@ public class Home implements Initializable {
     }
 
     private void displayDatabaseResults() {
-        bookApi.getChildren().clear();
+        bookapi.getChildren().clear();
         int columns = 6;
         int rows = 6;
         int bookCount = 0;
@@ -312,9 +326,9 @@ public class Home implements Initializable {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("book.fxml"));
                     Pane bookPane = loader.load();
-                    Bookapi controller = loader.getController();
-                    controller.setDataAll(databaseSearchResults.get(bookCount));
-                    bookData.add(bookPane, col, row);
+                    BookCover controller = loader.getController();
+                    controller.setDataApi(databaseSearchResults.get(bookCount));
+                    bookdata.add(bookPane, col, row);
                     bookCount++;
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -324,9 +338,9 @@ public class Home implements Initializable {
     }
 
     private void displayApiResults() {
-        bookApi.getChildren().clear(); // Xóa các sách hiển thị trước đó
-        int columns = 6;
-        int rows = 6;
+        bookapi.getChildren().clear();
+        int columns = 10;
+        int rows = 10;
         int bookCount = 0;
 
         for (int row = 0; row < rows; row++) {
@@ -337,9 +351,9 @@ public class Home implements Initializable {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("book.fxml"));
                     Pane bookPane = loader.load();
-                    Bookapi controller = loader.getController();
+                    BookCover controller = loader.getController();
                     controller.setData(apiSearchResults.get(bookCount));
-                    bookApi.add(bookPane, col, row);
+                    bookapi.add(bookPane, col, row);
                     bookCount++;
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -351,13 +365,169 @@ public class Home implements Initializable {
     public static ScrollPane staticMainScrollPane;
     @FXML
     void searchButton(ActionEvent event) throws IOException, GeneralSecurityException, SQLException {
+        Anchorpanesearch.setVisible(true);
+        dashboard1.setVisible(false);
         List<Book> ApiResult = ApiBook.searchbook(addressBar.getText());
         List<Book> databaseResult = DatabaseConnection.searchbookdata(addressBar.getText());
         setSearchResults(databaseResult, ApiResult);
     }
 
+    public void setSearchaddbookResults(List<Book> apiResults) {
+        this.apiSearchResults = apiResults;
+        displayApiaddbookResults();
+    }
 
+    private void displayApiaddbookResults() {
+        bookaddapi.getChildren().clear();
+        int columns = 6;
+        int rows = 6;
+        int bookCount = 0;
 
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                if (bookCount >= apiSearchResults.size()) {
+                    break;
+                }
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("bookaddsearch.fxml"));
+                    Pane bookPane = loader.load();
+                    BookCover controller = loader.getController();
+                    controller.setData(apiSearchResults.get(bookCount));
+                    bookaddapi.add(bookPane, col, row);
+                    bookCount++;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    @FXML
+    void searchaddbookButton(ActionEvent event) throws IOException, GeneralSecurityException, SQLException {
+        List<Book> ApiResult = ApiBook.searchbook(searchadd.getText());
+        setSearchaddbookResults(ApiResult);
+    }
+
+    public void acceptbutton(ActionEvent event) throws IOException, GeneralSecurityException, SQLException {
+        Book addbook = new Book();
+        addbook.setTitle(addtitle.getText());
+        addbook.setAuthor(addauthor.getText());
+        addbook.setTheloai(addtheloai.getText());
+        addbook.setISBN(addISBN.getText());
+        addbook.setMota(addmota.getText());
+        addbook.setImage(linkimage.getText());
+        addbook.setPublisher(addnxb.getText());
+        int soluong = Integer.parseInt(addsl.getText());
+        addbook.setSoluong(soluong);
+        addbook.setRivew(linkreview.getText());
+        DatabaseConnection.addbookdata(addbook);
+    }
+
+    public void setdashboardbook(List<Book> newbooks, List<Book> shortstory, List<Book> educationbooks) {
+        this.newbooks = newbooks;
+        this.shortstorybook = shortstory;
+        this.educationbooks = educationbooks;
+        displayDatabasenewbook();
+        displayDatabaseshortstory();
+        displayDatabaseeducationbook();
+    }
+
+    private void displayDatabasenewbook() {
+        newbook.getChildren().clear();
+        int columns = 6;
+        int rows = 6;
+        int bookCount = 0;
+
+        if (newbooks == null || newbooks.isEmpty()) {
+            System.out.println("No books available to display.");
+            return;
+        }
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                if (bookCount >= newbooks.size()) {
+                    break;
+                }
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("book.fxml"));
+                    Pane bookPane = loader.load();
+                    BookCover controller = loader.getController();
+                    controller.setDataApi(newbooks.get(bookCount));
+                    newbook.add(bookPane, col, row);
+                    bookCount++;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private void displayDatabaseshortstory() {
+        shortstory.getChildren().clear();
+        int columns = 6;
+        int rows = 6;
+        int bookCount = 0;
+
+        if (shortstorybook == null || shortstorybook.isEmpty()) {
+            System.out.println("No books available to display.");
+            return;
+        }
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                if (bookCount >= shortstorybook.size()) {
+                    break;
+                }
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("book.fxml"));
+                    Pane bookPane = loader.load();
+                    BookCover controller = loader.getController();
+                    controller.setDataApi(shortstorybook.get(bookCount));
+                    shortstory.add(bookPane, col, row);
+                    bookCount++;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private void displayDatabaseeducationbook() {
+        education.getChildren().clear();
+        int columns = 6;
+        int rows = 6;
+        int bookCount = 0;
+
+        if (educationbooks == null || educationbooks.isEmpty()) {
+            System.out.println("No books available to display.");
+            return;
+        }
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                if (bookCount >= educationbooks.size()) {
+                    break;
+                }
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("book.fxml"));
+                    Pane bookPane = loader.load();
+                    BookCover controller = loader.getController();
+                    controller.setDataApi(educationbooks.get(bookCount));
+                    education.add(bookPane, col, row);
+                    bookCount++;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private void dashbordresult() throws SQLException {
+        List<Book> newbooks  = DatabaseConnection.searchBookDataNew();
+        List<Book> shortstorybook = DatabaseConnection.searchbookdata("Short storis");
+        List<Book> educationbook = DatabaseConnection.searchbookdata("Education");
+        setdashboardbook(newbooks, shortstorybook, educationbook );
+    }
 }
 
 
