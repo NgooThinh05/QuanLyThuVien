@@ -84,6 +84,8 @@ public class Login implements Initializable{
         } catch (SQLException e) {
             e.printStackTrace();
             e.getCause();
+        } finally {
+            connectiBD.close();
         }
     }
 

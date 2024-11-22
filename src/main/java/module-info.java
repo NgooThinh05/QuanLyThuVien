@@ -2,7 +2,8 @@ module com.example.demo {
     requires javafx.fxml;
     requires java.sql;
 
-
+    requires org.slf4j;
+    requires org.xerial.sqlitejdbc;
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
