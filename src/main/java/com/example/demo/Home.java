@@ -1,15 +1,18 @@
 package com.example.demo;
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.PasswordField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -22,6 +25,7 @@ import javafx.event.ActionEvent;
 import javafx.stage.StageStyle;
 
 import java.awt.*;
+import java.awt.ScrollPane;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
@@ -136,6 +140,22 @@ public class Home implements Initializable {
     private AnchorPane Anchorpanesearch;
     @FXML
     private AnchorPane dashboard1;
+    @FXML
+    private TableView dsuser;
+    @FXML
+    private TableColumn<User, String> stt;
+    @FXML
+    private TableColumn<User, String> hoten;
+    @FXML
+    private TableColumn<User, String> tk;
+    @FXML
+    private TableColumn<User, String> mk;
+    @FXML
+    private TableColumn<User, String> sdt;
+    @FXML
+    private TableColumn<User, String> cccd;
+    @FXML
+    private TableColumn<User, String> diachi;
 
 
     private List<Book> databaseSearchResults;
@@ -166,6 +186,12 @@ public class Home implements Initializable {
 
         try {
             dashbordresult();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            UserMN();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -527,6 +553,31 @@ public class Home implements Initializable {
         List<Book> shortstorybook = DatabaseConnection.searchbookdata("Comics");
         List<Book> educationbook = DatabaseConnection.searchbookdata("Education");
         setdashboardbook(newbooks, shortstorybook, educationbook );
+    }
+
+    public void initializeTableView(TableView<User> tableView,
+                                    TableColumn<User, String> stt,
+                                    TableColumn<User, String> hoten,
+                                    TableColumn<User, String> tk,
+                                    TableColumn<User, String> mk,
+                                    TableColumn<User, String> sdt,
+                                    TableColumn<User, String> cccd,
+                                    TableColumn<User, String> diachi,
+                                    List<User> users) {
+        stt.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        hoten.setCellValueFactory(new PropertyValueFactory<>("Hoten"));
+        tk.setCellValueFactory(new PropertyValueFactory<>("username"));
+        mk.setCellValueFactory(new PropertyValueFactory<>("password"));
+        sdt.setCellValueFactory(new PropertyValueFactory<>("sodt"));
+        cccd.setCellValueFactory(new PropertyValueFactory<>("CCCD"));
+        diachi.setCellValueFactory(new PropertyValueFactory<>("DiaChi"));
+        ObservableList<User> observableUsers = FXCollections.observableArrayList(users);
+        tableView.setItems(observableUsers);
+    }
+
+    private void UserMN() throws SQLException {
+        List<User> users = DatabaseConnection.Listusers();
+        initializeTableView(dsuser, stt, hoten, tk, mk, sdt, cccd, diachi, users );
     }
 }
 
