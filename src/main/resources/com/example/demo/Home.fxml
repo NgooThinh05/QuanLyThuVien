@@ -56,7 +56,7 @@
          <children>
             <Pane fx:id="topForm" layoutX="24.0" layoutY="-2.0" prefHeight="59.0" prefWidth="990.0" styleClass="top-form" stylesheets="@../../../dashboarddesign.css">
                <children>
-                  <Label fx:id="nameapp" layoutX="349.0" layoutY="-2.0" prefHeight="46.0" prefWidth="278.0" text="Management library" textAlignment="CENTER" textFill="#2a34c1">
+                  <Label fx:id="nameapp" layoutX="349.0" layoutY="-2.0" prefHeight="46.0" prefWidth="278.0" text="Library Management" textAlignment="CENTER" textFill="#2a34c1">
                      <font>
                         <Font size="30.0" />
                      </font>
@@ -73,7 +73,7 @@
                   </Button>
                </children>
             </Pane>
-            <AnchorPane fx:id="DashBoardForm" layoutX="28.0" layoutY="57.0" prefHeight="664.0" prefWidth="980.0" visible="false">
+            <AnchorPane fx:id="DashBoardForm" layoutX="28.0" layoutY="57.0" prefHeight="664.0" prefWidth="980.0">
                <children>
                   <TextField fx:id="addressBar" layoutX="260.0" layoutY="17.0" prefHeight="36.0" prefWidth="558.0" promptText="Seach..." />
                   <Button fx:id="searchButton" layoutX="194.0" layoutY="17.0" mnemonicParsing="false" onAction="#searchButton" styleClass="minus" stylesheets="@../../../dashboarddesign.css">
@@ -187,7 +187,7 @@
                   <TextField fx:id="addmota" layoutX="84.0" layoutY="405.0" prefHeight="32.0" prefWidth="396.0" promptText="describe" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="borrow" layoutX="28.0" layoutY="57.0" prefHeight="666.0" prefWidth="944.0">
+            <AnchorPane fx:id="borrow" layoutX="28.0" layoutY="57.0" prefHeight="666.0" prefWidth="944.0" visible="false">
                <children>
                   <AnchorPane layoutX="500.0" layoutY="5.0" prefHeight="655.0" prefWidth="477.0" style="-fx-background-color: #f2f4f6;" styleClass="bgr-while" stylesheets="@../../../dashboarddesign.css">
                      <children>
@@ -270,7 +270,7 @@
                   <TextField fx:id="searchReturnBook" layoutX="400.0" layoutY="40.0" prefHeight="30.0" prefWidth="250.0" promptText="Search" />
                   <ScrollPane layoutX="115.0" layoutY="100.0" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #ffffff;">
                      <content>
-                        <GridPane fx:id="bookData1" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #ffffff;">
+                        <GridPane fx:id="bookData1" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #ffffff;" visible="false">
                            <children>
                               <TableView prefHeight="500.0" prefWidth="800.0">
                                  <columns>
@@ -316,11 +316,33 @@
             </AnchorPane>
             <AnchorPane fx:id="user" layoutX="24.0" layoutY="57.0" prefHeight="664.0" prefWidth="989.0" visible="false">
                <children>
-                  <Label layoutX="467.0" layoutY="14.0" prefHeight="50.0" prefWidth="55.0" text="User">
+                  <Label layoutX="389.0" layoutY="14.0" prefHeight="50.0" prefWidth="210.0" text="User Management">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
+                  <TextField layoutX="317.0" layoutY="64.0" prefHeight="26.0" prefWidth="314.0" promptText="Search" />
+                  <Button layoutX="211.0" layoutY="58.0" minWidth="32.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="54.0" styleClass="minus" stylesheets="@../../../dashboarddesign.css" />
+                  <ImageView fitHeight="54.0" fitWidth="31.0" layoutX="275.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../image/kinhlup.png" />
+                     </image>
+                  </ImageView>
+                  <ScrollPane layoutX="38.0" layoutY="121.0" prefHeight="532.0" prefWidth="941.0">
+                     <content>
+                        <TableView fx:id="dsuser" prefHeight="544.0" prefWidth="928.0">
+                          <columns>
+                            <TableColumn fx:id="stt" prefWidth="50.0" text="STT" />
+                            <TableColumn fx:id="hoten" prefWidth="220.0" text="FullName" />
+                              <TableColumn fx:id="tk" prefWidth="100.0" text="Username" />
+                              <TableColumn fx:id="mk" prefWidth="100.0" text="Password" />
+                              <TableColumn fx:id="sdt" prefWidth="120.0" text="Numberphone" />
+                              <TableColumn fx:id="cccd" prefWidth="100.0" text="CCCD" />
+                              <TableColumn fx:id="diachi" prefWidth="230.0" text="Address" />
+                          </columns>
+                        </TableView>
+                     </content>
+                  </ScrollPane>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="settings" layoutX="24.0" layoutY="57.0" prefHeight="666.0" prefWidth="990.0" visible="false">

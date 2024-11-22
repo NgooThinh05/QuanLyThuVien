@@ -101,4 +101,30 @@ public class DatabaseConnection {
 
         return books;
     }
+
+    public static List<User> Listusers() throws SQLException {
+        List<User> users = new ArrayList<>();
+        String query = "SELECT * FROM users";
+        try (
+                Connection connection = getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(query)
+        ) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+            while (resultSet.next()) {
+                String ID = resultSet.getString("ID");
+                String Hoten = resultSet.getString("Hoten");
+                String username = resultSet.getString("username");
+                String password = resultSet.getString("password");
+                String sodt = resultSet.getString("sodt");
+                String CCCD = resultSet.getString("CCCD");
+                String Diachi = resultSet.getString("DiaChi");
+                User user = new User(ID, Hoten, username, password, sodt, CCCD, Diachi);
+                users.add(user);
+            }
+        }
+    } finally {
+        getConnection().close();
+    }
+        return users;
+    }
 }
