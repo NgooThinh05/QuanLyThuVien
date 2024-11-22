@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -34,7 +35,10 @@
                   <Text fx:id="linkimage" strokeType="OUTSIDE" strokeWidth="0.0" text="linkimage" wrappingWidth="559.7367706298828" />
                   <Text fx:id="linkreview" strokeType="OUTSIDE" strokeWidth="0.0" text="linkreview" wrappingWidth="566.1369171142578" />
                   <Text fx:id="describe1" strokeType="OUTSIDE" strokeWidth="0.0" text="MoTa" wrappingWidth="573.3992309570312" />
-                  <Button fx:id="buttonaccept" mnemonicParsing="false" onAction="#buttonaccept" styleClass="chitiet" stylesheets="@../../../book.css" text="Accept" textAlignment="CENTER" />
+                  <Button fx:id="buttonaccept" mnemonicParsing="false" onAction="#buttonaccept" styleClass="chitiet" stylesheets="@../../../book.css" text="Accept" textAlignment="CENTER">
+                     <VBox.margin>
+                        <Insets left="250.0" />
+                     </VBox.margin></Button>
                </children>
             </VBox>
             <Text fx:id="isbn" layoutX="246.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN" wrappingWidth="259.73675537109375" />

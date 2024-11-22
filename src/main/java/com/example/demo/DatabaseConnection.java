@@ -17,12 +17,11 @@ public class DatabaseConnection {
 
 
     public static void addbookdata(Book book) throws SQLException {
-
         String addsql = "INSERT INTO book(ISBN, Title, Author, Publisher, mota, theloai, image, review, soluong) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(addsql)) {
+        try (Connection conn = getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(addsql)) {
 
             preparedStatement.setString(1, book.getISBN());
             preparedStatement.setString(2, book.getTitle());
@@ -33,33 +32,27 @@ public class DatabaseConnection {
             preparedStatement.setString(7, book.getImage());
             preparedStatement.setString(8, book.getRivew());
             preparedStatement.setInt(9, book.getSoluong());
-            int rowsAffected = preparedStatement.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Thêm sách thành công!");
-            } else {
-                System.out.println("Thêm sách thất bại.");
-            }
+            preparedStatement.executeUpdate();
+            System.out.println("Thêm sách thành công!");
         } catch (SQLException e) {
             System.err.println("Lỗi khi thêm sách: " + e.getMessage());
             throw e;
+        } finally {
+            getConnection().close();
         }
     }
 
     public static List<Book> searchbookdata(String search) throws SQLException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
         List<Book> books = new ArrayList<>();
+        String mysql = "SELECT * FROM book WHERE Title LIKE ? OR Author LIKE ? OR theloai LIKE ? OR Publisher LIKE ?";
 
-        try {
-            connection = getConnection();
-            String mysql = "SELECT * FROM book WHERE Title LIKE ? OR Author LIKE ? OR theloai LIKE ? OR Publisher LIKE ?";
-            preparedStatement = connection.prepareStatement(mysql);
+        try (Connection conn = getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(mysql)) {
             preparedStatement.setString(1, "%" + search + "%");
             preparedStatement.setString(2, "%" + search + "%");
             preparedStatement.setString(3, "%" + search + "%");
             preparedStatement.setString(4, "%" + search + "%");
-            resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 String ISBN = resultSet.getString("ISBN");
@@ -75,14 +68,13 @@ public class DatabaseConnection {
                 books.add(book);
             }
         } finally {
-            if (resultSet != null) resultSet.close();
-            if (preparedStatement != null) preparedStatement.close();
-            if (connection != null) connection.close();
+            getConnection().close();
         }
         return books;
     }
 
     public static List<Book> searchBookDataNew() throws SQLException {
+
         List<Book> books = new ArrayList<>();
         String query = "SELECT * FROM book ORDER BY stt DESC LIMIT 6";
         try (
@@ -103,6 +95,8 @@ public class DatabaseConnection {
                     books.add(book);
                 }
             }
+        } finally {
+            getConnection().close();
         }
 
         return books;
