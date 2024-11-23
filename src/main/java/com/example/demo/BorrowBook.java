@@ -3,6 +3,7 @@ package com.example.demo;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -28,7 +29,7 @@ public class BorrowBook {
     @FXML
     private TableColumn<Book, String> descriptionColumn;
     @FXML
-    private TableColumn<Book, String> availableColumn;
+    private TableColumn<Book, Void> availableColumn; // Column for borrow button
 
     private List<Book> availableBooks; // Danh sách sách khả dụng
 
@@ -48,8 +49,29 @@ public class BorrowBook {
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
         publisherColumn.setCellValueFactory(new PropertyValueFactory<>("publisher"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
-        availableColumn.setCellValueFactory(new PropertyValueFactory<>("availability"));
+
+        availableColumn.setCellFactory(column -> new TableCell<>() {
+            private final Button borrowButton = new Button("Borrow");
+
+            {
+                borrowButton.setOnAction(event -> {
+                    Book book = getTableView().getItems().get(getIndex());
+                    handleBorrowBook(book);
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(borrowButton);
+                }
+            }
+        });
     }
+
 
     private void loadBooksFromDatabase() {
         try {
@@ -68,7 +90,7 @@ public class BorrowBook {
     }
 
     @FXML
-    private void handleSearch() {
+    public void handleSearch() {
         String keyword = searchField.getText().toLowerCase().trim();
 
         // Kiểm tra nếu không có từ khóa nhập vào
@@ -91,6 +113,18 @@ public class BorrowBook {
     private void updateBookList(List<Book> books) {
         tableView.getItems().clear();
         tableView.getItems().addAll(books);
+    }
+
+    private void handleBorrowBook(Book book) {
+        try {
+            DatabaseConnection.borrowBook(book);
+            availableBooks.remove(book);
+            updateBookList(availableBooks);
+            showInfoDialog("Success", "Book borrowed successfully.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showErrorDialog("Borrow Error", "Unable to borrow the selected book.");
+        }
     }
 
     private void showErrorDialog(String title, String message) {
