@@ -73,7 +73,7 @@
                   </Button>
                </children>
             </Pane>
-            <AnchorPane fx:id="DashBoardForm" layoutX="28.0" layoutY="57.0" prefHeight="664.0" prefWidth="980.0">
+            <AnchorPane fx:id="DashBoardForm" layoutX="28.0" layoutY="57.0" prefHeight="664.0" prefWidth="980.0" visible="false">
                <children>
                   <TextField fx:id="addressBar" layoutX="260.0" layoutY="17.0" prefHeight="36.0" prefWidth="558.0" promptText="Seach..." />
                   <Button fx:id="searchButton" layoutX="194.0" layoutY="17.0" mnemonicParsing="false" onAction="#searchButton" styleClass="minus" stylesheets="@../../../dashboarddesign.css">
@@ -294,7 +294,7 @@
                         </GridPane>
                      </content>
                   </ScrollPane>
-                  <Button fx:id="searchReturnBookButton" layoutX="350.0" layoutY="29.0" mnemonicParsing="false" onAction="#searchButton" prefHeight="50.0" prefWidth="50.0" styleClass="minus" stylesheets="@../../../../../../../../Users/Victus/Downloads/QuanLyThuVien-Tu/QuanLyThuVien-Tu/src/main/resources/dashboarddesign.css">
+                  <Button fx:id="searchReturnBookButton" layoutX="350.0" layoutY="29.0" mnemonicParsing="false" onAction="#searchButton" prefHeight="50.0" prefWidth="50.0" styleClass="minus" stylesheets="@../../../dashboarddesign.css">
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -305,13 +305,41 @@
                   </Button>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="delete" layoutX="24.0" layoutY="57.0" prefHeight="664.0" prefWidth="989.0" visible="false">
+            <AnchorPane fx:id="delete" layoutX="24.0" layoutY="58.0" prefHeight="664.0" prefWidth="989.0">
                <children>
-                  <Label layoutX="425.0" layoutY="14.0" prefHeight="54.0" prefWidth="138.0" text="Delete Book">
+                  <Label layoutX="413.0" layoutY="8.0" prefHeight="44.0" prefWidth="138.0" text="Delete Book">
                      <font>
                         <Font size="25.0" />
                      </font>
                   </Label>
+                  <TextField fx:id="searchdele" layoutX="309.0" layoutY="69.0" prefHeight="35.0" prefWidth="410.0" promptText="Search" />
+                  <Button fx:id="searchdelebutton" layoutX="254.0" layoutY="65.0" minWidth="40.0" mnemonicParsing="false" onAction="#searchdelebookButton" prefHeight="44.0" prefWidth="54.0" styleClass="minus" stylesheets="@../../../dashboarddesign.css" text="Button">
+                     <graphic>
+                        <ImageView fx:id="search1" fitHeight="37.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../image/kinhlup.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <AnchorPane fx:id="deledashboard" layoutX="59.0" layoutY="138.0" prefHeight="506.0" prefWidth="883.0">
+                     <children>
+                        <ScrollPane prefHeight="506.0" prefWidth="900.0">
+                           <content>
+                              <GridPane fx:id="deletebook" prefWidth="900.0" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="delesearch" layoutX="59.0" layoutY="138.0" prefHeight="500.0" prefWidth="890.0" visible="false">
+                     <children>
+                        <ScrollPane prefHeight="501.0" prefWidth="892.0">
+                           <content>
+                              <GridPane fx:id="deletebooksearch" prefWidth="900.0" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="user" layoutX="24.0" layoutY="57.0" prefHeight="664.0" prefWidth="989.0" visible="false">

@@ -41,7 +41,7 @@ public class Bookdetail {
         title.setText(book.getTitle());
         author.setText("Author: " + book.getAuthor());
         nxb.setText("Publisher: " + book.getPublisher());
-        theloai.setText("Category: " + book.getTheloai());
+        theloai.setText(book.getTheloai());
 
         describe.setText(book.getMota());
 
