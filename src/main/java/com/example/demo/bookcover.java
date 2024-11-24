@@ -97,5 +97,21 @@ public class BookCover extends Node {
         }
     }
 
+    public void delebookbutton(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("delebook.fxml"));
+            Parent root = loader.load();
+            Addbookapi controller = loader.getController(); // Nếu là Addbookapi
+            controller.addbookapi(book); // Gọi phương thức tương ứng
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            System.err.println("Error loading detailed view: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
 
 }

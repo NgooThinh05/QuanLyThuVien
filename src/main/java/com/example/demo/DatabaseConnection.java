@@ -91,7 +91,7 @@ public class DatabaseConnection {
                     String mota = resultSet.getString("mota");
                     String image = resultSet.getString("image");
                     String review = resultSet.getString("review");
-                    Book book = new Book(ISBN, title, author, publisher, mota, theloai, image, review);
+                    Book book = new Book(ISBN, title, author, publisher, theloai, mota, image, review);
                     books.add(book);
                 }
             }
@@ -101,6 +101,36 @@ public class DatabaseConnection {
 
         return books;
     }
+
+    public static List<Book> deleteBookData() throws SQLException {
+
+        List<Book> books = new ArrayList<>();
+        String query = "SELECT * FROM book ORDER BY stt LIMIT 30";
+        try (
+                Connection connection = getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(query)
+        ) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    String ISBN = resultSet.getString("ISBN");
+                    String title = resultSet.getString("Title");
+                    String author = resultSet.getString("Author");
+                    String theloai = resultSet.getString("theloai");
+                    String publisher = resultSet.getString("Publisher");
+                    String mota = resultSet.getString("mota");
+                    String image = resultSet.getString("image");
+                    String review = resultSet.getString("review");
+                    Book book = new Book(ISBN, title, author, publisher, theloai, mota,  image, review);
+                    books.add(book);
+                }
+            }
+        } finally {
+            getConnection().close();
+        }
+
+        return books;
+    }
+
 
     public static List<User> Listusers() throws SQLException {
         List<User> users = new ArrayList<>();
@@ -126,5 +156,20 @@ public class DatabaseConnection {
         getConnection().close();
     }
         return users;
+    }
+
+    public static void acceptdelebook(Book book) throws SQLException {
+        String query = "DELETE FROM book WHERE ISBN = ?";
+        try (Connection conn = getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setString(1, book.getISBN());
+            preparedStatement.executeUpdate();
+            System.out.println("Xoa sách thành công!");
+        } catch (SQLException e) {
+            System.err.println("Lỗi khi thêm sách: " + e.getMessage());
+            throw e;
+        } finally {
+            getConnection().close();
+        }
     }
 }
