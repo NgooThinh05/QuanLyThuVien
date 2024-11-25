@@ -37,6 +37,8 @@ public class Addbookapi {
     private Text linkimage;
     @FXML
     private Text linkreview;
+    @FXML
+    private Button buttonacceptdele;
 
     public void addbookapi(Book book) {
         this.book = book;
@@ -79,6 +81,19 @@ public class Addbookapi {
         DatabaseConnection.addbookdata(book);
     }
 
+    @FXML
+    public void buttondeleaccept(ActionEvent event) throws SQLException {
+        Book book = new Book();
+        book.setTitle(title1.getText());
+        book.setAuthor(author1.getText());
+        book.setPublisher(nxb1.getText());
+        book.setTheloai(theloai1.getText());
+        book.setMota(describe1.getText());
+        book.setImage(linkimage.getText());
+        book.setISBN(isbn.getText());
+        book.setRivew(linkreview.getText());
+        DatabaseConnection.acceptdelebook(book);
+    }
 
 
 }

@@ -1,15 +1,18 @@
 package com.example.demo;
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.PasswordField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -22,6 +25,7 @@ import javafx.event.ActionEvent;
 import javafx.stage.StageStyle;
 
 import java.awt.*;
+import java.awt.ScrollPane;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
@@ -137,12 +141,93 @@ public class Home implements Initializable {
     @FXML
     private AnchorPane dashboard1;
 
+    private AnchorPane profileform;
+    @FXML
+    private AnchorPane deledashboard;
+    @FXML
+    private AnchorPane delesearch;
+    @FXML
+    private ImageView search;
+    @FXML
+    private GridPane bookapi;
+    @FXML
+    private GridPane bookdata;
+    @FXML
+    private ImageView searchaddimage;
+    @FXML
+    private ImageView search1;
+    @FXML
+    private TextField searchadd;
+    @FXML
+    private GridPane bookaddapi;
+    @FXML
+    private Button searchaddbutton;
+    @FXML
+    private Button acceptbutton;
+    @FXML
+    private TextField addtitle;
+    @FXML
+    private TextField addauthor;
+    @FXML
+    private TextField addmota;
+    @FXML
+    private TextField addISBN;
+    @FXML
+    private TextField addnxb;
+    @FXML
+    private TextField addsl;
+    @FXML
+    private TextField addtheloai;
+    @FXML
+    private TextField linkimage;
+    @FXML
+    private TextField linkreview;
+    @FXML
+    private GridPane newbook;
+    @FXML
+    private GridPane shortstory;
+    @FXML
+    private GridPane education;
+    @FXML
+    private GridPane deletebook;
+    @FXML
+    private GridPane deletebooksearch;
+    @FXML
+    private AnchorPane Anchorpanesearch;
+    @FXML
+    private AnchorPane dashboard1;
+    @FXML
+    private TableView dsuser;
+    @FXML
+    private TableColumn<User, String> stt;
+    @FXML
+    private TableColumn<User, String> hoten;
+    @FXML
+    private TableColumn<User, String> tk;
+    @FXML
+    private TableColumn<User, String> mk;
+    @FXML
+    private TableColumn<User, String> sdt;
+    @FXML
+    private TableColumn<User, String> cccd;
+    @FXML
+    private TableColumn<User, String> diachi;
+    @FXML
+    private TextField searchdele;
 
     private List<Book> databaseSearchResults;
     private List<Book> apiSearchResults;
     private List<Book> newbooks;
     private List<Book> shortstorybook;
     private List<Book> educationbooks;
+
+    private List<Book> databaseSearchResults;
+    private List<Book> apiSearchResults;
+    private List<Book> newbooks;
+    private List<Book> shortstorybook;
+    private List<Book> educationbooks;
+    private List<Book> deletebooks;
+    private List<AnchorPane> panes;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -266,6 +351,59 @@ public class Home implements Initializable {
 
     }
 
+        searchaddimage.setImage(brandingImage2);
+        search1.setImage(brandingImage2);
+
+        Name();
+
+        panes = List.of(DashBoardForm, AddBookForm, borrow, returnbook, delete, user, settings, profileform);
+
+        try {
+            dashbordresult();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            UserMN();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            DSdeletebook();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
+    public void switchForm(ActionEvent event) {
+        panes.forEach(pane -> pane.setVisible(false));
+
+        if (event.getSource() == DashBoard) {
+            DashBoardForm.setVisible(true);
+            dashboard1.setVisible(true);
+            Anchorpanesearch.setVisible(false);
+        } else if (event.getSource() == AddBook) {
+            AddBookForm.setVisible(true);
+        } else if (event.getSource() == BorrowBook) {
+            borrow.setVisible(true);
+        } else if (event.getSource() == ReturnBook) {
+            returnbook.setVisible(true);
+        } else if (event.getSource() == Delete) {
+            delete.setVisible(true);
+            deledashboard.setVisible(true);
+            delesearch.setVisible(false);
+        } else if (event.getSource() == User) {
+            user.setVisible(true);
+        } else if (event.getSource() == Setting) {
+            settings.setVisible(true);
+        } else if (event.getSource() == profile) {
+            profileform.setVisible(true);
+        }
+    }
 
     public void exit() {
         System.exit(0);
@@ -341,6 +479,14 @@ public class Home implements Initializable {
         bookapi.getChildren().clear();
         int columns = 10;
         int rows = 10;
+        displayBooks(bookdata, databaseResults, "Book.fxml");
+        displayBooks(bookapi, apiResults, "Book.fxml");
+    }
+
+    private void displayBooks(GridPane gridPane, List<Book> books, String fxmlFileName) {
+        gridPane.getChildren().clear();
+        int columns = 6;
+        int rows = 3;
         int bookCount = 0;
 
         for (int row = 0; row < rows; row++) {
@@ -354,6 +500,15 @@ public class Home implements Initializable {
                     BookCover controller = loader.getController();
                     controller.setData(apiSearchResults.get(bookCount));
                     bookapi.add(bookPane, col, row);
+                if (bookCount >= books.size()) {
+                    break;
+                }
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFileName));
+                    Pane bookPane = loader.load();
+                    BookCover controller = loader.getController();
+                    controller.setDataApi(books.get(bookCount));
+                    gridPane.add(bookPane, col, row);
                     bookCount++;
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -401,6 +556,9 @@ public class Home implements Initializable {
             }
         }
     }
+        displayBooks(bookaddapi, apiResults, "bookaddsearch.fxml");
+    }
+
 
     @FXML
     void searchaddbookButton(ActionEvent event) throws IOException, GeneralSecurityException, SQLException {
@@ -527,6 +685,68 @@ public class Home implements Initializable {
         List<Book> shortstorybook = DatabaseConnection.searchbookdata("Short storis");
         List<Book> educationbook = DatabaseConnection.searchbookdata("Education");
         setdashboardbook(newbooks, shortstorybook, educationbook );
+    public void setdashboardbook(List<Book> newbooks, List<Book> shortstorys, List<Book> educationbooks) {
+        this.newbooks = newbooks;
+        this.shortstorybook = shortstorys;
+        this.educationbooks = educationbooks;
+        displayBooks(newbook, newbooks, "book.fxml" );
+        displayBooks(shortstory, shortstorybook, "book.fxml");
+        displayBooks(education, educationbooks, "book.fxml");
+    }
+
+    private void dashbordresult() throws SQLException {
+        List<Book> newbooks  = DatabaseConnection.searchBookDataNew();
+        List<Book> shortstorybook = DatabaseConnection.searchbookdata("Comics");
+        List<Book> educationbook = DatabaseConnection.searchbookdata("Education");
+        setdashboardbook(newbooks, shortstorybook, educationbook );
+    }
+
+    public void initializeTableView(TableView<User> tableView,
+                                    TableColumn<User, String> stt,
+                                    TableColumn<User, String> hoten,
+                                    TableColumn<User, String> tk,
+                                    TableColumn<User, String> mk,
+                                    TableColumn<User, String> sdt,
+                                    TableColumn<User, String> cccd,
+                                    TableColumn<User, String> diachi,
+                                    List<User> users) {
+        stt.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        hoten.setCellValueFactory(new PropertyValueFactory<>("Hoten"));
+        tk.setCellValueFactory(new PropertyValueFactory<>("username"));
+        mk.setCellValueFactory(new PropertyValueFactory<>("password"));
+        sdt.setCellValueFactory(new PropertyValueFactory<>("sodt"));
+        cccd.setCellValueFactory(new PropertyValueFactory<>("CCCD"));
+        diachi.setCellValueFactory(new PropertyValueFactory<>("DiaChi"));
+        ObservableList<User> observableUsers = FXCollections.observableArrayList(users);
+        tableView.setItems(observableUsers);
+    }
+
+    private void UserMN() throws SQLException {
+        List<User> users = DatabaseConnection.Listusers();
+        initializeTableView(dsuser, stt, hoten, tk, mk, sdt, cccd, diachi, users );
+    }
+
+    private void setDelete(List<Book> deletebooks) {
+        this.deletebooks = deletebooks;
+        displayBooks(deletebook, deletebooks, "coverbookdelete.fxml");
+    }
+
+    private void DSdeletebook() throws SQLException {
+        List<Book> deletebooks = DatabaseConnection.deleteBookData();
+        setDelete(deletebooks);
+    }
+
+    @FXML
+    void searchdelebookButton(ActionEvent event) throws IOException, GeneralSecurityException, SQLException {
+        deledashboard.setVisible(false);
+        delesearch.setVisible(true);
+        List<Book> ApiResult = DatabaseConnection.searchbookdata(searchdele.getText());
+        setSearchdelebookResults(ApiResult);
+    }
+
+    public void setSearchdelebookResults(List<Book> apiResults) {
+        this.apiSearchResults = apiResults;
+        displayBooks(deletebooksearch, apiResults, "coverbookdelete.fxml");
     }
 }
 
