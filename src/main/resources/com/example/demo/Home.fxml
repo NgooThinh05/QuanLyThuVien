@@ -21,7 +21,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Home">
    <left>
-      <AnchorPane prefHeight="726.0" prefWidth="210.0" styleClass="form" stylesheets="@../../../dashboarddesign.css" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="720.0" prefWidth="200.0" styleClass="form" stylesheets="@../../../dashboarddesign.css" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="DashBoard" layoutX="5.0" layoutY="75.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="75.0" prefWidth="200.0" styleClass="nav-btn" stylesheets="@../../../dashboarddesign.css" text="DashBoard" />
             <Button fx:id="AddBook" layoutX="5.0" layoutY="151.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="75.0" prefWidth="200.0" styleClass="nav-btn" stylesheets="@../../../dashboarddesign.css" text="AddBook" />
@@ -54,7 +54,7 @@
    <center>
       <AnchorPane prefHeight="722.0" prefWidth="1010.0" stylesheets="@../../../dashboarddesign.css" BorderPane.alignment="CENTER">
          <children>
-            <Pane fx:id="topForm" layoutX="24.0" layoutY="-2.0" prefHeight="59.0" prefWidth="990.0" styleClass="top-form" stylesheets="@../../../dashboarddesign.css">
+            <Pane fx:id="topForm" prefHeight="60.0" prefWidth="1000.0" styleClass="top-form" stylesheets="@../../../dashboarddesign.css">
                <children>
                   <Label fx:id="nameapp" layoutX="349.0" layoutY="-2.0" prefHeight="46.0" prefWidth="278.0" text="Library Management" textAlignment="CENTER" textFill="#2a34c1">
                      <font>
@@ -73,6 +73,7 @@
                   </Button>
                </children>
             </Pane>
+            <AnchorPane fx:id="DashBoardForm" layoutY="60.0" prefHeight="660.0" prefWidth="1000.0">
             <AnchorPane fx:id="DashBoardForm" layoutX="28.0" layoutY="57.0" prefHeight="664.0" prefWidth="980.0" visible="false">
                <children>
                   <TextField fx:id="addressBar" layoutX="260.0" layoutY="17.0" prefHeight="36.0" prefWidth="558.0" promptText="Seach..." />
@@ -85,6 +86,11 @@
                         </ImageView>
                      </graphic>
                   </Button>
+                  <AnchorPane fx:id="Anchorpanesearch" layoutX="260.0" layoutY="70.0" minWidth="690.0" prefHeight="550.0" prefWidth="680.0">
+                     <children>
+                        <ScrollPane prefHeight="550.0" prefWidth="680.0">
+                           <content>
+                              <VBox prefHeight="550.0" prefWidth="680.0">
                   <AnchorPane fx:id="Anchorpanesearch" layoutX="51.0" layoutY="95.0" prefHeight="540.0" prefWidth="882.0" visible="false">
                      <children>
                         <VBox prefHeight="502.0" prefWidth="877.0">
@@ -125,6 +131,7 @@
                                        </font>
                                     </Label>
                                     <GridPane fx:id="newbook" prefWidth="850.0" />
+                                    <Label text="short story">
                                     <Label text="Comics">
                                        <font>
                                           <Font size="20.0" />
@@ -143,9 +150,98 @@
                         </ScrollPane>
                      </children>
                   </AnchorPane>
+                  <VBox layoutX="30.0" layoutY="70.0" prefHeight="550.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+                           <children>
+                              <ImageView fx:id="BookshelfIcon" fitHeight="45.0" fitWidth="45.0" layoutX="135.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../image/bookshelf.png" />
+                                 </image>
+                              </ImageView>
+                              <Label contentDisplay="CENTER" layoutX="20.0" layoutY="10.0" prefHeight="50.0" prefWidth="100.0" text="0" textAlignment="RIGHT">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="20.0" layoutY="65.0" text="Books">
+                                 <font>
+                                    <Font name="Avenir Black" size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+                           <children>
+                              <ImageView fx:id="StudentsIcon" fitHeight="45.0" fitWidth="45.0" layoutX="135.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../image/user.png" />
+                                 </image>
+                              </ImageView>
+                              <Label contentDisplay="CENTER" layoutX="20.0" layoutY="10.0" prefHeight="50.0" prefWidth="100.0" text="0" textAlignment="RIGHT">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="20.0" layoutY="65.0" text="Students">
+                                 <font>
+                                    <Font name="Avenir Black" size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="45.0" />
+                           </VBox.margin>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+                           <children>
+                              <ImageView fx:id="BorrowIcon" fitHeight="45.0" fitWidth="45.0" layoutX="135.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../image/borrow.png" />
+                                 </image>
+                              </ImageView>
+                              <Label contentDisplay="CENTER" layoutX="20.0" layoutY="10.0" prefHeight="50.0" prefWidth="100.0" text="0" textAlignment="RIGHT">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="20.0" layoutY="65.0" text="Borrow">
+                                 <font>
+                                    <Font name="Avenir Black" size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="55.0" />
+                           </VBox.margin>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+                           <children>
+                              <ImageView fx:id="OverdueIcon" fitHeight="45.0" fitWidth="45.0" layoutX="135.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../image/hourglass.png" />
+                                 </image>
+                              </ImageView>
+                              <Label contentDisplay="CENTER" layoutX="20.0" layoutY="10.0" prefHeight="50.0" prefWidth="100.0" text="0" textAlignment="RIGHT">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="20.0" layoutY="65.0" text="Overdue">
+                                 <font>
+                                    <Font name="Avenir Black" size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="45.0" />
+                           </VBox.margin>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="AddBookForm" layoutY="57.0" prefHeight="662.0" prefWidth="1037.0" visible="false">
+            <AnchorPane fx:id="AddBookForm" layoutY="60.0" prefHeight="660.0" prefWidth="1000.0" visible="false">
                <children>
                   <Label layoutX="469.0" layoutY="20.0" prefHeight="42.0" prefWidth="100.0" text="Add Book">
                      <font>
@@ -187,6 +283,85 @@
                   <TextField fx:id="addmota" layoutX="84.0" layoutY="405.0" prefHeight="32.0" prefWidth="396.0" promptText="describe" />
                </children>
             </AnchorPane>
+            <AnchorPane fx:id="BorrowBookForm" layoutY="60.0" prefHeight="660.0" prefWidth="1000.0" visible="false">
+               <children>
+                  <AnchorPane layoutX="500.0" layoutY="5.0" prefHeight="655.0" prefWidth="477.0" style="-fx-background-color: #f2f4f6;" styleClass="bgr-while" stylesheets="@../../../../../../../../Users/Victus/Downloads/QuanLyThuVien-Tu/QuanLyThuVien-Tu/src/main/resources/dashboarddesign.css">
+                     <children>
+                        <TextField layoutX="84.0" layoutY="14.0" prefHeight="26.0" prefWidth="353.0" promptText="Search" />
+                        <ImageView fx:id="searchBorrowBook" fitHeight="29.0" fitWidth="34.0" layoutX="50.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../../Users/Victus/Downloads/QuanLyThuVien-Tu/QuanLyThuVien-Tu/image/kinhlup.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+                  <VBox prefHeight="660.0" prefWidth="500.0" style="-fx-background-color: #f2f4f6;">
+                     <children>
+                        <ImageView fitHeight="300.0" fitWidth="250.0" pickOnBounds="true">
+                           <VBox.margin>
+                              <Insets left="125.0" top="20.0" />
+                           </VBox.margin>
+                           <image>
+                              <Image url="@../../../../../Users/Victus/Downloads/QuanLyThuVien-Tu/QuanLyThuVien-Tu/image/bookCover.jpeg" />
+                           </image>
+                        </ImageView>
+                        <TextField prefHeight="50.0" promptText="Book ID" style="-fx-background-color: #cfe7ea;">
+                           <font>
+                              <Font name="Times New Roman Italic" size="28.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="15.0" right="15.0" top="20.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField prefHeight="50.0" promptText="Book Title" style="-fx-background-color: #cfe7ea;">
+                           <font>
+                              <Font name="Times New Roman Italic" size="28.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="15.0" right="15.0" top="15.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField prefHeight="50.0" promptText="Author" style="-fx-background-color: #cfe7ea;">
+                           <font>
+                              <Font name="Times New Roman Italic" size="28.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="15.0" right="15.0" top="15.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField prefHeight="50.0" promptText="Publisher" style="-fx-background-color: #cfe7ea;">
+                           <font>
+                              <Font name="Times New Roman Italic" size="28.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="15.0" right="15.0" top="15.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <HBox prefHeight="50.0" prefWidth="300.0">
+                           <VBox.margin>
+                              <Insets left="100.0" right="100.0" top="12.5" />
+                           </VBox.margin>
+                           <children>
+                              <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="125.0" style="-fx-background-color: #51a7bf;" text="Borrow" textFill="#daf4ff">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="125.0" style="-fx-background-color: #51a7bf;" text="Cancel" textFill="#daf4ff">
+                                 <HBox.margin>
+                                    <Insets left="50.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="ReturnBookForm" layoutY="60.0" prefHeight="660.0" prefWidth="1000.0" style="-fx-background-color: #f2f4f6;" visible="false">
             <AnchorPane fx:id="borrow" layoutX="28.0" layoutY="57.0" prefHeight="666.0" prefWidth="944.0" visible="false">
                <children>
                   <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="664.0" prefWidth="980.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
@@ -213,6 +388,7 @@
                   <TextField fx:id="searchReturnBook" layoutX="400.0" layoutY="40.0" prefHeight="30.0" prefWidth="250.0" promptText="Search" />
                   <ScrollPane layoutX="115.0" layoutY="100.0" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #ffffff;">
                      <content>
+                        <GridPane fx:id="bookData1" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #ffffff;">
                         <GridPane fx:id="bookData1" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #ffffff;" visible="false">
                            <children>
                               <TableView prefHeight="500.0" prefWidth="800.0">
@@ -237,6 +413,11 @@
                         </GridPane>
                      </content>
                   </ScrollPane>
+                  <Button fx:id="searchReturnBookButton" layoutX="350.0" layoutY="29.0" mnemonicParsing="false" onAction="#searchButton" prefHeight="50.0" prefWidth="50.0" styleClass="minus" stylesheets="@../../../../../../../../Users/Victus/Downloads/QuanLyThuVien-Tu/QuanLyThuVien-Tu/src/main/resources/dashboarddesign.css">
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../../Users/Victus/Downloads/QuanLyThuVien-Tu/QuanLyThuVien-Tu/image/kinhlup.png" />
                   <Button fx:id="searchReturnBookButton" layoutX="350.0" layoutY="29.0" mnemonicParsing="false" onAction="#searchButton" prefHeight="50.0" prefWidth="50.0" styleClass="minus" stylesheets="@../../../dashboarddesign.css">
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
@@ -248,6 +429,7 @@
                   </Button>
                </children>
             </AnchorPane>
+            <AnchorPane fx:id="DeleteBookForrm" layoutY="60.0" prefHeight="660.0" prefWidth="1000.0" visible="false">
             <AnchorPane fx:id="delete" layoutX="24.0" layoutY="58.0" prefHeight="664.0" prefWidth="989.0">
                <children>
                   <Label layoutX="413.0" layoutY="8.0" prefHeight="44.0" prefWidth="138.0" text="Delete Book">
@@ -285,7 +467,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="user" layoutX="24.0" layoutY="57.0" prefHeight="664.0" prefWidth="989.0" visible="false">
+            <AnchorPane fx:id="UserForm" layoutY="60.0" prefHeight="660.0" prefWidth="1000.0" visible="false">
                <children>
                   <Label layoutX="389.0" layoutY="14.0" prefHeight="50.0" prefWidth="210.0" text="User Management">
                      <font>
@@ -316,7 +498,7 @@
                   </ScrollPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="settings" layoutX="24.0" layoutY="57.0" prefHeight="666.0" prefWidth="990.0" visible="false">
+            <AnchorPane fx:id="SettingsForm" layoutY="60.0" prefHeight="660.0" prefWidth="1000.0" visible="false">
                <children>
                   <Label layoutX="451.0" layoutY="14.0" prefHeight="42.0" prefWidth="87.0" text="Settings">
                      <font>
@@ -325,7 +507,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="profileform" layoutX="24.0" layoutY="57.0" prefHeight="666.0" prefWidth="990.0" visible="false">
+            <AnchorPane fx:id="ProfileForm" layoutY="60.0" prefHeight="660.0" prefWidth="1000.0" visible="false">
                <children>
                   <Label layoutX="457.0" layoutY="14.0" prefHeight="48.0" prefWidth="75.0" text="Profile">
                      <font>

@@ -85,16 +85,62 @@ public class Home implements Initializable {
     @FXML
     private AnchorPane AddBookForm;
     @FXML
-    private AnchorPane borrow;
+    private AnchorPane BorrowBookForm;
     @FXML
-    private AnchorPane returnbook;
+    private AnchorPane ReturnBookForm;
     @FXML
-    private AnchorPane delete;
+    private AnchorPane DeleteBookForm;
     @FXML
-    private AnchorPane user;
+    private AnchorPane UserForm;
     @FXML
-    private AnchorPane settings;
+    private AnchorPane SettingsForm;
     @FXML
+    private AnchorPane ProfileForm;
+    @FXML
+    private ImageView search;
+    @FXML
+    private GridPane bookapi;
+    @FXML
+    private GridPane bookdata;
+    @FXML
+    private ImageView searchaddimage;
+    @FXML
+    private TextField searchadd;
+    @FXML
+    private GridPane bookaddapi;
+    @FXML
+    private Button searchaddbutton;
+    @FXML
+    private Button acceptbutton;
+    @FXML
+    private TextField addtitle;
+    @FXML
+    private TextField addauthor;
+    @FXML
+    private TextField addmota;
+    @FXML
+    private TextField addISBN;
+    @FXML
+    private TextField addnxb;
+    @FXML
+    private TextField addsl;
+    @FXML
+    private TextField addtheloai;
+    @FXML
+    private TextField linkimage;
+    @FXML
+    private TextField linkreview;
+    @FXML
+    private GridPane newbook;
+    @FXML
+    private GridPane shortstory;
+    @FXML
+    private GridPane education;
+    @FXML
+    private AnchorPane Anchorpanesearch;
+    @FXML
+    private AnchorPane dashboard1;
+
     private AnchorPane profileform;
     @FXML
     private AnchorPane deledashboard;
@@ -169,6 +215,11 @@ public class Home implements Initializable {
     @FXML
     private TextField searchdele;
 
+    private List<Book> databaseSearchResults;
+    private List<Book> apiSearchResults;
+    private List<Book> newbooks;
+    private List<Book> shortstorybook;
+    private List<Book> educationbooks;
 
     private List<Book> databaseSearchResults;
     private List<Book> apiSearchResults;
@@ -191,6 +242,115 @@ public class Home implements Initializable {
         File brandingFile2 = new File("image/kinhlup.png");
         Image brandingImage2 = new Image(brandingFile2.toURI().toString());
         search.setImage(brandingImage2);
+
+        File brandingFile3 = new File("image/kinhlup.png");
+        Image brandingImage3 = new Image(brandingFile2.toURI().toString());
+        searchaddimage.setImage(brandingImage2);
+
+        Name();
+
+        try {
+            dashbordresult();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
+    public void switchForm(ActionEvent event) {
+        if (event.getSource() == DashBoard) {
+            DashBoardForm.setVisible(true);
+            dashboard1.setVisible(true);
+            Anchorpanesearch.setVisible(false);
+            AddBookForm.setVisible(false);
+            BorrowBookForm.setVisible(false);
+            ReturnBookForm.setVisible(false);
+            DeleteBookForm.setVisible(false);
+            UserForm.setVisible(false);
+            SettingsForm.setVisible(false);
+            ProfileForm.setVisible(false);
+        }
+
+        if (event.getSource() == AddBook) {
+            DashBoardForm.setVisible(false);
+            AddBookForm.setVisible(true);
+            BorrowBookForm.setVisible(false);
+            ReturnBookForm.setVisible(false);
+            DeleteBookForm.setVisible(false);
+            UserForm.setVisible(false);
+            SettingsForm.setVisible(false);
+            ProfileForm.setVisible(false);
+        }
+
+        if (event.getSource() == BorrowBook) {
+            DashBoardForm.setVisible(false);
+            AddBookForm.setVisible(false);
+            BorrowBookForm.setVisible(true);
+            ReturnBookForm.setVisible(false);
+            DeleteBookForm.setVisible(false);
+            UserForm.setVisible(false);
+            SettingsForm.setVisible(false);
+            ProfileForm.setVisible(false);
+        }
+
+        if (event.getSource() == ReturnBook) {
+            DashBoardForm.setVisible(false);
+            AddBookForm.setVisible(false);
+            BorrowBookForm.setVisible(false);
+            ReturnBookForm.setVisible(true);
+            DeleteBookForm.setVisible(false);
+            UserForm.setVisible(false);
+            SettingsForm.setVisible(false);
+            ProfileForm.setVisible(false);
+        }
+
+        if (event.getSource() == Delete) {
+            DashBoardForm.setVisible(false);
+            AddBookForm.setVisible(false);
+            BorrowBookForm.setVisible(false);
+            ReturnBookForm.setVisible(false);
+            DeleteBookForm.setVisible(true);
+            UserForm.setVisible(false);
+            SettingsForm.setVisible(false);
+            ProfileForm.setVisible(false);
+        }
+
+        if (event.getSource() == User) {
+            DashBoardForm.setVisible(false);
+            AddBookForm.setVisible(false);
+            BorrowBookForm.setVisible(false);
+            ReturnBookForm.setVisible(false);
+            DeleteBookForm.setVisible(false);
+            UserForm.setVisible(true);
+            SettingsForm.setVisible(false);
+            ProfileForm.setVisible(false);
+        }
+
+        if (event.getSource() == Setting) {
+            DashBoardForm.setVisible(false);
+            AddBookForm.setVisible(false);
+            BorrowBookForm.setVisible(false);
+            ReturnBookForm.setVisible(false);
+            DeleteBookForm.setVisible(false);
+            UserForm.setVisible(false);
+            SettingsForm.setVisible(true);
+            ProfileForm.setVisible(false);
+        }
+
+        if (event.getSource() == profile) {
+            DashBoardForm.setVisible(false);
+            AddBookForm.setVisible(false);
+            BorrowBookForm.setVisible(false);
+            ReturnBookForm.setVisible(false);
+            DeleteBookForm.setVisible(false);
+            UserForm.setVisible(false);
+            SettingsForm.setVisible(false);
+            ProfileForm.setVisible(true);
+        }
+
+    }
+
         searchaddimage.setImage(brandingImage2);
         search1.setImage(brandingImage2);
 
@@ -281,6 +441,44 @@ public class Home implements Initializable {
     public void setSearchResults(List<Book> databaseResults, List<Book> apiResults) {
         this.databaseSearchResults = databaseResults;
         this.apiSearchResults = apiResults;
+        displayDatabaseResults();
+        displayApiResults();
+    }
+
+    private void displayDatabaseResults() {
+        bookapi.getChildren().clear();
+        int columns = 6;
+        int rows = 6;
+        int bookCount = 0;
+
+        if (databaseSearchResults == null || databaseSearchResults.isEmpty()) {
+            System.out.println("No books available to display.");
+            return;
+        }
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                if (bookCount >= databaseSearchResults.size()) {
+                    break;
+                }
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("book.fxml"));
+                    Pane bookPane = loader.load();
+                    BookCover controller = loader.getController();
+                    controller.setDataApi(databaseSearchResults.get(bookCount));
+                    bookdata.add(bookPane, col, row);
+                    bookCount++;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private void displayApiResults() {
+        bookapi.getChildren().clear();
+        int columns = 10;
+        int rows = 10;
         displayBooks(bookdata, databaseResults, "Book.fxml");
         displayBooks(bookapi, apiResults, "Book.fxml");
     }
@@ -293,6 +491,15 @@ public class Home implements Initializable {
 
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
+                if (bookCount >= apiSearchResults.size()) {
+                    break;
+                }
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("book.fxml"));
+                    Pane bookPane = loader.load();
+                    BookCover controller = loader.getController();
+                    controller.setData(apiSearchResults.get(bookCount));
+                    bookapi.add(bookPane, col, row);
                 if (bookCount >= books.size()) {
                     break;
                 }
@@ -310,7 +517,6 @@ public class Home implements Initializable {
         }
     }
 
-
     public static ScrollPane staticMainScrollPane;
     @FXML
     void searchButton(ActionEvent event) throws IOException, GeneralSecurityException, SQLException {
@@ -323,6 +529,33 @@ public class Home implements Initializable {
 
     public void setSearchaddbookResults(List<Book> apiResults) {
         this.apiSearchResults = apiResults;
+        displayApiaddbookResults();
+    }
+
+    private void displayApiaddbookResults() {
+        bookaddapi.getChildren().clear();
+        int columns = 6;
+        int rows = 6;
+        int bookCount = 0;
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                if (bookCount >= apiSearchResults.size()) {
+                    break;
+                }
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("bookaddsearch.fxml"));
+                    Pane bookPane = loader.load();
+                    BookCover controller = loader.getController();
+                    controller.setData(apiSearchResults.get(bookCount));
+                    bookaddapi.add(bookPane, col, row);
+                    bookCount++;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
         displayBooks(bookaddapi, apiResults, "bookaddsearch.fxml");
     }
 
@@ -348,6 +581,110 @@ public class Home implements Initializable {
         DatabaseConnection.addbookdata(addbook);
     }
 
+    public void setdashboardbook(List<Book> newbooks, List<Book> shortstory, List<Book> educationbooks) {
+        this.newbooks = newbooks;
+        this.shortstorybook = shortstory;
+        this.educationbooks = educationbooks;
+        displayDatabasenewbook();
+        displayDatabaseshortstory();
+        displayDatabaseeducationbook();
+    }
+
+    private void displayDatabasenewbook() {
+        newbook.getChildren().clear();
+        int columns = 6;
+        int rows = 6;
+        int bookCount = 0;
+
+        if (newbooks == null || newbooks.isEmpty()) {
+            System.out.println("No books available to display.");
+            return;
+        }
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                if (bookCount >= newbooks.size()) {
+                    break;
+                }
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("book.fxml"));
+                    Pane bookPane = loader.load();
+                    BookCover controller = loader.getController();
+                    controller.setDataApi(newbooks.get(bookCount));
+                    newbook.add(bookPane, col, row);
+                    bookCount++;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private void displayDatabaseshortstory() {
+        shortstory.getChildren().clear();
+        int columns = 6;
+        int rows = 6;
+        int bookCount = 0;
+
+        if (shortstorybook == null || shortstorybook.isEmpty()) {
+            System.out.println("No books available to display.");
+            return;
+        }
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                if (bookCount >= shortstorybook.size()) {
+                    break;
+                }
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("book.fxml"));
+                    Pane bookPane = loader.load();
+                    BookCover controller = loader.getController();
+                    controller.setDataApi(shortstorybook.get(bookCount));
+                    shortstory.add(bookPane, col, row);
+                    bookCount++;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private void displayDatabaseeducationbook() {
+        education.getChildren().clear();
+        int columns = 6;
+        int rows = 6;
+        int bookCount = 0;
+
+        if (educationbooks == null || educationbooks.isEmpty()) {
+            System.out.println("No books available to display.");
+            return;
+        }
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                if (bookCount >= educationbooks.size()) {
+                    break;
+                }
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("book.fxml"));
+                    Pane bookPane = loader.load();
+                    BookCover controller = loader.getController();
+                    controller.setDataApi(educationbooks.get(bookCount));
+                    education.add(bookPane, col, row);
+                    bookCount++;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private void dashbordresult() throws SQLException {
+        List<Book> newbooks  = DatabaseConnection.searchBookDataNew();
+        List<Book> shortstorybook = DatabaseConnection.searchbookdata("Short storis");
+        List<Book> educationbook = DatabaseConnection.searchbookdata("Education");
+        setdashboardbook(newbooks, shortstorybook, educationbook );
     public void setdashboardbook(List<Book> newbooks, List<Book> shortstorys, List<Book> educationbooks) {
         this.newbooks = newbooks;
         this.shortstorybook = shortstorys;
