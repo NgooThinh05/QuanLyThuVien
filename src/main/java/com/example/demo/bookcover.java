@@ -113,5 +113,21 @@ public class BookCover extends Node {
         }
     }
 
+    public void borrowbookbutton(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("borrowbookdetail.fxml"));
+            Parent root = loader.load();
+            Addbookapi controller = loader.getController();
+            controller.addbookapi(book);
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            System.err.println("Error loading detailed view: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
 
 }

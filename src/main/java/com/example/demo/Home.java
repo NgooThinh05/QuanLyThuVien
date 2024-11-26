@@ -37,6 +37,8 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static com.example.demo.User.getCurrentUser;
+
 public class Home implements Initializable {
 
     @FXML
@@ -101,15 +103,25 @@ public class Home implements Initializable {
     @FXML
     private AnchorPane delesearch;
     @FXML
+    private AnchorPane borrowpane;
+    @FXML
+    private AnchorPane searchborrowpane;
+    @FXML
     private ImageView search;
     @FXML
     private GridPane bookapi;
     @FXML
     private GridPane bookdata;
     @FXML
+    private GridPane recommendgrid;
+    @FXML
+    private GridPane recommendgrid1;
+    @FXML
     private ImageView searchaddimage;
     @FXML
     private ImageView search1;
+    @FXML
+    private ImageView search2;
     @FXML
     private TextField searchadd;
     @FXML
@@ -153,6 +165,8 @@ public class Home implements Initializable {
     @FXML
     private TableView dsuser;
     @FXML
+    private TextField searchborrrow;
+    @FXML
     private TableColumn<User, String> stt;
     @FXML
     private TableColumn<User, String> hoten;
@@ -176,6 +190,7 @@ public class Home implements Initializable {
     private List<Book> shortstorybook;
     private List<Book> educationbooks;
     private List<Book> deletebooks;
+    private List<Book> recommendbooks;
     private List<AnchorPane> panes;
 
     @Override
@@ -193,6 +208,7 @@ public class Home implements Initializable {
         search.setImage(brandingImage2);
         searchaddimage.setImage(brandingImage2);
         search1.setImage(brandingImage2);
+        search2.setImage(brandingImage2);
 
         Name();
 
@@ -216,6 +232,12 @@ public class Home implements Initializable {
             throw new RuntimeException(e);
         }
 
+        try {
+            recommendbookborrow();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
 
@@ -229,6 +251,8 @@ public class Home implements Initializable {
         } else if (event.getSource() == AddBook) {
             AddBookForm.setVisible(true);
         } else if (event.getSource() == BorrowBook) {
+            borrowpane.setVisible(true);
+            searchborrowpane.setVisible(false);
             borrow.setVisible(true);
         } else if (event.getSource() == ReturnBook) {
             returnbook.setVisible(true);
@@ -264,7 +288,8 @@ public class Home implements Initializable {
     }
 
     public void Name() {
-        hello.setText("Hello, " + getdata.username);
+        User currentUser = getCurrentUser();
+        hello.setText("Hello, " + currentUser.getHoten());
     }
 
     public void SignOut() {
@@ -395,7 +420,7 @@ public class Home implements Initializable {
     }
 
     private void DSdeletebook() throws SQLException {
-        List<Book> deletebooks = DatabaseConnection.deleteBookData();
+        List<Book> deletebooks = DatabaseConnection.BookData();
         setDelete(deletebooks);
     }
 
@@ -411,6 +436,30 @@ public class Home implements Initializable {
         this.apiSearchResults = apiResults;
         displayBooks(deletebooksearch, apiResults, "coverbookdelete.fxml");
     }
+
+    public void setrecommend(List<Book> recommendbooks) {
+        this.recommendbooks = recommendbooks;
+        displayBooks(recommendgrid, recommendbooks, "coverbookborrow.fxml" );
+    }
+
+    private void recommendbookborrow() throws SQLException {
+        List<Book> recommendbooks = DatabaseConnection.BookData();
+        setrecommend(recommendbooks);
+    }
+
+    @FXML
+    void searchborrowkButton(ActionEvent event) throws IOException, GeneralSecurityException, SQLException {
+        List<Book> ApiResult = DatabaseConnection.searchbookdata(searchborrrow.getText());
+        setSearchborrowbookResults(ApiResult);
+    }
+
+    public void setSearchborrowbookResults(List<Book> Results) {
+        borrowpane.setVisible(false);
+        searchborrowpane.setVisible(true);
+        this.databaseSearchResults = Results;
+        displayBooks(recommendgrid1, Results, "coverbookborrow.fxml");
+    }
+
 }
 
 

@@ -64,7 +64,7 @@ public class DatabaseConnection {
                 String image = resultSet.getString("image");
                 String review = resultSet.getString("review");
 
-                Book book = new Book(ISBN, title, author, publisher, mota, theloai, image, review);
+                Book book = new Book(ISBN, title, author, publisher, theloai, mota, image, review);
                 books.add(book);
             }
         } finally {
@@ -102,8 +102,7 @@ public class DatabaseConnection {
         return books;
     }
 
-    public static List<Book> deleteBookData() throws SQLException {
-
+    public static List<Book> BookData() throws SQLException {
         List<Book> books = new ArrayList<>();
         String query = "SELECT * FROM book ORDER BY stt LIMIT 30";
         try (
@@ -141,7 +140,7 @@ public class DatabaseConnection {
         ) {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
-                String ID = resultSet.getString("ID");
+                int ID = resultSet.getInt("ID");
                 String Hoten = resultSet.getString("Hoten");
                 String username = resultSet.getString("username");
                 String password = resultSet.getString("password");
@@ -172,4 +171,25 @@ public class DatabaseConnection {
             getConnection().close();
         }
     }
+
+    public static void Borrowbook(Borrow borrow) throws SQLException {
+        String query = "insert into borrow(ISBN, soluong, ngaymuon, ngaytra, CCCD, trangthai) values(?,?,?,?,?,?)";
+        try (Connection conn = getConnection();
+        PreparedStatement preparedStatement = conn.prepareStatement(query)) {
+            preparedStatement.setString(1, borrow.getISBN());
+            preparedStatement.setInt(2, borrow.getSl());
+            preparedStatement.setString(3, borrow.getDateborrowed());
+            preparedStatement.setString(4, borrow.getDatereturned());
+            preparedStatement.setString(5, borrow.getCCCD());
+            preparedStatement.setString(6, borrow.getStatus());
+            preparedStatement.executeUpdate();
+            System.out.println("Muon sách thành công!");
+        } catch (SQLException e) {
+            System.err.println("Lỗi khi thêm sách: " + e.getMessage());
+            throw e;
+        } finally {
+            getConnection().close();
+        }
+    }
+
 }

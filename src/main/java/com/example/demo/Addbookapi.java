@@ -3,13 +3,19 @@ package com.example.demo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import static com.example.demo.User.getCurrentUser;
 
 public class Addbookapi {
     private Book book;
@@ -39,6 +45,14 @@ public class Addbookapi {
     private Text linkreview;
     @FXML
     private Button buttonacceptdele;
+    @FXML
+    private TextField slmuon;
+    @FXML
+    private TextField mamuon;
+    @FXML
+    private DatePicker dateborrow;
+    @FXML
+    private DatePicker datereturn;
 
     public void addbookapi(Book book) {
         this.book = book;
@@ -95,5 +109,27 @@ public class Addbookapi {
         DatabaseConnection.acceptdelebook(book);
     }
 
+    @FXML
+    public void buttonacceptborrow(ActionEvent event) throws SQLException {
+        Borrow borrow = new Borrow();
+        borrow.setISBN(isbn.getText());
+        int soluong = Integer.parseInt(slmuon.getText());
+        borrow.setSl(soluong);
+        LocalDate borrowDate = dateborrow.getValue();
+        if (borrowDate != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            borrow.setDateborrowed(borrowDate.format(formatter));
+        }
+
+        LocalDate returnDate = datereturn.getValue();
+        if (returnDate != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            borrow.setDatereturned(returnDate.format(formatter));
+        }
+        borrow.setCCCD(mamuon.getText());
+        borrow.setStatus("Dang muon");
+        DatabaseConnection.Borrowbook(borrow);
+
+    }
 
 }

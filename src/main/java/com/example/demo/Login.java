@@ -65,17 +65,24 @@ public class Login implements Initializable{
         DatabaseConnection connecnow = new DatabaseConnection();
         Connection connectiBD = connecnow.getConnection();
 
-        String verifylogin = "SELECT id FROM users WHERE username = ? AND password = ?";
+        String verifylogin = "SELECT * FROM users WHERE username = ? AND password = ?";
 
         try {
             PreparedStatement preparedStatement = connectiBD.prepareStatement(verifylogin);
             preparedStatement.setString(1, usernametextfield.getText());
             preparedStatement.setString(2, enterpasswordfield.getText());
-
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                getdata.username = usernametextfield.getText();
+                int ID = resultSet.getInt("ID");
+                String Hoten = resultSet.getString("Hoten");
+                String username = resultSet.getString("username");
+                String password = resultSet.getString("password");
+                String sodt = resultSet.getString("sodt");
+                String CCCD = resultSet.getString("CCCD");
+                String Diachi = resultSet.getString("Diachi");
+                User usermain = new User(ID, Hoten, username, password, sodt, CCCD, Diachi);
+                User.setCurrentUser(usermain);
                 Home();
             } else {
                 loginMessagelabel.setText("Invalid login. Please try again!");
@@ -105,7 +112,7 @@ public class Login implements Initializable{
     public void Home(){
         try {
 
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/com/example/demo/Home.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Home.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 1200, 720);
             scene.getStylesheets().add(Main.class.getResource("/dashboarddesign.css").toExternalForm());
             Stage stage1 = new Stage();
