@@ -22,6 +22,15 @@ public class User {
         this.DiaChi = DiaChi;
     }
 
+    public User () {
+        this.Hoten = Hoten;
+        this.username = username;
+        this.password = password;
+        this.sodt = sodt;
+        this.CCCD = CCCD;
+        this.DiaChi = DiaChi;
+    }
+
     public int getID() {
         return ID;
     }
@@ -81,4 +90,6 @@ public class User {
     public static void setCurrentUser(User user) {
         currentUser = user;
     }
+
+
 }

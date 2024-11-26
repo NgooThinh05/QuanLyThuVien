@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -27,6 +28,7 @@ import javafx.stage.StageStyle;
 import java.awt.*;
 import java.awt.ScrollPane;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -123,6 +125,16 @@ public class Home implements Initializable {
     @FXML
     private ImageView search2;
     @FXML
+    private ImageView search4;
+    @FXML
+    private ImageView search5;
+    @FXML
+    private ImageView reset;
+    @FXML
+    private ImageView reset1;
+    @FXML
+    private ImageView reset2;
+    @FXML
     private TextField searchadd;
     @FXML
     private GridPane bookaddapi;
@@ -165,7 +177,13 @@ public class Home implements Initializable {
     @FXML
     private TableView dsuser;
     @FXML
+    private TableView DSborrow;
+    @FXML
     private TextField searchborrrow;
+    @FXML
+    private TextField searchReturnBook;
+    @FXML
+    private TextField textsearchuser;
     @FXML
     private TableColumn<User, String> stt;
     @FXML
@@ -180,6 +198,22 @@ public class Home implements Initializable {
     private TableColumn<User, String> cccd;
     @FXML
     private TableColumn<User, String> diachi;
+    @FXML
+    private TableColumn<Borrow, String> stt1;
+    @FXML
+    private TableColumn<Borrow, String> ISBN;
+    @FXML
+    private TableColumn<Borrow, String> sl1;
+    @FXML
+    private TableColumn<Borrow, String> cccd1;
+    @FXML
+    private TableColumn<Borrow, String> dateborrow;
+    @FXML
+    private TableColumn<Borrow, String> datereturn;
+    @FXML
+    private TableColumn<Borrow, String> status;
+
+
     @FXML
     private TextField searchdele;
 
@@ -209,6 +243,15 @@ public class Home implements Initializable {
         searchaddimage.setImage(brandingImage2);
         search1.setImage(brandingImage2);
         search2.setImage(brandingImage2);
+        search4.setImage(brandingImage2);
+        search5.setImage(brandingImage2);
+
+        File brandingFile3 = new File("image/reset.png");
+        Image brandingImage3 = new Image(brandingFile3.toURI().toString());
+        reset.setImage(brandingImage3);
+        reset1.setImage(brandingImage3);
+        reset2.setImage(brandingImage3);
+
 
         Name();
 
@@ -238,6 +281,11 @@ public class Home implements Initializable {
             throw new RuntimeException(e);
         }
 
+        try {
+            DSborrow();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -407,10 +455,34 @@ public class Home implements Initializable {
         diachi.setCellValueFactory(new PropertyValueFactory<>("DiaChi"));
         ObservableList<User> observableUsers = FXCollections.observableArrayList(users);
         tableView.setItems(observableUsers);
+        tableView.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) { // Double-click
+                User selectedUser = tableView.getSelectionModel().getSelectedItem();
+                if (selectedUser != null) {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("edituser.fxml"));
+                        Parent root = loader.load();
+                        Edituser controller = loader.getController();
+                        controller.showEditDialog(selectedUser);
+                        Stage stage = new Stage();
+                        stage.setScene(new Scene(root));
+                        stage.showAndWait();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
     }
 
     private void UserMN() throws SQLException {
         List<User> users = DatabaseConnection.Listusers();
+        initializeTableView(dsuser, stt, hoten, tk, mk, sdt, cccd, diachi, users );
+    }
+
+    @FXML
+    void buttonsearchusers(ActionEvent event) throws IOException, GeneralSecurityException, SQLException {
+        List<User> users = DatabaseConnection.searchUsers(textsearchuser.getText());
         initializeTableView(dsuser, stt, hoten, tk, mk, sdt, cccd, diachi, users );
     }
 
@@ -460,6 +532,95 @@ public class Home implements Initializable {
         displayBooks(recommendgrid1, Results, "coverbookborrow.fxml");
     }
 
+    public void initializeTableViewborrow(TableView<Borrow> tableView,
+                                    TableColumn<Borrow, String> stt1,
+                                    TableColumn<Borrow, String> ISBN,
+                                    TableColumn<Borrow, String> sl1,
+                                    TableColumn<Borrow, String> dateborrow,
+                                    TableColumn<Borrow, String> datereturn,
+                                    TableColumn<Borrow, String> cccd1,
+                                    TableColumn<Borrow, String> status,
+                                    List<Borrow> borrows) {
+        stt1.setCellValueFactory(new PropertyValueFactory<>("id"));
+        ISBN.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
+        sl1.setCellValueFactory(new PropertyValueFactory<>("sl"));
+        dateborrow.setCellValueFactory(new PropertyValueFactory<>("Dateborrowed"));
+        datereturn.setCellValueFactory(new PropertyValueFactory<>("Datereturned"));
+        cccd1.setCellValueFactory(new PropertyValueFactory<>("CCCD"));
+        status.setCellValueFactory(new PropertyValueFactory<>("status"));
+        ObservableList<Borrow> observableborrows = FXCollections.observableArrayList(borrows);
+        tableView.setItems(observableborrows);
+        tableView.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) { // Double-click
+                Borrow selectedBorrow = tableView.getSelectionModel().getSelectedItem();
+                if (selectedBorrow != null) {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("returnbook.fxml"));
+                        Parent root = loader.load();
+                        Returnbook controller = loader.getController();
+                        controller.showBorrow(selectedBorrow);
+                        Stage stage = new Stage();
+                        stage.setScene(new Scene(root));
+                        stage.showAndWait();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+    }
+
+    private void DSborrow() throws SQLException {
+        List<Borrow> borrows = DatabaseConnection.Listborrows();
+        initializeTableViewborrow(DSborrow , stt1, ISBN, sl1, dateborrow, datereturn, cccd1, status, borrows );
+    }
+
+    @FXML
+    void buttonsearchborrow(ActionEvent event) throws IOException, GeneralSecurityException, SQLException {
+        List<Borrow> borrows = DatabaseConnection.searchborrow(searchReturnBook.getText());
+        initializeTableViewborrow(DSborrow , stt1, ISBN, sl1, dateborrow, datereturn, cccd1, status, borrows );
+    }
+
+    @FXML
+    void buttonadduser(ActionEvent event) throws IOException, GeneralSecurityException, SQLException {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("adduser.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void buttonresetuser(ActionEvent event) throws IOException, GeneralSecurityException, SQLException {
+        try {
+            UserMN();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    void buttonresetbook(ActionEvent event) throws IOException, GeneralSecurityException, SQLException {
+        try {
+            DSdeletebook();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    void buttonresetreturn(ActionEvent event) throws IOException, GeneralSecurityException, SQLException {
+        try {
+            DSborrow();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
 
 

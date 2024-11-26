@@ -1,7 +1,5 @@
 package com.example.demo;
 
-import java.util.Date;
-
 public class Borrow {
     private String id;
     private String ISBN;
