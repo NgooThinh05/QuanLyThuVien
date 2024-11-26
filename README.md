@@ -28,12 +28,17 @@ Run the project.
    - ReturnBook: based on the borrowList on screen, user choose a book to return back to the library.
    - Delete: admin will have the permission to delete a book in the library when neccessary.
    - User: user management, admin permission, can delete any student has illegal actions:v
-   - Settings: 
+   - Settings:
+  
+4. Exit application by the button on top left corner, or Sign-out Button bottom right corner.
 
 ## Demo
 
 
 ## Future improvements
+1. Add more effects
+2. Add more games
+3. Improve user interface
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
