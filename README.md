@@ -16,15 +16,15 @@ If you want to change the data, you can change the E_V.txt and V_E.txt files.
 Usage
 
 ###### Demo
-![Demo](
 
-####### Future improvements
 
-Contributing
+###### Future improvements
+
+###### Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-Project status
+###### Project status
 The project is completed.
 
-Notes
+###### Notes
 The application is written for educational purposes.
