@@ -15,35 +15,41 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.io.File;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
-
-public class Login implements Initializable{
+public class Login implements Initializable {
     @FXML
     private Button Cancelbutton;
 
     @FXML
     private Label loginMessagelabel;
+
     @FXML
     private ImageView brandingImageView;
+
     @FXML
     private TextField usernametextfield;
+
     @FXML
     private PasswordField enterpasswordfield;
-    @FXML
-    private Button loginbutton;
-    @FXML
-    private Button signupbutton;
 
+    @FXML
+    private Button loginButton;
+
+    @FXML
+    private Button Signupbutton;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        File brandingFile = new File("image/bgrlogin.jpg");
-        Image brandingImage = new Image(brandingFile.toURI().toString());
-        brandingImageView.setImage(brandingImage);
+        // Adjusted for loading resources properly
+        try {
+            Image brandingImage = new Image(getClass().getResource("/image/LoginImage.png").toExternalForm());
+            brandingImageView.setImage(brandingImage);
+        } catch (NullPointerException e) {
+            System.out.println("Image not found! Check the path.");
+        }
     }
 
     public void loginButtonOnAction(ActionEvent event) throws SQLException {
@@ -67,8 +73,7 @@ public class Login implements Initializable{
 
         String verifylogin = "SELECT * FROM users WHERE username = ? AND password = ?";
 
-        try {
-            PreparedStatement preparedStatement = connectiBD.prepareStatement(verifylogin);
+        try (PreparedStatement preparedStatement = connectiBD.prepareStatement(verifylogin)) {
             preparedStatement.setString(1, usernametextfield.getText());
             preparedStatement.setString(2, enterpasswordfield.getText());
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -87,39 +92,41 @@ public class Login implements Initializable{
             } else {
                 loginMessagelabel.setText("Invalid login. Please try again!");
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
             e.getCause();
         } finally {
-            connectiBD.close();
+            try {
+                connectiBD.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    public void createAccountForm(){
+    public void createAccountForm() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("signup.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 1200, 720);
-            Stage stage1 = new Stage();
-            stage1.initStyle(StageStyle.UNDECORATED);
-            stage1.setScene(scene);
-            stage1.show();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("signup.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setScene(new Scene(root, 700, 500));
+            stage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void Home(){
+
+    public void Home() {
         try {
-
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Home.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 1200, 720);
-            scene.getStylesheets().add(Main.class.getResource("/dashboarddesign.css").toExternalForm());
-            Stage stage1 = new Stage();
-            stage1.initStyle(StageStyle.UNDECORATED);
-            stage1.setScene(scene);
-            stage1.show();
-
+            Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
+            Scene scene = new Scene(root, 1200, 720);
+            scene.getStylesheets().add(getClass().getResource("/dashboarddesign.css").toExternalForm());
+            stage.setScene(scene);
+            stage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
