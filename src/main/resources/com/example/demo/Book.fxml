@@ -18,7 +18,7 @@
             </ImageView>
             <Label fx:id="namebook" prefHeight="18.0" prefWidth="151.0" text="namebook" textAlignment="CENTER" />
             <Label fx:id="author" prefHeight="18.0" prefWidth="147.0" text="tac gia" textAlignment="CENTER" />
-            <Button fx:id="chitiet" mnemonicParsing="false" onAction="#chitiet" styleClass="chitiet" stylesheets="@../../../book.css" text="chi tiet" textAlignment="CENTER" />
+            <Button fx:id="chitiet" mnemonicParsing="false" onAction="#chitiet" styleClass="chitiet" stylesheets="@../../../book.css" text="detail" textAlignment="CENTER" />
          </children>
       </VBox>
    </children>

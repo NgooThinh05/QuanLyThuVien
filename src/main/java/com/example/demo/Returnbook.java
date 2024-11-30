@@ -6,10 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -25,7 +22,7 @@ public class Returnbook {
     @FXML
     private Label dateborrow;
     @FXML
-    private TextField status;
+    private ChoiceBox<String> status;
     @FXML
     private Label datereturn;
     @FXML
@@ -36,34 +33,61 @@ public class Returnbook {
 
     public void showBorrow(Borrow borrow) {
         this.borrow = borrow;
-        ISBN.setText(borrow.getISBN().toString());
+        ISBN.setText(borrow.getISBN());
         CCCD.setText(borrow.getCCCD());
         dateborrow.setText(borrow.getDateborrowed());
         datereturn.setText(borrow.getDatereturned());
         datereturn1.setValue(LocalDate.parse(borrow.getDatereturned()));
-        status.setText(borrow.getStatus());
+        if (status.getItems().isEmpty()) {
+            status.getItems().addAll("Dang muon", "Da tra", "Qua han");
+        }
+        status.setValue(borrow.getStatus());
         sl.setText(String.valueOf(borrow.getSl()));
     }
 
     @FXML
-    private void onAccept(ActionEvent event) throws SQLException {
-        Borrow selectedUser = this.borrow;
-        if (selectedUser != null) {
-            selectedUser.setISBN(ISBN.getText());
-            selectedUser.setCCCD(CCCD.getText());
-            selectedUser.setDateborrowed(dateborrow.getText());
-            LocalDate returnDate = datereturn1.getValue();
-            if (returnDate != null) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                selectedUser.setDatereturned(returnDate.format(formatter));
+    private void onAccept(ActionEvent event) {
+        try {
+            if (borrow != null) {
+                borrow.setISBN(ISBN.getText());
+                borrow.setCCCD(CCCD.getText());
+                borrow.setDateborrowed(dateborrow.getText());
+                LocalDate returnDate = datereturn1.getValue();
+                if (returnDate != null) {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    borrow.setDatereturned(returnDate.format(formatter));
+                }
+                String selectedStatus = status.getValue();
+                if (selectedStatus != null) {
+                    borrow.setStatus(selectedStatus);
+                } else {
+                    showAlert(Alert.AlertType.WARNING, "Input Error", "Please select a status.");
+                    return;
+                }
+                try {
+                    borrow.setSl(Integer.parseInt(sl.getText()));
+                } catch (NumberFormatException e) {
+                    showAlert(Alert.AlertType.ERROR, "Input Error", "Invalid quantity. Please enter a valid number.");
+                    return;
+                }
+                DatabaseConnection.updateBorrow(borrow);
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Borrow record updated successfully!");
+            } else {
+                showAlert(Alert.AlertType.WARNING, "No Selection", "No borrow record selected!");
             }
-            selectedUser.setStatus(status.getText());
-            selectedUser.setSl(Integer.parseInt(sl.getText()));
-            DatabaseConnection.updateBorrow(selectedUser);
-            System.out.println("Borrow updated successfully!");
-        } else {
-            System.out.println("No borrow record selected!");
+        } catch (SQLException e) {
+            showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to update borrow record: " + e.getMessage());
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Unexpected Error", "An unexpected error occurred: " + e.getMessage());
         }
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
 

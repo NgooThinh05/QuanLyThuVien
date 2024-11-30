@@ -10,31 +10,35 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Login">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Login">
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="500.0" prefWidth="282.0" style="-fx-background-color: #333333;" BorderPane.alignment="CENTER" />
+   </center>
+   <right>
+      <AnchorPane prefHeight="600.0" prefWidth="486.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="brandingImageView" fitHeight="882.0" fitWidth="1474.0" layoutX="-269.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../../../image/bgrlogin.jpg" />
-               </image>
-            </ImageView>
-            <AnchorPane layoutX="458.0" layoutY="213.0" prefHeight="346.0" prefWidth="226.0">
+            <AnchorPane layoutX="116.0" layoutY="154.0" prefHeight="346.0" prefWidth="226.0">
                <children>
-                  <Label contentDisplay="CENTER" layoutX="80.0" layoutY="14.0" prefHeight="82.0" prefWidth="70.0" text="Sign in" textAlignment="CENTER" textFill="WHITE">
-                     <font>
-                        <Font size="21.0" />
-                     </font>
-                  </Label>
                   <TextField fx:id="usernametextfield" layoutX="35.0" layoutY="108.0" prefHeight="26.0" prefWidth="150.0" promptText="username" />
                   <PasswordField fx:id="enterpasswordfield" layoutX="35.0" layoutY="154.0" prefHeight="26.0" prefWidth="150.0" promptText="password" />
                   <Button fx:id="loginButton" layoutX="35.0" layoutY="202.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="26.0" prefWidth="71.0" text="Log in" textAlignment="CENTER" />
                   <Button fx:id="Signupbutton" layoutX="115.0" layoutY="201.0" mnemonicParsing="false" onAction="#signupButtonOnAction" prefHeight="26.0" prefWidth="71.0" text="Sign up" textAlignment="CENTER" />
                   <Button fx:id="Cancelbutton" layoutX="37.0" layoutY="240.0" mnemonicParsing="false" onAction="#CancelbuttonOnAction" prefHeight="26.0" prefWidth="145.0" text="Cancel" />
                   <Label fx:id="loginMessagelabel" layoutX="36.0" layoutY="274.0" onDragDetected="#loginButtonOnAction" prefHeight="31.0" prefWidth="158.0" textFill="WHITE" />
+                  <Label fx:id="loginMessagelabel" layoutX="11.0" layoutY="274.0" prefHeight="26.0" prefWidth="198.0" />
                </children>
             </AnchorPane>
+            <ImageView fx:id="brandingImageView" fitHeight="150.0" fitWidth="200.0" layoutX="154.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../image/LoginImage.png" />
+               </image>
+            </ImageView>
+            <Label contentDisplay="CENTER" layoutX="197.0" layoutY="221.0" text="Sign in" textAlignment="CENTER" textFill="#101010">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
-   </center>
+   </right>
 </BorderPane>
