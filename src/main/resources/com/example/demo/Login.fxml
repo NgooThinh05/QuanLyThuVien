@@ -25,9 +25,10 @@
                   <Button fx:id="Signupbutton" layoutX="115.0" layoutY="201.0" mnemonicParsing="false" onAction="#signupButtonOnAction" prefHeight="26.0" prefWidth="71.0" text="Sign up" textAlignment="CENTER" />
                   <Button fx:id="Cancelbutton" layoutX="37.0" layoutY="240.0" mnemonicParsing="false" onAction="#CancelbuttonOnAction" prefHeight="26.0" prefWidth="145.0" text="Cancel" />
                   <Label fx:id="loginMessagelabel" layoutX="36.0" layoutY="274.0" onDragDetected="#loginButtonOnAction" prefHeight="31.0" prefWidth="158.0" textFill="WHITE" />
+                  <Label fx:id="loginMessagelabel" layoutX="11.0" layoutY="274.0" prefHeight="26.0" prefWidth="198.0" />
                </children>
             </AnchorPane>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="154.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="brandingImageView" fitHeight="150.0" fitWidth="200.0" layoutX="154.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../../image/LoginImage.png" />
                </image>

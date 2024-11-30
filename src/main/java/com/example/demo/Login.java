@@ -43,13 +43,10 @@ public class Login implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Adjusted for loading resources properly
-        try {
-            Image brandingImage = new Image(getClass().getResource("/image/LoginImage.png").toExternalForm());
-            brandingImageView.setImage(brandingImage);
-        } catch (NullPointerException e) {
-            System.out.println("Image not found! Check the path.");
-        }
+        File brandingFile = new File("image/LoginImage.png");
+        Image brandingImage = new Image(brandingFile.toURI().toString());
+        brandingImageView.setImage(brandingImage);
+
     }
 
     public void loginButtonOnAction(ActionEvent event) throws SQLException {
@@ -106,27 +103,34 @@ public class Login implements Initializable {
 
     public void createAccountForm() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("signup.fxml"));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.setScene(new Scene(root, 700, 500));
-            stage.show();
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("signup.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 700, 500);
+            Stage stage1 = new Stage();
+            stage1.initStyle(StageStyle.UNDECORATED);
+            stage1.setScene(scene);
+            stage1.show();
+
+            Stage stage = (Stage) Signupbutton.getScene().getWindow();
+            stage.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-
-    public void Home() {
+    public void Home(){
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
-            Stage stage = new Stage();
-            stage.initStyle(StageStyle.UNDECORATED);
-            Scene scene = new Scene(root, 1200, 720);
-            scene.getStylesheets().add(getClass().getResource("/dashboarddesign.css").toExternalForm());
-            stage.setScene(scene);
-            stage.show();
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Home.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 1200, 720);
+            scene.getStylesheets().add(Main.class.getResource("/dashboarddesign.css").toExternalForm());
+
+            Stage stage1 = new Stage();
+            stage1.initStyle(StageStyle.UNDECORATED);
+            stage1.setScene(scene);
+            stage1.show();
+
+            Stage stage = (Stage) loginButton.getScene().getWindow();
+            stage.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -32,6 +32,7 @@
                   <TextField fx:id="MSV" layoutX="73.0" layoutY="151.0" prefHeight="26.0" prefWidth="202.0" promptText="CCCD" />
                   <TextField fx:id="sodt" layoutX="73.0" layoutY="188.0" prefHeight="26.0" prefWidth="202.0" promptText="sodt" />
                   <TextField fx:id="diachi" layoutX="73.0" layoutY="226.0" prefHeight="26.0" prefWidth="204.0" promptText="DiaChi" />
+                  <Label fx:id="signupmessage" layoutX="75.0" layoutY="358.0" prefHeight="24.0" prefWidth="200.0" />
                </children>
             </AnchorPane>
          </children>

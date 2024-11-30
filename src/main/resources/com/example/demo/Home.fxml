@@ -33,7 +33,6 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Button fx:id="Setting" layoutX="2.0" layoutY="531.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="75.0" prefWidth="200.0" styleClass="nav-btn" stylesheets="@../../../dashboarddesign.css" text="Settings" />
             <Label layoutX="76.0" layoutY="668.0" prefHeight="30.0" prefWidth="51.0" styleClass="labelSignout" stylesheets="@../../../dashboarddesign.css" text="SignOut" textFill="WHITE" />
             <Label fx:id="hello" layoutX="76.0" layoutY="32.0" prefHeight="27.0" prefWidth="126.0" styleClass="labelSignout" stylesheets="@../../../dashboarddesign.css" />
             <Button fx:id="profile" layoutX="8.0" layoutY="13.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="56.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../../../dashboarddesign.css">
@@ -69,7 +68,7 @@
                   </Button>
                </children>
             </Pane>
-            <AnchorPane fx:id="DashBoardForm" layoutX="28.0" layoutY="57.0" prefHeight="664.0" prefWidth="980.0" visible="false">
+            <AnchorPane fx:id="DashBoardForm" layoutX="28.0" layoutY="57.0" prefHeight="664.0" prefWidth="980.0">
                <children>
                   <TextField fx:id="addressBar" layoutX="260.0" layoutY="17.0" prefHeight="36.0" prefWidth="558.0" promptText="Seach..." />
                   <Button fx:id="searchButton" layoutX="194.0" layoutY="17.0" mnemonicParsing="false" onAction="#searchButton" styleClass="minus" stylesheets="@../../../dashboarddesign.css">
@@ -167,20 +166,20 @@
                         </ScrollPane>
                      </children>
                   </AnchorPane>
-                  <TextField fx:id="addsl" layoutX="88.0" layoutY="496.0" prefHeight="26.0" prefWidth="162.0" promptText="soluong">
+                  <TextField fx:id="addsl" layoutX="88.0" layoutY="496.0" prefHeight="26.0" prefWidth="162.0" promptText="quantity">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </TextField>
                   <Button fx:id="acceptbutton" layoutX="361.0" layoutY="496.0" mnemonicParsing="false" onAction="#acceptbutton" prefHeight="30.0" prefWidth="83.0" styleClass="chitiet" stylesheets="@../../../book.css" text="Accept" />
-                  <TextField fx:id="addISBN" layoutX="87.0" layoutY="206.0" promptText="ISBN" />
-                  <TextField fx:id="addauthor" layoutX="309.0" layoutY="206.0" promptText="Author" />
-                  <TextField fx:id="addtitle" layoutX="84.0" layoutY="146.0" prefHeight="30.0" prefWidth="323.0" promptText="Title" />
-                  <TextField fx:id="addnxb" layoutX="87.0" layoutY="268.0" promptText="Publisher" />
-                  <TextField fx:id="addtheloai" layoutX="314.0" layoutY="270.0" promptText="category" />
+                  <TextField fx:id="addISBN" layoutX="87.0" layoutY="206.0" prefHeight="26.0" prefWidth="165.0" promptText="ISBN" />
+                  <TextField fx:id="addauthor" layoutX="309.0" layoutY="206.0" prefHeight="26.0" prefWidth="164.0" promptText="Author" />
+                  <TextField fx:id="addtitle" layoutX="84.0" layoutY="146.0" prefHeight="30.0" prefWidth="388.0" promptText="Title" />
+                  <TextField fx:id="addnxb" layoutX="87.0" layoutY="268.0" prefHeight="26.0" prefWidth="166.0" promptText="Publisher" />
+                  <TextField fx:id="addtheloai" layoutX="314.0" layoutY="270.0" prefHeight="26.0" prefWidth="159.0" promptText="category" />
                   <TextField fx:id="linkimage" layoutX="84.0" layoutY="340.0" prefHeight="30.0" prefWidth="170.0" promptText="linkImage" />
-                  <TextField fx:id="linkreview" layoutX="311.0" layoutY="340.0" prefHeight="30.0" prefWidth="165.0" promptText="linkreview" />
-                  <TextField fx:id="addmota" layoutX="84.0" layoutY="405.0" prefHeight="32.0" prefWidth="396.0" promptText="describe" />
+                  <TextField fx:id="linkreview" layoutX="311.0" layoutY="340.0" prefHeight="30.0" prefWidth="162.0" promptText="linkreview" />
+                  <TextField fx:id="addmota" layoutX="84.0" layoutY="405.0" prefHeight="32.0" prefWidth="390.0" promptText="describe" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="borrow" layoutX="28.0" layoutY="57.0" prefHeight="666.0" prefWidth="944.0" visible="false">
@@ -237,7 +236,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="returnbook" layoutX="24.0" layoutY="58.0" prefHeight="666.0" prefWidth="988.0" style="-fx-background-color: #f2f4f6;" stylesheets="@../../../dashboarddesign.css">
+            <AnchorPane fx:id="returnbook" layoutX="24.0" layoutY="58.0" prefHeight="666.0" prefWidth="988.0" style="-fx-background-color: #f2f4f6;" stylesheets="@../../../dashboarddesign.css" visible="false">
                <children>
                   <TextField fx:id="searchReturnBook" layoutX="400.0" layoutY="40.0" onDragEntered="#buttonsearchborrow" prefHeight="30.0" prefWidth="250.0" promptText="Search" />
                   <ScrollPane layoutX="66.0" layoutY="93.0" prefHeight="542.0" prefWidth="879.0" style="-fx-background-color: #ffffff;">
@@ -366,43 +365,6 @@
                         </ImageView>
                      </graphic>
                   </Button>
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="settings" layoutX="24.0" layoutY="57.0" prefHeight="666.0" prefWidth="990.0" visible="false">
-               <children>
-                  <Label layoutX="451.0" layoutY="14.0" prefHeight="42.0" prefWidth="87.0" text="Settings">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="profileform" layoutX="24.0" layoutY="57.0" prefHeight="666.0" prefWidth="990.0" visible="false">
-               <children>
-                  <Label layoutX="457.0" layoutY="14.0" prefHeight="48.0" prefWidth="75.0" text="Profile">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <Pane layoutX="75.0" layoutY="76.0" prefHeight="234.0" prefWidth="234.0">
-                     <children>
-                        <ImageView fitHeight="234.0" fitWidth="290.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../../image/avatar.jpg" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </Pane>
-                  <Button layoutX="351.0" layoutY="262.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="79.0" text="edit" />
-                  <TextField layoutX="75.0" layoutY="383.0" prefHeight="30.0" prefWidth="236.0" />
-                  <TextField layoutX="395.0" layoutY="383.0" prefHeight="30.0" prefWidth="255.0" />
-                  <TextField layoutX="75.0" layoutY="525.0" prefHeight="30.0" prefWidth="584.0" />
-                  <TextField layoutX="707.0" layoutY="386.0" prefHeight="30.0" prefWidth="229.0" />
-                  <Button layoutX="457.0" layoutY="597.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="126.0" text="Update" />
-                  <Label layoutX="75.0" layoutY="358.0" prefHeight="26.0" prefWidth="45.0" text="HoTen" />
-                  <Label layoutX="395.0" layoutY="363.0" text="CCCD" />
-                  <Label layoutX="707.0" layoutY="360.0" prefHeight="22.0" prefWidth="36.0" text="sodt" />
-                  <Label layoutX="75.0" layoutY="504.0" prefHeight="22.0" prefWidth="46.0" text="DiaChi" />
                </children>
             </AnchorPane>
          </children></AnchorPane>

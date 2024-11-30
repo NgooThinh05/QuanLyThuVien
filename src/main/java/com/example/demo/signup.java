@@ -15,15 +15,15 @@ import javafx.event.ActionEvent;
 import javafx.stage.StageStyle;
 
 import java.net.URL;
+
+import java.sql.*;
 import java.util.ResourceBundle;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class signup implements Initializable {
 
-    @FXML
-    private ImageView signupimage;
+public class signup implements Initializable {
 
     @FXML
     private Button closebutton;
@@ -54,44 +54,47 @@ public class signup implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Load the background image for branding
-        try {
-            URL imageUrl = getClass().getResource("/image/");
-            if (imageUrl != null) {
-                Image brandingImage = new Image(imageUrl.toExternalForm());
-                signupimage.setImage(brandingImage);
-            } else {
-                System.out.println("Background image not found. Check the file path!");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @FXML
     public void SignupButtonAction(ActionEvent actionEvent) {
         if (!setpasswordfield.getText().equals(comfirmpasswordfield.getText())) {
             signupmessage.setText("Passwords do not match!");
-        } else {
-            try {
-                signupuser();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                signupmessage.setText("An error occurred during signup!");
-            }
+            return;
+        }
+
+        if (usernameTextField.getText().isBlank() ||
+                setpasswordfield.getText().isBlank() ||
+                HoTen.getText().isBlank() ||
+                sodt.getText().isBlank() ||
+                MSV.getText().isBlank() ||
+                diachi.getText().isBlank()) {
+            signupmessage.setText("All fields are required!");
+            return;
+        } 
+        signupuser();
+            
+
         }
     }
 
     private void signupuser() throws SQLException {
         DatabaseConnection connection = new DatabaseConnection();
         Connection connectDB = connection.getConnection();
-
-        String username = usernameTextField.getText();
-        String password = setpasswordfield.getText();
-        String hoTenText = HoTen.getText();
-        String sodtText = sodt.getText();
-        String MSVText = MSV.getText();
-        String DiaChi = diachi.getText();
+        if (connectDB == null) {
+            signupmessage.setText("Cannot connect to the database!");
+            return;
+        }
+        String username = usernameTextField.getText().trim();
+        String password = setpasswordfield.getText().trim();
+        String hoTenText = HoTen.getText().trim();
+        String sodtText = sodt.getText().trim();
+        String MSVText = MSV.getText().trim();
+        String diaChiText = diachi.getText().trim();
+        if (!sodtText.matches("\\d+")) {
+            signupmessage.setText("Phone number must contain only digits!");
+            return;
+        }
 
         String insertQuery = "INSERT INTO users (HoTen, username, password, sodt, CCCD, Diachi) VALUES (?, ?, ?, ?, ?, ?)";
 
@@ -101,18 +104,39 @@ public class signup implements Initializable {
             preparedStatement.setString(3, password);
             preparedStatement.setString(4, sodtText);
             preparedStatement.setString(5, MSVText);
-            preparedStatement.setString(6, DiaChi);
+            preparedStatement.setString(6, diaChiText);
 
             int rowsInserted = preparedStatement.executeUpdate();
             if (rowsInserted > 0) {
                 signupmessage.setText("Signup successful!");
             } else {
-                signupmessage.setText("Signup failed!");
+                signupmessage.setText("Signup failed! Please try again.");
             }
+
+        } catch (SQLIntegrityConstraintViolationException e) {
+            signupmessage.setText("Username already exists!");
+        } catch (SQLException e) {
+            signupmessage.setText("An error occurred while accessing the database!");
+            e.printStackTrace();
         }
     }
 
-    @FXML
+    public void Login(){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Login.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 700, 500);
+            Stage stage1 = new Stage();
+            stage1.initStyle(StageStyle.UNDECORATED);
+
+            stage1.setScene(scene);
+            stage1.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
     public void closeButton(ActionEvent actionEvent) {
         Stage stage = (Stage) closebutton.getScene().getWindow();
         stage.close();

@@ -101,8 +101,8 @@ public class BookCover extends Node {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("delebook.fxml"));
             Parent root = loader.load();
-            Addbookapi controller = loader.getController(); // Nếu là Addbookapi
-            controller.addbookapi(book); // Gọi phương thức tương ứng
+            Addbookapi controller = loader.getController();
+            controller.addbookapi(book);
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);

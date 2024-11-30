@@ -255,7 +255,7 @@ public class Home implements Initializable {
 
         Name();
 
-        panes = List.of(DashBoardForm, AddBookForm, borrow, returnbook, delete, user, settings, profileform);
+        panes = List.of(DashBoardForm, AddBookForm, borrow, returnbook, delete, user);
 
         try {
             dashbordresult();
@@ -310,10 +310,6 @@ public class Home implements Initializable {
             delesearch.setVisible(false);
         } else if (event.getSource() == User) {
             user.setVisible(true);
-        } else if (event.getSource() == Setting) {
-            settings.setVisible(true);
-        } else if (event.getSource() == profile) {
-            profileform.setVisible(true);
         }
     }
 
@@ -406,19 +402,60 @@ public class Home implements Initializable {
         setSearchaddbookResults(ApiResult);
     }
 
-    public void acceptbutton(ActionEvent event) throws IOException, GeneralSecurityException, SQLException {
-        Book addbook = new Book();
-        addbook.setTitle(addtitle.getText());
-        addbook.setAuthor(addauthor.getText());
-        addbook.setTheloai(addtheloai.getText());
-        addbook.setISBN(addISBN.getText());
-        addbook.setMota(addmota.getText());
-        addbook.setImage(linkimage.getText());
-        addbook.setPublisher(addnxb.getText());
-        int soluong = Integer.parseInt(addsl.getText());
-        addbook.setSoluong(soluong);
-        addbook.setRivew(linkreview.getText());
-        DatabaseConnection.addbookdata(addbook);
+    @FXML
+    public void acceptbutton(ActionEvent event) {
+        try {
+            String title = addtitle.getText();
+            String author = addauthor.getText();
+            String theloai = addtheloai.getText();
+            String isbn = addISBN.getText();
+            String mota = addmota.getText();
+            String image = linkimage.getText();
+            String publisher = addnxb.getText();
+            String review = linkreview.getText();
+
+            if (title.isEmpty() || author.isEmpty() || theloai.isEmpty() || isbn.isEmpty()) {
+                showAlert(Alert.AlertType.WARNING, "Input Error", "All fields must be filled!");
+                return;
+            }
+
+            int soluong;
+            try {
+                soluong = Integer.parseInt(addsl.getText());
+                if (soluong <= 0) {
+                    showAlert(Alert.AlertType.WARNING, "Input Error", "Quantity must be greater than 0!");
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                showAlert(Alert.AlertType.ERROR, "Input Error", "Invalid quantity! Please enter a valid number.");
+                return;
+            }
+
+            Book addbook = new Book();
+            addbook.setTitle(title);
+            addbook.setAuthor(author);
+            addbook.setTheloai(theloai);
+            addbook.setISBN(isbn);
+            addbook.setMota(mota);
+            addbook.setImage(image);
+            addbook.setPublisher(publisher);
+            addbook.setSoluong(soluong);
+            addbook.setRivew(review);
+            DatabaseConnection.addbookdata(addbook);
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Book added successfully!");
+        } catch (SQLException e) {
+            showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to add book: " + e.getMessage());
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Unexpected Error", "An unexpected error occurred: " + e.getMessage());
+        }
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     public void setdashboardbook(List<Book> newbooks, List<Book> shortstorys, List<Book> educationbooks) {
