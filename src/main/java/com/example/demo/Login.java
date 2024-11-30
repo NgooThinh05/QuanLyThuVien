@@ -34,9 +34,9 @@ public class Login implements Initializable{
     @FXML
     private PasswordField enterpasswordfield;
     @FXML
-    private Button loginbutton;
+    private Button loginButton;
     @FXML
-    private Button signupbutton;
+    private Button Signupbutton;
 
 
     @Override
@@ -104,6 +104,9 @@ public class Login implements Initializable{
             stage1.initStyle(StageStyle.UNDECORATED);
             stage1.setScene(scene);
             stage1.show();
+
+            Stage stage = (Stage) Signupbutton.getScene().getWindow();
+            stage.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -111,14 +114,17 @@ public class Login implements Initializable{
 
     public void Home(){
         try {
-
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Home.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 1200, 720);
             scene.getStylesheets().add(Main.class.getResource("/dashboarddesign.css").toExternalForm());
+
             Stage stage1 = new Stage();
             stage1.initStyle(StageStyle.UNDECORATED);
             stage1.setScene(scene);
             stage1.show();
+
+            Stage stage = (Stage) loginButton.getScene().getWindow();
+            stage.close();
 
         } catch (Exception e) {
             e.printStackTrace();

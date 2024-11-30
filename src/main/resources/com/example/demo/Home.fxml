@@ -141,7 +141,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="AddBookForm" layoutY="57.0" prefHeight="662.0" prefWidth="1037.0" visible="false">
+            <AnchorPane fx:id="AddBookForm" layoutY="57.0" prefHeight="662.0" prefWidth="1037.0">
                <children>
                   <Label layoutX="469.0" layoutY="20.0" prefHeight="42.0" prefWidth="100.0" text="Add Book">
                      <font>
@@ -167,20 +167,20 @@
                         </ScrollPane>
                      </children>
                   </AnchorPane>
-                  <TextField fx:id="addsl" layoutX="88.0" layoutY="496.0" prefHeight="26.0" prefWidth="162.0" promptText="soluong">
+                  <TextField fx:id="addsl" layoutX="88.0" layoutY="496.0" prefHeight="26.0" prefWidth="162.0" promptText="quantity">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </TextField>
                   <Button fx:id="acceptbutton" layoutX="361.0" layoutY="496.0" mnemonicParsing="false" onAction="#acceptbutton" prefHeight="30.0" prefWidth="83.0" styleClass="chitiet" stylesheets="@../../../book.css" text="Accept" />
-                  <TextField fx:id="addISBN" layoutX="87.0" layoutY="206.0" promptText="ISBN" />
-                  <TextField fx:id="addauthor" layoutX="309.0" layoutY="206.0" promptText="Author" />
-                  <TextField fx:id="addtitle" layoutX="84.0" layoutY="146.0" prefHeight="30.0" prefWidth="323.0" promptText="Title" />
-                  <TextField fx:id="addnxb" layoutX="87.0" layoutY="268.0" promptText="Publisher" />
-                  <TextField fx:id="addtheloai" layoutX="314.0" layoutY="270.0" promptText="category" />
+                  <TextField fx:id="addISBN" layoutX="87.0" layoutY="206.0" prefHeight="26.0" prefWidth="165.0" promptText="ISBN" />
+                  <TextField fx:id="addauthor" layoutX="309.0" layoutY="206.0" prefHeight="26.0" prefWidth="164.0" promptText="Author" />
+                  <TextField fx:id="addtitle" layoutX="84.0" layoutY="146.0" prefHeight="30.0" prefWidth="388.0" promptText="Title" />
+                  <TextField fx:id="addnxb" layoutX="87.0" layoutY="268.0" prefHeight="26.0" prefWidth="166.0" promptText="Publisher" />
+                  <TextField fx:id="addtheloai" layoutX="314.0" layoutY="270.0" prefHeight="26.0" prefWidth="159.0" promptText="category" />
                   <TextField fx:id="linkimage" layoutX="84.0" layoutY="340.0" prefHeight="30.0" prefWidth="170.0" promptText="linkImage" />
-                  <TextField fx:id="linkreview" layoutX="311.0" layoutY="340.0" prefHeight="30.0" prefWidth="165.0" promptText="linkreview" />
-                  <TextField fx:id="addmota" layoutX="84.0" layoutY="405.0" prefHeight="32.0" prefWidth="396.0" promptText="describe" />
+                  <TextField fx:id="linkreview" layoutX="311.0" layoutY="340.0" prefHeight="30.0" prefWidth="162.0" promptText="linkreview" />
+                  <TextField fx:id="addmota" layoutX="84.0" layoutY="405.0" prefHeight="32.0" prefWidth="390.0" promptText="describe" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="borrow" layoutX="28.0" layoutY="57.0" prefHeight="666.0" prefWidth="944.0" visible="false">
@@ -237,7 +237,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="returnbook" layoutX="24.0" layoutY="58.0" prefHeight="666.0" prefWidth="988.0" style="-fx-background-color: #f2f4f6;" stylesheets="@../../../dashboarddesign.css">
+            <AnchorPane fx:id="returnbook" layoutX="24.0" layoutY="58.0" prefHeight="666.0" prefWidth="988.0" style="-fx-background-color: #f2f4f6;" stylesheets="@../../../dashboarddesign.css" visible="false">
                <children>
                   <TextField fx:id="searchReturnBook" layoutX="400.0" layoutY="40.0" onDragEntered="#buttonsearchborrow" prefHeight="30.0" prefWidth="250.0" promptText="Search" />
                   <ScrollPane layoutX="66.0" layoutY="93.0" prefHeight="542.0" prefWidth="879.0" style="-fx-background-color: #ffffff;">

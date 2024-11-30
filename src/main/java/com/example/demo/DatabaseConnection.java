@@ -165,7 +165,7 @@ public class DatabaseConnection {
             preparedStatement.executeUpdate();
             System.out.println("Xoa sách thành công!");
         } catch (SQLException e) {
-            System.err.println("Lỗi khi thêm sách: " + e.getMessage());
+            System.err.println("Lỗi khi xoa sách: " + e.getMessage());
             throw e;
         } finally {
             getConnection().close();

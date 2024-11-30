@@ -14,14 +14,14 @@
    <center>
       <AnchorPane prefHeight="400.0" prefWidth="520.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="signupimage" fitHeight="882.0" fitWidth="1474.0" layoutX="-134.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="signupimage" fitHeight="882.0" fitWidth="1474.0" layoutX="-116.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../../image/bgrlogin.jpg" />
                </image>
             </ImageView>
-            <AnchorPane layoutX="551.0" layoutY="218.0" prefHeight="478.0" prefWidth="350.0">
+            <AnchorPane layoutX="513.0" layoutY="158.0" prefHeight="513.0" prefWidth="358.0" styleClass="transparent-box" stylesheets="@../../../login.css">
                <children>
-                  <Label layoutX="126.0" layoutY="22.0" prefHeight="59.0" prefWidth="98.0" text="Sign up" textAlignment="CENTER" textFill="WHITE">
+                  <Label layoutX="126.0" layoutY="22.0" prefHeight="59.0" prefWidth="98.0" text="Sign up" textAlignment="CENTER" textFill="#201e1e">
                      <font>
                         <Font size="28.0" />
                      </font>

@@ -18,10 +18,7 @@ import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ResourceBundle;
 
 public class signup implements Initializable {
@@ -56,7 +53,18 @@ public class signup implements Initializable {
 
     public void SignupButtonAction(ActionEvent actionEvent) throws SQLException {
         if (!setpasswordfield.getText().equals(comfirmpasswordfield.getText())) {
-            signupmessage.setText("password not match!");
+            signupmessage.setText("Passwords do not match!");
+            return;
+        }
+
+        if (usernameTextField.getText().isBlank() ||
+                setpasswordfield.getText().isBlank() ||
+                HoTen.getText().isBlank() ||
+                sodt.getText().isBlank() ||
+                MSV.getText().isBlank() ||
+                diachi.getText().isBlank()) {
+            signupmessage.setText("All fields are required!");
+            return;
         }
         signupuser();
     }
@@ -64,37 +72,40 @@ public class signup implements Initializable {
     public void signupuser() throws SQLException {
         DatabaseConnection connection = new DatabaseConnection();
         Connection connectDB = connection.getConnection();
-
-        // Lấy giá trị từ các trường nhập liệu
-        String username = usernameTextField.getText();
-        String password = setpasswordfield.getText();
-        String hoTenText = HoTen.getText();
-        String sodtText = sodt.getText();
-        String MSVText = MSV.getText();
-        String DiaChi = diachi.getText();
-
-        // Câu lệnh SQL với các placeholder (?)
+        if (connectDB == null) {
+            signupmessage.setText("Cannot connect to the database!");
+            return;
+        }
+        String username = usernameTextField.getText().trim();
+        String password = setpasswordfield.getText().trim();
+        String hoTenText = HoTen.getText().trim();
+        String sodtText = sodt.getText().trim();
+        String MSVText = MSV.getText().trim();
+        String diaChiText = diachi.getText().trim();
+        if (!sodtText.matches("\\d+")) {
+            signupmessage.setText("Phone number must contain only digits!");
+            return;
+        }
         String insertQuery = "INSERT INTO users (HoTen, username, password, sodt, CCCD, Diachi) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement preparedStatement = connectDB.prepareStatement(insertQuery)) {
-            // Gán giá trị cho các placeholder
             preparedStatement.setString(1, hoTenText);
             preparedStatement.setString(2, username);
             preparedStatement.setString(3, password);
             preparedStatement.setString(4, sodtText);
             preparedStatement.setString(5, MSVText);
-            preparedStatement.setString(6, DiaChi);
-
-            // Thực thi câu lệnh
+            preparedStatement.setString(6, diaChiText);
             int rowsInserted = preparedStatement.executeUpdate();
             if (rowsInserted > 0) {
                 signupmessage.setText("Signup successful!");
             } else {
-                signupmessage.setText("Signup failed!");
+                signupmessage.setText("Signup failed! Please try again.");
             }
+        } catch (SQLIntegrityConstraintViolationException e) {
+            signupmessage.setText("Username already exists!");
         } catch (SQLException e) {
+            signupmessage.setText("An error occurred while accessing the database!");
             e.printStackTrace();
-            signupmessage.setText("An error occurred!");
         }
     }
 

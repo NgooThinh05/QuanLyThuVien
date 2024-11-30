@@ -6,10 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.PasswordField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -67,25 +64,47 @@ public class Edituser {
         }
     }
 
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
     @FXML
-    private void onAcceptadd(ActionEvent event) throws SQLException {
-        User selectedUser = new User(); // Lấy đối tượng `User` được chỉnh sửa
-        if (selectedUser != null) {
-            selectedUser.setUsername(editusername.getText());
-            selectedUser.setPassword(editpassword.getText());
-            selectedUser.setHoten(editHoten.getText());
-            selectedUser.setCCCD(editcccd1.getText());
-            selectedUser.setDiaChi(editaddress.getText());
-            selectedUser.setSodt(editsdt.getText());
+    private void onAcceptadd(ActionEvent event) {
+        try {
+            String username = editusername.getText();
+            String password = editpassword.getText();
+            String hoten = editHoten.getText();
+            String cccd = editcccd1.getText();
+            String diaChi = editaddress.getText();
+            String sodt = editsdt.getText();
+            if (username.isEmpty() || password.isEmpty() || hoten.isEmpty() || cccd.isEmpty() || diaChi.isEmpty() || sodt.isEmpty()) {
+                showAlert(Alert.AlertType.WARNING, "Input Error", "All fields must be filled!");
+                return;
+            }
+            User selectedUser = new User();
+            selectedUser.setUsername(username);
+            selectedUser.setPassword(password);
+            selectedUser.setHoten(hoten);
+            selectedUser.setCCCD(cccd);
+            selectedUser.setDiaChi(diaChi);
+            selectedUser.setSodt(sodt);
             DatabaseConnection.adduser(selectedUser);
-            System.out.println("User add successfully!");
+            showAlert(Alert.AlertType.INFORMATION, "Success", "User edited successfully!");
+        } catch (SQLException e) {
+            showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to add user: " + e.getMessage());
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Unexpected Error", "An unexpected error occurred: " + e.getMessage());
         }
     }
 
     @FXML
     private void onAcceptdele(ActionEvent event) throws SQLException {
             DatabaseConnection.deleteuser(editcccd.getText());
-            System.out.println("User updated successfully!");
+            showAlert(Alert.AlertType.INFORMATION, "Success", "User deleted successfully!");
     }
 }
 
