@@ -255,7 +255,7 @@ public class Home implements Initializable {
 
         Name();
 
-        panes = List.of(DashBoardForm, AddBookForm, borrow, returnbook, delete, user, settings, profileform);
+        panes = List.of(DashBoardForm, AddBookForm, borrow, returnbook, delete, user);
 
         try {
             dashbordresult();
@@ -310,10 +310,6 @@ public class Home implements Initializable {
             delesearch.setVisible(false);
         } else if (event.getSource() == User) {
             user.setVisible(true);
-        } else if (event.getSource() == Setting) {
-            settings.setVisible(true);
-        } else if (event.getSource() == profile) {
-            profileform.setVisible(true);
         }
     }
 
@@ -324,7 +320,7 @@ public class Home implements Initializable {
     public void Login(){
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Login.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 1200, 720);
+            Scene scene = new Scene(fxmlLoader.load(), 700, 500);
             Stage stage1 = new Stage();
             stage1.initStyle(StageStyle.UNDECORATED);
 

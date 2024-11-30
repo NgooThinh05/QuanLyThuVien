@@ -41,7 +41,7 @@ public class Login implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        File brandingFile = new File("image/bgrlogin.jpg");
+        File brandingFile = new File("image/LoginImage.png");
         Image brandingImage = new Image(brandingFile.toURI().toString());
         brandingImageView.setImage(brandingImage);
     }
@@ -99,7 +99,7 @@ public class Login implements Initializable{
     public void createAccountForm(){
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("signup.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 1200, 720);
+            Scene scene = new Scene(fxmlLoader.load(), 700, 500);
             Stage stage1 = new Stage();
             stage1.initStyle(StageStyle.UNDECORATED);
             stage1.setScene(scene);

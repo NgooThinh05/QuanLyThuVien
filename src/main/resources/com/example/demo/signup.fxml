@@ -4,24 +4,20 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.signup">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.signup">
    <center>
-      <AnchorPane prefHeight="400.0" prefWidth="520.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="400.0" prefWidth="520.0" style="-fx-background-color: #333333;" BorderPane.alignment="CENTER" />
+   </center>
+   <left>
+      <AnchorPane prefHeight="500.0" prefWidth="486.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="signupimage" fitHeight="882.0" fitWidth="1474.0" layoutX="-116.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../../../image/bgrlogin.jpg" />
-               </image>
-            </ImageView>
-            <AnchorPane layoutX="513.0" layoutY="158.0" prefHeight="513.0" prefWidth="358.0" styleClass="transparent-box" stylesheets="@../../../login.css">
+            <AnchorPane layoutX="68.0" layoutY="11.0" prefHeight="478.0" prefWidth="350.0">
                <children>
-                  <Label layoutX="126.0" layoutY="22.0" prefHeight="59.0" prefWidth="98.0" text="Sign up" textAlignment="CENTER" textFill="#201e1e">
+                  <Label layoutX="126.0" layoutY="22.0" prefHeight="59.0" prefWidth="98.0" text="Sign up" textAlignment="CENTER" textFill="#131212">
                      <font>
                         <Font size="28.0" />
                      </font>
@@ -36,9 +32,10 @@
                   <TextField fx:id="MSV" layoutX="73.0" layoutY="151.0" prefHeight="26.0" prefWidth="202.0" promptText="CCCD" />
                   <TextField fx:id="sodt" layoutX="73.0" layoutY="188.0" prefHeight="26.0" prefWidth="202.0" promptText="sodt" />
                   <TextField fx:id="diachi" layoutX="73.0" layoutY="226.0" prefHeight="26.0" prefWidth="204.0" promptText="DiaChi" />
+                  <Label fx:id="signupmessage" layoutX="75.0" layoutY="358.0" prefHeight="24.0" prefWidth="200.0" />
                </children>
             </AnchorPane>
          </children>
       </AnchorPane>
-   </center>
+   </left>
 </BorderPane>

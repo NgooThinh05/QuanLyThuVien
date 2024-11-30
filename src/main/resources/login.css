@@ -1,7 +1,0 @@
-.transparent-box {
-    -fx-background-color: rgba(255, 255, 255, 0.5); /* Nền trắng mờ 50% */
-    -fx-padding: 20px; /* Khoảng cách bên trong */
-    -fx-border-width: 2px;
-    -fx-border-radius: 10px; /* Bo góc cho viền */
-    -fx-background-radius: 10px; /* Bo góc cho nền */
-}
