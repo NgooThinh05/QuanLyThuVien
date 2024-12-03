@@ -11,7 +11,7 @@ The application is designed to "clone" a library to our PC. Written in Java and 
 Simple is the best, the less is more!
 
 ## UML diagram
-![UML diagram](./UML.png)
+![UML diagram](./image/UML.png)
 
 ## Installation
 Clone the project from the repository.
