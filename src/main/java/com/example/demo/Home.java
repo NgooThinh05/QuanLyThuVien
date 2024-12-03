@@ -140,6 +140,10 @@ public class Home implements Initializable {
     @FXML
     private ImageView reset2;
     @FXML
+    private ImageView resetdashboard;
+    @FXML
+    private ImageView resetborrow;
+    @FXML
     private TextField searchadd;
     @FXML
     private GridPane bookaddapi;
@@ -217,6 +221,8 @@ public class Home implements Initializable {
     private TableColumn<Borrow, String> datereturn;
     @FXML
     private TableColumn<Borrow, String> status;
+    @FXML
+    private TableColumn<Borrow, String> title;
 
 
     @FXML
@@ -269,6 +275,8 @@ public class Home implements Initializable {
         reset.setImage(resetImage);
         reset1.setImage(resetImage);
         reset2.setImage(resetImage);
+        resetdashboard.setImage(resetImage);
+        resetborrow.setImage(resetImage);
     }
 
     private Task<Void> createTask(Runnable taskAction) {
@@ -598,6 +606,7 @@ public class Home implements Initializable {
                                     TableColumn<Borrow, String> datereturn,
                                     TableColumn<Borrow, String> cccd1,
                                     TableColumn<Borrow, String> status,
+                                    TableColumn<Borrow, String> title,
                                     List<Borrow> borrows) {
         stt1.setCellValueFactory(new PropertyValueFactory<>("id"));
         ISBN.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
@@ -606,6 +615,7 @@ public class Home implements Initializable {
         datereturn.setCellValueFactory(new PropertyValueFactory<>("Datereturned"));
         cccd1.setCellValueFactory(new PropertyValueFactory<>("CCCD"));
         status.setCellValueFactory(new PropertyValueFactory<>("status"));
+        title.setCellValueFactory(new PropertyValueFactory<>("Title"));
         ObservableList<Borrow> observableborrows = FXCollections.observableArrayList(borrows);
         tableView.setItems(observableborrows);
         tableView.setOnMouseClicked(event -> {
@@ -633,7 +643,7 @@ public class Home implements Initializable {
     private void DSborrow() {
         try {
             List<Borrow> borrows = DatabaseConnection.Listborrows();
-            Platform.runLater(() -> initializeTableViewborrow(DSborrow, stt1, ISBN, sl1, dateborrow, datereturn, cccd1, status, borrows));
+            Platform.runLater(() -> initializeTableViewborrow(DSborrow, stt1, ISBN, sl1, dateborrow, datereturn, cccd1, status, title, borrows));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -642,7 +652,7 @@ public class Home implements Initializable {
     @FXML
     void buttonsearchborrow(ActionEvent event) throws IOException, GeneralSecurityException, SQLException {
         List<Borrow> borrows = DatabaseConnection.searchborrow(searchReturnBook.getText());
-        initializeTableViewborrow(DSborrow , stt1, ISBN, sl1, dateborrow, datereturn, cccd1, status, borrows );
+        initializeTableViewborrow(DSborrow , stt1, ISBN, sl1, dateborrow, datereturn, cccd1, status, title, borrows );
     }
 
     @FXML
@@ -672,6 +682,18 @@ public class Home implements Initializable {
     void buttonresetreturn(ActionEvent event) throws IOException, GeneralSecurityException, SQLException {
         DSborrow();
     }
+
+    @FXML
+    void buttonresetdashboard(ActionEvent event) throws IOException, GeneralSecurityException, SQLException {
+        dashbordresult();
+    }
+
+    @FXML
+    void buttonresetborrow(ActionEvent event) throws IOException, GeneralSecurityException, SQLException {
+        recommendbookborrow();
+    }
+
+
 }
 
 
