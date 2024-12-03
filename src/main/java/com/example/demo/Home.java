@@ -229,15 +229,15 @@ public class Home implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        File brandingFile = new File("image/avatar.jpg");
+        File brandingFile = new File("image/user.jpg");
         Image brandingImage = new Image(brandingFile.toURI().toString());
         Avatar.setImage(brandingImage);
 
-        File brandingFile1 = new File("image/log-out.png");
+        File brandingFile1 = new File("image/out.png");
         Image brandingImage1 = new Image(brandingFile1.toURI().toString());
         SignOutImage.setImage(brandingImage1);
 
-        File brandingFile2 = new File("image/kinhlup.png");
+        File brandingFile2 = new File("image/loupe.png");
         Image brandingImage2 = new Image(brandingFile2.toURI().toString());
         search.setImage(brandingImage2);
         searchaddimage.setImage(brandingImage2);
