@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -19,29 +20,33 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Home">
    <left>
-      <AnchorPane prefHeight="720.0" prefWidth="200.0" styleClass="form" stylesheets="@../../../dashboarddesign.css" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="720.0" prefWidth="200.0" style="-fx-background-color: #000000;" styleClass="form" stylesheets="@../../../dashboarddesign.css" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="DashBoard" layoutX="5.0" layoutY="75.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="75.0" prefWidth="200.0" styleClass="nav-btn" stylesheets="@../../../dashboarddesign.css" text="DashBoard" />
-            <Button fx:id="AddBook" layoutX="5.0" layoutY="151.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="75.0" prefWidth="200.0" styleClass="nav-btn" stylesheets="@../../../dashboarddesign.css" text="AddBook" />
-            <Button fx:id="BorrowBook" layoutX="5.0" layoutY="227.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="75.0" prefWidth="200.0" styleClass="nav-btn" stylesheets="@../../../dashboarddesign.css" text="BorrowBook" />
-            <Button fx:id="ReturnBook" layoutX="2.0" layoutY="303.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="75.0" prefWidth="200.0" styleClass="nav-btn" stylesheets="@../../../dashboarddesign.css" text="ReturnBook" />
-            <Button fx:id="Delete" layoutX="5.0" layoutY="379.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="75.0" prefWidth="200.0" styleClass="nav-btn" stylesheets="@../../../dashboarddesign.css" text="Delete" />
-            <Button fx:id="User" layoutX="5.0" layoutY="455.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="75.0" prefWidth="200.0" styleClass="nav-btn" stylesheets="@../../../dashboarddesign.css" text="User" />
+            <VBox layoutY="100.0" prefHeight="450.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="DashBoard" mnemonicParsing="false" onAction="#switchForm" prefHeight="75.0" prefWidth="200.0" styleClass="nav-btn" stylesheets="@../../../dashboarddesign.css" text="DashBoard" />
+                  <Button fx:id="AddBook" mnemonicParsing="false" onAction="#switchForm" prefHeight="75.0" prefWidth="200.0" styleClass="nav-btn" stylesheets="@../../../dashboarddesign.css" text="AddBook" />
+                  <Button fx:id="BorrowBook" mnemonicParsing="false" onAction="#switchForm" prefHeight="75.0" prefWidth="200.0" styleClass="nav-btn" stylesheets="@../../../dashboarddesign.css" text="BorrowBook" />
+                  <Button fx:id="ReturnBook" mnemonicParsing="false" onAction="#switchForm" prefHeight="75.0" prefWidth="200.0" styleClass="nav-btn" stylesheets="@../../../dashboarddesign.css" text="ReturnBook" />
+                  <Button fx:id="Delete" mnemonicParsing="false" onAction="#switchForm" prefHeight="75.0" prefWidth="200.0" styleClass="nav-btn" stylesheets="@../../../dashboarddesign.css" text="Delete" />
+                  <Button fx:id="User" mnemonicParsing="false" onAction="#switchForm" prefHeight="75.0" prefWidth="200.0" styleClass="nav-btn" stylesheets="@../../../dashboarddesign.css" text="User" />
+               </children>
+            </VBox>
             <Button fx:id="SignOut" layoutX="9.0" layoutY="654.0" minWidth="47.0" mnemonicParsing="false" onAction="#SignOut" prefHeight="51.0" prefWidth="62.0" styleClass="nav-btn" stylesheets="@../../../dashboarddesign.css">
                <graphic>
-                  <ImageView fx:id="SignOutImage" fitHeight="54.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="SignOutImage" fitHeight="50.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../image/log-out.png" />
+                        <Image url="@../../../../../../image/out.png" />
                      </image>
                   </ImageView>
                </graphic></Button>
-            <Label layoutX="76.0" layoutY="668.0" prefHeight="30.0" prefWidth="51.0" styleClass="labelSignout" stylesheets="@../../../dashboarddesign.css" text="SignOut" textFill="WHITE" />
-            <Label fx:id="hello" layoutX="76.0" layoutY="32.0" prefHeight="27.0" prefWidth="126.0" styleClass="labelSignout" stylesheets="@../../../dashboarddesign.css" />
-            <Button fx:id="profile" layoutX="8.0" layoutY="13.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="56.0" prefWidth="60.0" styleClass="nav-btn" stylesheets="@../../../dashboarddesign.css">
+            <Label layoutX="70.0" layoutY="669.0" prefHeight="30.0" prefWidth="50.0" styleClass="labelSignout" stylesheets="@../../../dashboarddesign.css" text="SignOut" textFill="WHITE" />
+            <Label fx:id="hello" layoutX="76.0" layoutY="32.0" prefHeight="27.0" prefWidth="126.0" styleClass="labelSignout" stylesheets="@../../../dashboarddesign.css" textFill="WHITE" />
+            <Button fx:id="profile" layoutX="8.0" layoutY="10.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #ffffff;" styleClass="nav-btn" stylesheets="@../../../dashboarddesign.css">
                <graphic>
                   <ImageView fx:id="Avatar" fitHeight="46.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../image/avatar.jpg" />
+                        <Image url="@../../../../../../image/user.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -51,33 +56,41 @@
    <center>
       <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1000.0" stylesheets="@../../../dashboarddesign.css" BorderPane.alignment="CENTER">
          <children>
-            <Pane fx:id="topForm" prefHeight="60.0" prefWidth="1000.0" styleClass="top-form" stylesheets="@../../../dashboarddesign.css">
+            <Pane fx:id="topForm" prefHeight="60.0" prefWidth="1000.0" style="-fx-background-color: #000000;" styleClass="top-form" stylesheets="@../../../dashboarddesign.css">
                <children>
-                  <Label fx:id="nameapp" layoutX="350.0" prefHeight="50.0" prefWidth="260.0" text="Library Management" textAlignment="CENTER" textFill="#2a34c1">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="exit" layoutX="917.0" layoutY="6.0" mnemonicParsing="false" onAction="#exit" styleClass="close" stylesheets="@../../../dashboarddesign.css" text="X">
+                  <Button fx:id="exit" layoutX="917.0" layoutY="6.0" mnemonicParsing="false" onAction="#exit" style="-fx-text-fill: #ffffff;" styleClass="close" stylesheets="@../../../dashboarddesign.css" text="X" textFill="WHITE">
                      <font>
                         <Font size="21.0" />
                      </font>
                   </Button>
-                  <Button fx:id="minimize" layoutX="864.0" layoutY="4.0" minWidth="53.0" mnemonicParsing="false" onAction="#minimize" prefHeight="33.0" prefWidth="53.0" styleClass="minus" stylesheets="@../../../dashboarddesign.css" text="---">
+                  <Label fx:id="nameapp" layoutX="370.0" layoutY="2.0" prefHeight="50.0" prefWidth="260.0" text="Library Management" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="minimize" layoutX="864.0" layoutY="4.0" minWidth="53.0" mnemonicParsing="false" onAction="#minimize" prefHeight="33.0" prefWidth="53.0" style="-fx-text-fill: #ffffff;" styleClass="minus" stylesheets="@../../../dashboarddesign.css" text="---" textFill="WHITE">
                      <font>
                         <Font size="22.0" />
                      </font>
                   </Button>
                </children>
             </Pane>
-            <AnchorPane fx:id="DashBoardForm" layoutY="60.0" prefHeight="660.0" prefWidth="1000.0" visible="false">
+            <AnchorPane fx:id="DashBoardForm" layoutY="60.0" prefHeight="660.0" prefWidth="1000.0">
                <children>
-                  <TextField fx:id="addressBar" layoutX="260.0" layoutY="17.0" prefHeight="36.0" prefWidth="558.0" promptText="Seach..." />
-                  <Button fx:id="searchButton" layoutX="194.0" layoutY="17.0" mnemonicParsing="false" onAction="#searchButton" styleClass="minus" stylesheets="@../../../dashboarddesign.css">
+                  <ImageView fitHeight="660.0" fitWidth="1000.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../../../../../../image/background.png" />
+                     </image>
+                     <effect>
+                        <GaussianBlur radius="5.0" />
+                     </effect>
+                  </ImageView>
+                  <TextField fx:id="addressBar" layoutX="260.0" layoutY="17.0" prefHeight="40.0" prefWidth="560.0" promptText="Seach..." style="-fx-background-color: #e5e5e5;" />
+                  <Button fx:id="searchButton" layoutX="194.0" layoutY="17.0" mnemonicParsing="false" onAction="#searchButton" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #e5e5e5;" styleClass="minus" stylesheets="@../../../dashboarddesign.css">
                      <graphic>
                         <ImageView fx:id="search" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../image/kinhlup.png" />
+                              <Image url="@../../../../../../image/loupe.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -112,9 +125,9 @@
                   </AnchorPane>
                   <AnchorPane fx:id="dashboard1" layoutX="25.0" layoutY="80.0" prefHeight="570.0" prefWidth="950.0">
                      <children>
-                        <ScrollPane prefHeight="570.0" prefWidth="950.0">
+                        <ScrollPane prefHeight="570.0" prefWidth="950.0" style="-fx-background-color: #323232;">
                            <content>
-                              <VBox prefHeight="570.0" prefWidth="950.0">
+                              <VBox prefHeight="570.0" prefWidth="950.0" style="-fx-background-color: #e5e5e5;">
                                  <children>
                                     <Label prefHeight="30.0" prefWidth="297.0" text="New Book" textFill="#cf1616">
                                        <font>
@@ -252,7 +265,7 @@
             </AnchorPane>
             <AnchorPane fx:id="borrow" layoutY="60.0" prefHeight="660.0" prefWidth="1000.0" visible="false">
                <children>
-                  <AnchorPane layoutX="1.0" layoutY="5.0" prefHeight="655.0" prefWidth="977.0" style="-fx-background-color: #f2f4f6;" styleClass="bgr-while" stylesheets="@../../../dashboarddesign.css">
+                  <AnchorPane prefHeight="660.0" prefWidth="1000.0" style="-fx-background-color: #f2f4f6;" styleClass="bgr-while" stylesheets="@../../../dashboarddesign.css">
                      <children>
                         <TextField fx:id="searchborrrow" layoutX="318.0" layoutY="14.0" onAction="#searchborrowkButton" onMouseDragEntered="#searchborrowkButton" prefHeight="26.0" prefWidth="353.0" promptText="Search" />
                         <Button fx:id="searchBorrowBook" layoutX="254.0" layoutY="8.0" mnemonicParsing="false" onAction="#searchborrowkButton" styleClass="minus" stylesheets="@../../../dashboarddesign.css">
