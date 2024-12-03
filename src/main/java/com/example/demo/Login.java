@@ -68,7 +68,7 @@ public class Login implements Initializable {
         DatabaseConnection connecnow = new DatabaseConnection();
         Connection connectiBD = connecnow.getConnection();
 
-        String verifylogin = "SELECT * FROM users WHERE username = ? AND password = ?";
+        String verifylogin = "SELECT * FROM admin WHERE username = ? AND password = ?";
 
         try (PreparedStatement preparedStatement = connectiBD.prepareStatement(verifylogin)) {
             preparedStatement.setString(1, usernametextfield.getText());
@@ -80,11 +80,10 @@ public class Login implements Initializable {
                 String Hoten = resultSet.getString("Hoten");
                 String username = resultSet.getString("username");
                 String password = resultSet.getString("password");
-                String sodt = resultSet.getString("sodt");
+                String sodt = resultSet.getString("sdt");
                 String CCCD = resultSet.getString("CCCD");
-                String Diachi = resultSet.getString("Diachi");
-                User usermain = new User(ID, Hoten, username, password, sodt, CCCD, Diachi);
-                User.setCurrentUser(usermain);
+                Admin Admin = new Admin(ID, Hoten, sodt, CCCD, username, password );
+                Admin.setCurrentadmin(Admin);
                 Home();
             } else {
                 loginMessagelabel.setText("Invalid login. Please try again!");

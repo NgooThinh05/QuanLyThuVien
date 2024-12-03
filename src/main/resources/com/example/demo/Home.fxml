@@ -344,8 +344,8 @@
                                 <columns>
                                   <TableColumn fx:id="stt" prefWidth="50.0" text="STT" />
                                   <TableColumn fx:id="hoten" prefWidth="220.0" text="FullName" />
-                                    <TableColumn fx:id="tk" prefWidth="100.0" text="Username" />
-                                    <TableColumn fx:id="mk" prefWidth="100.0" text="Password" />
+                                    <TableColumn fx:id="gt" prefWidth="100.0" text="Gender" />
+                                    <TableColumn fx:id="birthday" prefWidth="100.0" text="Birth" />
                                     <TableColumn fx:id="sdt" prefWidth="120.0" text="Numberphone" />
                                     <TableColumn fx:id="cccd" prefWidth="100.0" text="CCCD" />
                                     <TableColumn fx:id="diachi" prefWidth="230.0" text="Address" />

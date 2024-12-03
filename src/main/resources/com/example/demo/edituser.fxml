@@ -9,7 +9,6 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Edituser">
    <children>
       <TextField fx:id="editHoten" layoutX="51.0" layoutY="92.0" prefHeight="26.0" prefWidth="286.0" promptText="Hoten" />
-      <TextField fx:id="editusername" layoutX="51.0" layoutY="222.0" prefHeight="26.0" prefWidth="182.0" promptText="username" />
       <TextField fx:id="editsdt" layoutX="358.0" layoutY="160.0" prefHeight="26.0" prefWidth="182.0" promptText="sdt" />
       <TextField fx:id="editaddress" layoutX="51.0" layoutY="284.0" prefHeight="26.0" prefWidth="490.0" promptText="Diachi" />
       <Label layoutX="251.0" layoutY="14.0" prefHeight="34.0" prefWidth="98.0" text="Edit User">
@@ -18,7 +17,6 @@
          </font>
       </Label>
       <Button fx:id="accept" layoutX="121.0" layoutY="342.0" mnemonicParsing="false" onAction="#onAccept" prefHeight="26.0" prefWidth="81.0" styleClass="chitiet" stylesheets="@../../../book.css" text="Edit" />
-      <TextField fx:id="editpassword" layoutX="358.0" layoutY="222.0" prefHeight="26.0" prefWidth="182.0" />
       <Label layoutX="51.0" layoutY="67.0" prefHeight="18.0" prefWidth="118.0" text="Fullname:">
          <font>
             <Font size="14.0" />
@@ -26,10 +24,12 @@
       </Label>
       <Label layoutX="51.0" layoutY="135.0" text="CCCD: " />
       <Label layoutX="358.0" layoutY="135.0" text="NumberPhone: " />
-      <Label layoutX="51.0" layoutY="200.0" text="Username:" />
-      <Label layoutX="358.0" layoutY="200.0" prefHeight="18.0" prefWidth="83.0" text="Password:" />
+      <Label layoutX="51.0" layoutY="200.0" text="Gender" />
+      <Label layoutX="358.0" layoutY="200.0" prefHeight="18.0" prefWidth="83.0" text="Birth" />
       <Label layoutX="55.0" layoutY="260.0" text="Address: " />
       <Label fx:id="editcccd" layoutX="51.0" layoutY="160.0" prefHeight="26.0" prefWidth="182.0" />
       <Button fx:id="accept1" layoutX="400.0" layoutY="342.0" mnemonicParsing="false" onAction="#onAcceptdele" prefHeight="26.0" prefWidth="81.0" styleClass="chitiet" stylesheets="@../../../book.css" text="Delete" />
+      <Label fx:id="gt" layoutX="55.0" layoutY="222.0" prefHeight="26.0" prefWidth="82.0" />
+      <Label fx:id="birth" layoutX="358.0" layoutY="222.0" prefHeight="26.0" prefWidth="182.0" />
    </children>
 </AnchorPane>

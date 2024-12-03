@@ -1,8 +1,10 @@
 package com.example.demo;
 
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -38,8 +40,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-import static com.example.demo.User.getCurrentUser;
+import static com.example.demo.Admin.getCurrentadmin;
+
 
 public class Home implements Initializable {
 
@@ -189,9 +194,9 @@ public class Home implements Initializable {
     @FXML
     private TableColumn<User, String> hoten;
     @FXML
-    private TableColumn<User, String> tk;
+    private TableColumn<User, String> gt;
     @FXML
-    private TableColumn<User, String> mk;
+    private TableColumn<User, String> birthday;
     @FXML
     private TableColumn<User, String> sdt;
     @FXML
@@ -227,66 +232,62 @@ public class Home implements Initializable {
     private List<Book> recommendbooks;
     private List<AnchorPane> panes;
 
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        ExecutorService executorService = Executors.newFixedThreadPool(4);
+        initializeImages();
+        Name();
+        panes = List.of(DashBoardForm, AddBookForm, borrow, returnbook, delete, user);
+        executorService.submit(createTask(this::dashbordresult));
+        executorService.submit(createTask(this::UserMN));
+        executorService.submit(createTask(this::DSdeletebook));
+        executorService.submit(createTask(this::recommendbookborrow));
+        executorService.submit(createTask(this::DSborrow));
+        executorService.shutdown();
+    }
+
+    private void initializeImages() {
         File brandingFile = new File("image/avatar.jpg");
-        Image brandingImage = new Image(brandingFile.toURI().toString());
-        Avatar.setImage(brandingImage);
+        Avatar.setImage(new Image(brandingFile.toURI().toString()));
 
         File brandingFile1 = new File("image/log-out.png");
-        Image brandingImage1 = new Image(brandingFile1.toURI().toString());
-        SignOutImage.setImage(brandingImage1);
+        SignOutImage.setImage(new Image(brandingFile1.toURI().toString()));
 
         File brandingFile2 = new File("image/kinhlup.png");
-        Image brandingImage2 = new Image(brandingFile2.toURI().toString());
-        search.setImage(brandingImage2);
-        searchaddimage.setImage(brandingImage2);
-        search1.setImage(brandingImage2);
-        search2.setImage(brandingImage2);
-        search4.setImage(brandingImage2);
-        search5.setImage(brandingImage2);
+        Image searchImage = new Image(brandingFile2.toURI().toString());
+        search.setImage(searchImage);
+        searchaddimage.setImage(searchImage);
+        search1.setImage(searchImage);
+        search2.setImage(searchImage);
+        search4.setImage(searchImage);
+        search5.setImage(searchImage);
 
         File brandingFile3 = new File("image/reset.png");
-        Image brandingImage3 = new Image(brandingFile3.toURI().toString());
-        reset.setImage(brandingImage3);
-        reset1.setImage(brandingImage3);
-        reset2.setImage(brandingImage3);
+        Image resetImage = new Image(brandingFile3.toURI().toString());
+        reset.setImage(resetImage);
+        reset1.setImage(resetImage);
+        reset2.setImage(resetImage);
+    }
 
+    private Task<Void> createTask(Runnable taskAction) {
+        return new Task<>() {
+            @Override
+            protected Void call() {
+                taskAction.run();
+                return null;
+            }
 
-        Name();
-
-        panes = List.of(DashBoardForm, AddBookForm, borrow, returnbook, delete, user);
-
-        try {
-            dashbordresult();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
-            UserMN();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
-            DSdeletebook();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
-            recommendbookborrow();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
-            DSborrow();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
+            @Override
+            protected void failed() {
+                Platform.runLater(() -> {
+                    Throwable e = getException();
+                    e.printStackTrace();
+                    showAlert(Alert.AlertType.ERROR, "Error", "Failed to complete task: " + e.getMessage());
+                });
+            }
+        };
     }
 
     public void switchForm(ActionEvent event) {
@@ -332,8 +333,8 @@ public class Home implements Initializable {
     }
 
     public void Name() {
-        User currentUser = getCurrentUser();
-        hello.setText("Hello, " + currentUser.getHoten());
+        Admin currentAdmin = getCurrentadmin();
+        hello.setText("Hello, " + currentAdmin.getHoten());
     }
 
     public void SignOut() {
@@ -467,33 +468,38 @@ public class Home implements Initializable {
         displayBooks(education, educationbooks, "book.fxml");
     }
 
-    private void dashbordresult() throws SQLException {
-        List<Book> newbooks  = DatabaseConnection.searchBookDataNew();
-        List<Book> shortstorybook = DatabaseConnection.searchbookdata("Comics");
-        List<Book> educationbook = DatabaseConnection.searchbookdata("Education");
-        setdashboardbook(newbooks, shortstorybook, educationbook );
+
+    private void dashbordresult() {
+        try {
+            List<Book> newBooks = DatabaseConnection.searchBookDataNew();
+            List<Book> shortStoryBook = DatabaseConnection.searchbookdata("Comics");
+            List<Book> educationBook = DatabaseConnection.searchbookdata("Education");
+            Platform.runLater(() -> setdashboardbook(newBooks, shortStoryBook, educationBook));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void initializeTableView(TableView<User> tableView,
                                     TableColumn<User, String> stt,
                                     TableColumn<User, String> hoten,
-                                    TableColumn<User, String> tk,
-                                    TableColumn<User, String> mk,
+                                    TableColumn<User, String> gt,
+                                    TableColumn<User, String> birthday,
                                     TableColumn<User, String> sdt,
                                     TableColumn<User, String> cccd,
                                     TableColumn<User, String> diachi,
                                     List<User> users) {
         stt.setCellValueFactory(new PropertyValueFactory<>("ID"));
         hoten.setCellValueFactory(new PropertyValueFactory<>("Hoten"));
-        tk.setCellValueFactory(new PropertyValueFactory<>("username"));
-        mk.setCellValueFactory(new PropertyValueFactory<>("password"));
+        gt.setCellValueFactory(new PropertyValueFactory<>("gt"));
+        birthday.setCellValueFactory(new PropertyValueFactory<>("Birthday"));
         sdt.setCellValueFactory(new PropertyValueFactory<>("sodt"));
         cccd.setCellValueFactory(new PropertyValueFactory<>("CCCD"));
         diachi.setCellValueFactory(new PropertyValueFactory<>("DiaChi"));
         ObservableList<User> observableUsers = FXCollections.observableArrayList(users);
         tableView.setItems(observableUsers);
         tableView.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2) { // Double-click
+            if (event.getClickCount() == 2) {
                 User selectedUser = tableView.getSelectionModel().getSelectedItem();
                 if (selectedUser != null) {
                     try {
@@ -512,15 +518,20 @@ public class Home implements Initializable {
         });
     }
 
-    private void UserMN() throws SQLException {
-        List<User> users = DatabaseConnection.Listusers();
-        initializeTableView(dsuser, stt, hoten, tk, mk, sdt, cccd, diachi, users );
+
+    private void UserMN() {
+        try {
+            List<User> users = DatabaseConnection.Listusers();
+            Platform.runLater(() -> initializeTableView(dsuser, stt, hoten, gt, birthday, sdt, cccd, diachi, users));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
     void buttonsearchusers(ActionEvent event) throws IOException, GeneralSecurityException, SQLException {
         List<User> users = DatabaseConnection.searchUsers(textsearchuser.getText());
-        initializeTableView(dsuser, stt, hoten, tk, mk, sdt, cccd, diachi, users );
+        initializeTableView(dsuser, stt, hoten, gt, birthday, sdt, cccd, diachi, users );
     }
 
     private void setDelete(List<Book> deletebooks) {
@@ -528,9 +539,14 @@ public class Home implements Initializable {
         displayBooks(deletebook, deletebooks, "coverbookdelete.fxml");
     }
 
-    private void DSdeletebook() throws SQLException {
-        List<Book> deletebooks = DatabaseConnection.BookData();
-        setDelete(deletebooks);
+
+    private void DSdeletebook() {
+        try {
+            List<Book> books = DatabaseConnection.BookData();
+            Platform.runLater(() -> setDelete(books));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
@@ -551,9 +567,14 @@ public class Home implements Initializable {
         displayBooks(recommendgrid, recommendbooks, "coverbookborrow.fxml" );
     }
 
-    private void recommendbookborrow() throws SQLException {
-        List<Book> recommendbooks = DatabaseConnection.BookData();
-        setrecommend(recommendbooks);
+
+    private void recommendbookborrow() {
+        try {
+            List<Book> recommendBooks = DatabaseConnection.BookData();
+            Platform.runLater(() -> setrecommend(recommendBooks));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
@@ -588,7 +609,7 @@ public class Home implements Initializable {
         ObservableList<Borrow> observableborrows = FXCollections.observableArrayList(borrows);
         tableView.setItems(observableborrows);
         tableView.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2) { // Double-click
+            if (event.getClickCount() == 2) {
                 Borrow selectedBorrow = tableView.getSelectionModel().getSelectedItem();
                 if (selectedBorrow != null) {
                     try {
@@ -608,9 +629,14 @@ public class Home implements Initializable {
 
     }
 
-    private void DSborrow() throws SQLException {
-        List<Borrow> borrows = DatabaseConnection.Listborrows();
-        initializeTableViewborrow(DSborrow , stt1, ISBN, sl1, dateborrow, datereturn, cccd1, status, borrows );
+
+    private void DSborrow() {
+        try {
+            List<Borrow> borrows = DatabaseConnection.Listborrows();
+            Platform.runLater(() -> initializeTableViewborrow(DSborrow, stt1, ISBN, sl1, dateborrow, datereturn, cccd1, status, borrows));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
@@ -634,29 +660,17 @@ public class Home implements Initializable {
 
     @FXML
     void buttonresetuser(ActionEvent event) throws IOException, GeneralSecurityException, SQLException {
-        try {
-            UserMN();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        UserMN();
     }
 
     @FXML
     void buttonresetbook(ActionEvent event) throws IOException, GeneralSecurityException, SQLException {
-        try {
-            DSdeletebook();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        DSdeletebook();
     }
 
     @FXML
     void buttonresetreturn(ActionEvent event) throws IOException, GeneralSecurityException, SQLException {
-        try {
-            DSborrow();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        DSborrow();
     }
 }
 
