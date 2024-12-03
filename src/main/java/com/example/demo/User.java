@@ -1,7 +1,9 @@
 package com.example.demo;
 
 public class User {
-    private String ID;
+    private static User currentUser;
+
+    private int ID;
     private String Hoten;
     private String username;
     private String password;
@@ -10,7 +12,7 @@ public class User {
     private String DiaChi;
 
 
-    public User (String ID, String Hoten, String username, String password, String sodt, String CCCD, String DiaChi) {
+    public User (int ID, String Hoten, String username, String password, String sodt, String CCCD, String DiaChi) {
         this.ID = ID;
         this.Hoten = Hoten;
         this.username = username;
@@ -20,7 +22,16 @@ public class User {
         this.DiaChi = DiaChi;
     }
 
-    public String getID() {
+    public User () {
+        this.Hoten = Hoten;
+        this.username = username;
+        this.password = password;
+        this.sodt = sodt;
+        this.CCCD = CCCD;
+        this.DiaChi = DiaChi;
+    }
+
+    public int getID() {
         return ID;
     }
 
@@ -71,4 +82,14 @@ public class User {
     public void setDiaChi(String diaChi) {
         DiaChi = diaChi;
     }
+
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
+    public static void setCurrentUser(User user) {
+        currentUser = user;
+    }
+
+
 }

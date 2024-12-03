@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -12,7 +11,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -110,11 +108,11 @@
                         </VBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="dashboard1" layoutX="25.0" layoutY="80.0" prefHeight="570.0" prefWidth="950.0">
+                  <AnchorPane fx:id="dashboard1" layoutX="13.0" layoutY="85.0" prefHeight="566.0" prefWidth="950.0">
                      <children>
-                        <ScrollPane prefHeight="570.0" prefWidth="950.0">
+                        <ScrollPane prefHeight="566.0" prefWidth="954.0">
                            <content>
-                              <VBox prefHeight="570.0" prefWidth="950.0">
+                              <VBox prefHeight="566.0" prefWidth="950.0">
                                  <children>
                                     <Label prefHeight="30.0" prefWidth="297.0" text="New Book" textFill="#cf1616">
                                        <font>
@@ -144,110 +142,44 @@
             </AnchorPane>
             <AnchorPane fx:id="AddBookForm" layoutY="60.0" prefHeight="660.0" prefWidth="1000.0" visible="false">
                <children>
-                  <AnchorPane layoutX="500.0" prefHeight="660.0" prefWidth="500.0" styleClass="bgr-while" stylesheets="@../../../dashboarddesign.css">
+                  <Label layoutX="469.0" layoutY="20.0" prefHeight="42.0" prefWidth="100.0" text="Add Book">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <AnchorPane layoutX="534.0" layoutY="131.0" prefHeight="526.0" prefWidth="466.0" styleClass="bgr-while" stylesheets="@../../../dashboarddesign.css">
                      <children>
-                        <TextField fx:id="searchadd" layoutX="75.0" layoutY="14.0" prefHeight="30.0" prefWidth="350.0" />
-                        <Button fx:id="searchaddbutton" layoutX="30.0" layoutY="10.0" mnemonicParsing="false" onAction="#searchaddbookButton" styleClass="minus" stylesheets="@../../../dashboarddesign.css">
+                        <TextField fx:id="searchadd" layoutX="84.0" layoutY="14.0" prefHeight="26.0" prefWidth="353.0" />
+                        <Button fx:id="searchaddbutton" layoutX="30.0" layoutY="7.0" mnemonicParsing="false" onAction="#searchaddbookButton" styleClass="minus" stylesheets="@../../../dashboarddesign.css">
                            <graphic>
-                              <ImageView fx:id="searchaddimage" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="searchaddimage" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../../../../../image/kinhlup.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </Button>
-                        <ScrollPane layoutX="25.0" layoutY="75.0" prefHeight="560.0" prefWidth="450.0">
+                        <ScrollPane layoutX="30.0" layoutY="73.0" prefHeight="438.0" prefWidth="414.0">
                            <content>
                               <GridPane fx:id="bookaddapi" prefWidth="410.0" />
                            </content>
                         </ScrollPane>
                      </children>
                   </AnchorPane>
-                  <VBox layoutY="155.0" prefHeight="350.0" prefWidth="500.0">
-                     <children>
-                        <TextField fx:id="addtitle" prefHeight="30.0" prefWidth="400.0" promptText="Title">
-                           <VBox.margin>
-                              <Insets left="50.0" right="50.0" />
-                           </VBox.margin>
-                        </TextField>
-                        <HBox prefHeight="30.0" prefWidth="500.0">
-                           <children>
-                              <TextField fx:id="addISBN" prefHeight="30.0" prefWidth="170.0" promptText="ISBN">
-                                 <HBox.margin>
-                                    <Insets left="50.0" />
-                                 </HBox.margin>
-                              </TextField>
-                              <TextField fx:id="addauthor" prefHeight="30.0" prefWidth="170.0" promptText="Author">
-                                 <HBox.margin>
-                                    <Insets left="60.0" />
-                                 </HBox.margin>
-                              </TextField>
-                           </children>
-                           <VBox.margin>
-                              <Insets top="30.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <HBox prefHeight="30.0" prefWidth="500.0">
-                           <children>
-                              <TextField fx:id="addnxb" prefHeight="30.0" prefWidth="170.0" promptText="Publisher">
-                                 <HBox.margin>
-                                    <Insets left="50.0" />
-                                 </HBox.margin>
-                              </TextField>
-                              <TextField fx:id="addtheloai" prefHeight="30.0" prefWidth="170.0" promptText="category">
-                                 <HBox.margin>
-                                    <Insets left="60.0" />
-                                 </HBox.margin>
-                              </TextField>
-                           </children>
-                           <VBox.margin>
-                              <Insets top="30.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <HBox prefHeight="30.0" prefWidth="500.0">
-                           <children>
-                              <TextField fx:id="linkimage" prefHeight="30.0" prefWidth="170.0" promptText="linkImage">
-                                 <HBox.margin>
-                                    <Insets left="50.0" />
-                                 </HBox.margin>
-                              </TextField>
-                              <TextField fx:id="linkreview" prefHeight="30.0" prefWidth="170.0" promptText="linkreview">
-                                 <HBox.margin>
-                                    <Insets left="60.0" />
-                                 </HBox.margin>
-                              </TextField>
-                           </children>
-                           <VBox.margin>
-                              <Insets top="30.0" />
-                           </VBox.margin>
-                        </HBox>
-                        <TextField fx:id="addmota" prefHeight="30.0" prefWidth="400.0" promptText="describe">
-                           <VBox.margin>
-                              <Insets left="50.0" right="50.0" top="30.0" />
-                           </VBox.margin>
-                        </TextField>
-                        <HBox prefHeight="30.0" prefWidth="500.0">
-                           <children>
-                              <TextField fx:id="addsl" prefHeight="30.0" prefWidth="160.0" promptText="quantity">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets left="50.0" />
-                                 </HBox.margin>
-                              </TextField>
-                              <Button fx:id="acceptbutton" mnemonicParsing="false" onAction="#acceptbutton" prefHeight="30.0" prefWidth="83.0" styleClass="chitiet" stylesheets="@../../../book.css" text="Accept">
-                                 <HBox.margin>
-                                    <Insets left="110.0" />
-                                 </HBox.margin>
-                              </Button>
-                           </children>
-                           <VBox.margin>
-                              <Insets top="30.0" />
-                           </VBox.margin>
-                        </HBox>
-                     </children>
-                  </VBox>
+                  <TextField fx:id="addsl" layoutX="88.0" layoutY="496.0" prefHeight="26.0" prefWidth="162.0" promptText="quantity">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </TextField>
+                  <Button fx:id="acceptbutton" layoutX="361.0" layoutY="496.0" mnemonicParsing="false" onAction="#acceptbutton" prefHeight="30.0" prefWidth="83.0" styleClass="chitiet" stylesheets="@../../../book.css" text="Accept" />
+                  <TextField fx:id="addISBN" layoutX="87.0" layoutY="206.0" prefHeight="26.0" prefWidth="165.0" promptText="ISBN" />
+                  <TextField fx:id="addauthor" layoutX="309.0" layoutY="206.0" prefHeight="26.0" prefWidth="164.0" promptText="Author" />
+                  <TextField fx:id="addtitle" layoutX="84.0" layoutY="146.0" prefHeight="30.0" prefWidth="388.0" promptText="Title" />
+                  <TextField fx:id="addnxb" layoutX="87.0" layoutY="268.0" prefHeight="26.0" prefWidth="166.0" promptText="Publisher" />
+                  <TextField fx:id="addtheloai" layoutX="314.0" layoutY="270.0" prefHeight="26.0" prefWidth="159.0" promptText="category" />
+                  <TextField fx:id="linkimage" layoutX="84.0" layoutY="340.0" prefHeight="30.0" prefWidth="170.0" promptText="linkImage" />
+                  <TextField fx:id="linkreview" layoutX="311.0" layoutY="340.0" prefHeight="30.0" prefWidth="162.0" promptText="linkreview" />
+                  <TextField fx:id="addmota" layoutX="84.0" layoutY="405.0" prefHeight="32.0" prefWidth="390.0" promptText="describe" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="borrow" layoutY="60.0" prefHeight="660.0" prefWidth="1000.0" visible="false">

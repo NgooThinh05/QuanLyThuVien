@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -17,16 +16,16 @@
    <content>
       <AnchorPane fx:id="anchorpane1" prefHeight="395.0" prefWidth="598.0">
          <children>
-            <VBox prefHeight="240.0" prefWidth="575.0">
+            <VBox layoutX="14.0" layoutY="8.0" prefHeight="279.0" prefWidth="574.0">
                <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox prefHeight="100.0" prefWidth="210.0">
                      <children>
-                        <ImageView fx:id="imagebook1" fitHeight="140.0" fitWidth="169.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imagebook1" fitHeight="93.0" fitWidth="138.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../Image/logo.png" />
                            </image>
                         </ImageView>
-                        <VBox prefHeight="156.0" prefWidth="386.0">
+                        <VBox prefHeight="170.0" prefWidth="386.0">
                            <children>
                               <Text fx:id="title1" strokeType="OUTSIDE" strokeWidth="0.0" text="Title" wrappingWidth="370.13665771484375">
                                  <font>
@@ -57,21 +56,16 @@
                                     <Text fx:id="nxb1" strokeType="OUTSIDE" strokeWidth="0.0" text="NXB" wrappingWidth="320.53663635253906" />
                                  </children>
                               </HBox>
-                              <HBox prefHeight="27.0" prefWidth="386.0">
-                                 <children>
-                                    <TextField fx:id="sl" prefHeight="26.0" prefWidth="48.0" promptText="SL" />
-                                 </children>
-                              </HBox>
                            </children>
                         </VBox>
                      </children>
                   </HBox>
-                  <VBox prefHeight="78.0" prefWidth="576.0">
+                  <VBox prefHeight="78.0" prefWidth="451.0">
                      <children>
                         <Text fx:id="linkimage" strokeType="OUTSIDE" strokeWidth="0.0" text="linkimage" wrappingWidth="559.7367706298828" />
                         <Text fx:id="linkreview" strokeType="OUTSIDE" strokeWidth="0.0" text="linkreview" wrappingWidth="566.1369171142578" />
                         <Text fx:id="describe1" strokeType="OUTSIDE" strokeWidth="0.0" text="MoTa" wrappingWidth="573.3992309570312" />
-                        <Button fx:id="buttonaccept" mnemonicParsing="false" onAction="#buttonaccept" styleClass="chitiet" stylesheets="@../../../book.css" text="Accept" textAlignment="CENTER">
+                        <Button fx:id="buttonacceptdele" mnemonicParsing="false" onAction="#buttondeleaccept" styleClass="chitiet" stylesheets="@../../../book.css" text="Accept" textAlignment="CENTER">
                            <VBox.margin>
                               <Insets left="250.0" />
                            </VBox.margin>
