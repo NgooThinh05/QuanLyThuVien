@@ -22,17 +22,16 @@
                         <Font size="28.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="usernameTextField" layoutX="73.0" layoutY="261.0" prefHeight="26.0" prefWidth="204.0" promptText="username" />
+                  <TextField fx:id="usernameTextField" layoutX="73.0" layoutY="226.0" prefHeight="26.0" prefWidth="204.0" promptText="username" />
                   <Button fx:id="signupbutton" layoutX="72.0" layoutY="386.0" mnemonicParsing="false" onAction="#SignupButtonAction" prefHeight="26.0" prefWidth="205.0" text="Sign up" textAlignment="CENTER" />
                   <Button fx:id="closebutton" layoutX="71.0" layoutY="420.0" mnemonicParsing="false" onAction="#closeButton" prefHeight="26.0" prefWidth="208.0" text="close" />
-                  <PasswordField fx:id="comfirmpasswordfield" layoutX="73.0" layoutY="329.0" prefHeight="26.0" prefWidth="204.0" promptText="confirm password" />
-                  <PasswordField fx:id="setpasswordfield" layoutX="73.0" layoutY="296.0" prefHeight="26.0" prefWidth="204.0" promptText="password" />
+                  <PasswordField fx:id="comfirmpasswordfield" layoutX="72.0" layoutY="303.0" prefHeight="26.0" prefWidth="204.0" promptText="confirm password" />
+                  <PasswordField fx:id="setpasswordfield" layoutX="73.0" layoutY="266.0" prefHeight="26.0" prefWidth="204.0" promptText="password" />
                   <Label fx:id="signupmessage" layoutX="78.0" layoutY="367.0" prefHeight="18.0" prefWidth="193.0" textAlignment="CENTER" textFill="WHITE" />
                   <TextField fx:id="HoTen" layoutX="72.0" layoutY="113.0" prefHeight="26.0" prefWidth="204.0" promptText="HoTen" />
                   <TextField fx:id="MSV" layoutX="73.0" layoutY="151.0" prefHeight="26.0" prefWidth="202.0" promptText="CCCD" />
                   <TextField fx:id="sodt" layoutX="73.0" layoutY="188.0" prefHeight="26.0" prefWidth="202.0" promptText="sodt" />
-                  <TextField fx:id="diachi" layoutX="73.0" layoutY="226.0" prefHeight="26.0" prefWidth="204.0" promptText="DiaChi" />
-                  <Label fx:id="signupmessage" layoutX="75.0" layoutY="358.0" prefHeight="24.0" prefWidth="200.0" />
+                  <Label fx:id="signupmessage" layoutX="75.0" layoutY="343.0" prefHeight="24.0" prefWidth="200.0" />
                </children>
             </AnchorPane>
          </children>

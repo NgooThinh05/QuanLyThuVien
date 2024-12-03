@@ -39,7 +39,6 @@ public class ApiBook {
                 String category = volumeInfo.getCategories() != null ? volumeInfo.getCategories().get(0) : "Unknown";
                 String description = volumeInfo.getDescription() != null ? volumeInfo.getDescription() : "No description available";
                 String publisher = volumeInfo.getPublisher() != null ? volumeInfo.getPublisher() : "Unknown";
-                String bookPath  = null;
                 String image = volumeInfo.getImageLinks() != null ? volumeInfo.getImageLinks().getThumbnail() : null;
                 String review = volumeInfo.getPreviewLink() != null ? volumeInfo.getPreviewLink() : "Unknown";
 

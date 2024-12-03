@@ -9,9 +9,6 @@ public class DatabaseConnection {
 
     public static Connection getConnection() throws SQLException {
         Connection connection = DriverManager.getConnection(DATABASE_URL);
-        try (Statement stmt = connection.createStatement()) {
-            stmt.execute("PRAGMA busy_timeout = 5000;");
-        }
         return connection;
     }
 
@@ -104,7 +101,7 @@ public class DatabaseConnection {
 
     public static List<Book> BookData() throws SQLException {
         List<Book> books = new ArrayList<>();
-        String query = "SELECT * FROM book ORDER BY stt LIMIT 30";
+        String query = "SELECT * FROM book ORDER BY stt LIMIT 15";
         try (
                 Connection connection = getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)
@@ -142,12 +139,12 @@ public class DatabaseConnection {
             while (resultSet.next()) {
                 int ID = resultSet.getInt("ID");
                 String Hoten = resultSet.getString("Hoten");
-                String username = resultSet.getString("username");
-                String password = resultSet.getString("password");
+                String gt = resultSet.getString("gt");
+                String birthday = resultSet.getString("birthday");
                 String sodt = resultSet.getString("sodt");
                 String CCCD = resultSet.getString("CCCD");
                 String Diachi = resultSet.getString("DiaChi");
-                User user = new User(ID, Hoten, username, password, sodt, CCCD, Diachi);
+                User user = new User(ID, Hoten, gt, birthday, sodt, CCCD, Diachi);
                 users.add(user);
             }
         }
@@ -234,13 +231,13 @@ public class DatabaseConnection {
                 while (resultSet.next()) {
                     int ID = resultSet.getInt("ID");
                     String Hoten = resultSet.getString("Hoten");
-                    String username = resultSet.getString("username");
-                    String password = resultSet.getString("password");
+                    String gt = resultSet.getString("gt");
+                    String birthday = resultSet.getString("birthday");
                     String sodt = resultSet.getString("sodt");
                     String CCCD = resultSet.getString("CCCD");
                     String Diachi = resultSet.getString("DiaChi");
 
-                    User user = new User(ID, Hoten, username, password, sodt, CCCD, Diachi);
+                    User user = new User(ID, Hoten, gt, birthday, sodt, CCCD, Diachi);
                     users.add(user);
                 }
             }
@@ -252,12 +249,12 @@ public class DatabaseConnection {
 
 
     public static void updateDatabase(User user) throws SQLException {
-        String sql = "UPDATE users SET hoten = ?, username = ?, password = ?, sodt = ?, cccd = ?, diachi = ? WHERE id = ?";
+        String sql = "UPDATE users SET hoten = ?, GT = ?, Birthday = ?, sodt = ?, cccd = ?, diachi = ? WHERE id = ?";
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, user.getHoten());
-            stmt.setString(2, user.getUsername());
-            stmt.setString(3, user.getPassword());
+            stmt.setString(2, user.getGt());
+            stmt.setString(3, user.getBirthday());
             stmt.setString(4, user.getSodt());
             stmt.setString(5, user.getCCCD());
             stmt.setString(6, user.getDiaChi());
@@ -271,12 +268,12 @@ public class DatabaseConnection {
     }
 
     public static void adduser(User user) throws SQLException {
-        String insertQuery = "INSERT INTO users (HoTen, username, password, sodt, CCCD, Diachi) VALUES (?, ?, ?, ?, ?, ?)";
+        String insertQuery = "INSERT INTO users (HoTen, GT, Birthday, sodt, CCCD, Diachi) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(insertQuery)) {
             stmt.setString(1, user.getHoten());
-            stmt.setString(2, user.getUsername());
-            stmt.setString(3, user.getPassword());
+            stmt.setString(2, user.getGt());
+            stmt.setString(3, user.getBirthday());
             stmt.setString(4, user.getSodt());
             stmt.setString(5, user.getCCCD());
             stmt.setString(6, user.getDiaChi());
@@ -300,7 +297,7 @@ public class DatabaseConnection {
                 System.out.println("Không tìm thấy người dùng với username: " + CCCD);
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // Hiển thị lỗi nếu xảy ra
+            e.printStackTrace();
         } finally {
             getConnection().close();
         }

@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import static com.example.demo.User.getCurrentUser;
+
 
 public class Addbookapi {
     private Book book;
@@ -139,10 +139,6 @@ public class Addbookapi {
         try {
             Borrow borrow = new Borrow();
             String isbnValue = isbn.getText();
-            if (isbnValue == null || isbnValue.isEmpty()) {
-                showAlert(Alert.AlertType.WARNING, "Input Error", "ISBN cannot be empty!");
-                return;
-            }
             borrow.setISBN(isbnValue);
 
             int soluong;
@@ -152,11 +148,6 @@ public class Addbookapi {
                     showAlert(Alert.AlertType.WARNING, "Input Error", "Quantity must be greater than 0!");
                     return;
                 }
-                if (book.getSoluong() - soluong < 0) {
-                    showAlert(Alert.AlertType.WARNING, "Input Error", "Quantity must be less than 0!");
-                } else {
-                    book.setSoluong(book.getSoluong() - soluong);
-                };
             } catch (NumberFormatException e) {
                 showAlert(Alert.AlertType.ERROR, "Input Error", "Invalid quantity! Please enter a valid number.");
                 return;
