@@ -8,8 +8,9 @@ public class Borrow {
     private String datereturned;
     private String CCCD;
     private String status;
+    private String title;
 
-    public Borrow(String id,String ISBN,int sl,String dateborrowed,String datereturned,String CCCD,String status ) {
+    public Borrow(String id,String ISBN,int sl,String dateborrowed,String datereturned,String CCCD,String status, String title ) {
         this.id = id;
         this.ISBN = ISBN;
         this.sl = sl;
@@ -17,6 +18,7 @@ public class Borrow {
         this.datereturned = datereturned;
         this.CCCD = CCCD;
         this.status = status;
+        this.title = title;
     }
 
     public Borrow() {
@@ -26,6 +28,7 @@ public class Borrow {
         this.datereturned = datereturned;
         this.CCCD = CCCD;
         this.status = status;
+        this.title = title;
     }
 
     public String getId() {
@@ -82,5 +85,13 @@ public class Borrow {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

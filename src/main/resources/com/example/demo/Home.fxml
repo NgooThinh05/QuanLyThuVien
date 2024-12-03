@@ -138,6 +138,15 @@
                         </ScrollPane>
                      </children>
                   </AnchorPane>
+                  <Button layoutX="888.0" layoutY="33.0" mnemonicParsing="false" onAction="#buttonresetdashboard" styleClass="minus" stylesheets="@../../../dashboarddesign.css">
+                     <graphic>
+                        <ImageView fx:id="resetdashboard" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../image/reset.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="AddBookForm" layoutY="57.0" prefHeight="662.0" prefWidth="1037.0" visible="false">
@@ -234,6 +243,15 @@
                         </AnchorPane>
                      </children>
                   </AnchorPane>
+                  <Button layoutX="898.0" layoutY="43.0" mnemonicParsing="false" onAction="#buttonresetborrow" styleClass="minus" stylesheets="@../../../dashboarddesign.css">
+                     <graphic>
+                        <ImageView fx:id="resetborrow" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../image/reset.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="returnbook" layoutX="24.0" layoutY="58.0" prefHeight="666.0" prefWidth="988.0" style="-fx-background-color: #f2f4f6;" stylesheets="@../../../dashboarddesign.css" visible="false">
@@ -244,12 +262,13 @@
                         <TableView fx:id="DSborrow" prefHeight="542.0" prefWidth="878.0">
                           <columns>
                             <TableColumn fx:id="stt1" prefWidth="51.20002061128616" text="ID" />
-                            <TableColumn fx:id="ISBN" prefWidth="118.40002059936523" text="ISBN" />
-                              <TableColumn fx:id="cccd1" prefWidth="160.00001525878906" text="CCCD" />
-                              <TableColumn fx:id="dateborrow" prefWidth="166.40005493164062" text="Dateborrow" />
-                              <TableColumn fx:id="datereturn" prefWidth="171.20001220703125" text="DateReturn" />
-                              <TableColumn fx:id="sl1" prefWidth="60.800048828125" text="SL" />
-                              <TableColumn fx:id="status" prefWidth="136.00006103515625" text="Status" />
+                            <TableColumn fx:id="ISBN" prefWidth="105.60000228881836" text="ISBN" />
+                              <TableColumn fx:id="title" prefWidth="132.7999725341797" text="Title" />
+                              <TableColumn fx:id="cccd1" prefWidth="93.60003662109375" text="CCCD" />
+                              <TableColumn fx:id="dateborrow" prefWidth="162.39999389648438" text="Dateborrow" />
+                              <TableColumn fx:id="datereturn" prefWidth="128.0" text="DateReturn" />
+                              <TableColumn fx:id="sl1" prefWidth="74.39990234375" text="SL" />
+                              <TableColumn fx:id="status" prefWidth="119.9998779296875" text="Status" />
                           </columns>
                         </TableView>
                      </content>

@@ -38,8 +38,7 @@ public class signup implements Initializable {
     private TextField HoTen;
     @FXML
     private TextField sodt;
-    @FXML
-    private TextField diachi;
+
 
 
 
@@ -56,8 +55,7 @@ public class signup implements Initializable {
                 setpasswordfield.getText().isBlank() ||
                 HoTen.getText().isBlank() ||
                 sodt.getText().isBlank() ||
-                MSV.getText().isBlank() ||
-                diachi.getText().isBlank()) {
+                MSV.getText().isBlank() ) {
             signupmessage.setText("All fields are required!");
             return;
         }
@@ -76,12 +74,11 @@ public class signup implements Initializable {
         String hoTenText = HoTen.getText().trim();
         String sodtText = sodt.getText().trim();
         String MSVText = MSV.getText().trim();
-        String diaChiText = diachi.getText().trim();
         if (!sodtText.matches("\\d+")) {
             signupmessage.setText("Phone number must contain only digits!");
             return;
         }
-        String insertQuery = "INSERT INTO users (HoTen, username, password, sodt, CCCD, Diachi) VALUES (?, ?, ?, ?, ?, ?)";
+        String insertQuery = "INSERT INTO Admin (HoTen, username, password, sdt, CCCD) VALUES (?, ?, ?, ?, ?)";
 
         try (PreparedStatement preparedStatement = connectDB.prepareStatement(insertQuery)) {
             preparedStatement.setString(1, hoTenText);
@@ -89,7 +86,6 @@ public class signup implements Initializable {
             preparedStatement.setString(3, password);
             preparedStatement.setString(4, sodtText);
             preparedStatement.setString(5, MSVText);
-            preparedStatement.setString(6, diaChiText);
             int rowsInserted = preparedStatement.executeUpdate();
             if (rowsInserted > 0) {
                 signupmessage.setText("Signup successful!");

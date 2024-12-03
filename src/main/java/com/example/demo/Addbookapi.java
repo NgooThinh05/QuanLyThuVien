@@ -91,7 +91,6 @@ public class Addbookapi {
     @FXML
     public void buttonaccept(ActionEvent event) throws SQLException {
         try {
-            // Tạo đối tượng Book và thiết lập các thuộc tính
             Book book = new Book();
             book.setTitle(title1.getText());
             book.setAuthor(author1.getText());
@@ -140,7 +139,7 @@ public class Addbookapi {
             Borrow borrow = new Borrow();
             String isbnValue = isbn.getText();
             borrow.setISBN(isbnValue);
-
+            borrow.setTitle(title1.getText());
             int soluong;
             try {
                 soluong = Integer.parseInt(slmuon.getText());

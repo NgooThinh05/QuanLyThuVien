@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.File;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
@@ -68,7 +69,7 @@ public class Login implements Initializable {
         DatabaseConnection connecnow = new DatabaseConnection();
         Connection connectiBD = connecnow.getConnection();
 
-        String verifylogin = "SELECT * FROM admin WHERE username = ? AND password = ?";
+        String verifylogin = "SELECT * FROM Admin WHERE username = ? AND password = ?";
 
         try (PreparedStatement preparedStatement = connectiBD.prepareStatement(verifylogin)) {
             preparedStatement.setString(1, usernametextfield.getText());

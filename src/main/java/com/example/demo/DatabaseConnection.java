@@ -170,7 +170,7 @@ public class DatabaseConnection {
     }
 
     public static void Borrowbook(Borrow borrow) throws SQLException {
-        String query = "insert into borrow(ISBN, soluong, ngaymuon, ngaytra, CCCD, trangthai) values(?,?,?,?,?,?)";
+        String query = "insert into borrow(ISBN, soluong, ngaymuon, ngaytra, CCCD, trangthai, tensach) values(?,?,?,?,?,?,?)";
         try (Connection conn = getConnection();
         PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             preparedStatement.setString(1, borrow.getISBN());
@@ -179,6 +179,7 @@ public class DatabaseConnection {
             preparedStatement.setString(4, borrow.getDatereturned());
             preparedStatement.setString(5, borrow.getCCCD());
             preparedStatement.setString(6, borrow.getStatus());
+            preparedStatement.setString(7, borrow.getTitle());
             preparedStatement.executeUpdate();
             System.out.println("Muon sách thành công!");
         } catch (SQLException e) {
@@ -206,7 +207,8 @@ public class DatabaseConnection {
                     String Datereturn = resultSet.getString("ngaytra");
                     String CCCD = resultSet.getString("CCCD");
                     String status = resultSet.getString("trangthai");
-                    Borrow borrow = new Borrow(id, ISBN, sl, Dateborrow, Datereturn, CCCD, status);
+                    String title = resultSet.getString("tensach");
+                    Borrow borrow = new Borrow(id, ISBN, sl, Dateborrow, Datereturn, CCCD, status, title);
                     borrows.add(borrow);
                 }
             }
@@ -322,12 +324,13 @@ public class DatabaseConnection {
 
     public static List<Borrow> searchborrow(String search) throws SQLException {
         List<Borrow> borrows = new ArrayList<>();
-        String query = "SELECT * FROM borrow where CCCD Like ? OR ISBN LIKE ?";
+        String query = "SELECT * FROM borrow where CCCD Like ? OR ISBN LIKE ? OR tensach like ?";
         try (Connection conn = getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             String searchPattern = "%" + search + "%";
             preparedStatement.setString(1, searchPattern);
             preparedStatement.setString(2, searchPattern);
+            preparedStatement.setString(3, searchPattern);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     String id = resultSet.getString("id");
@@ -337,7 +340,8 @@ public class DatabaseConnection {
                     String Datereturn = resultSet.getString("ngaytra");
                     String CCCD = resultSet.getString("CCCD");
                     String status = resultSet.getString("trangthai");
-                    Borrow borrow = new Borrow(id, ISBN, sl, Dateborrow, Datereturn, CCCD, status);
+                    String title = resultSet.getString("tensach");
+                    Borrow borrow = new Borrow(id, ISBN, sl, Dateborrow, Datereturn, CCCD, status, title);
                     borrows.add(borrow);
                 }
             }
