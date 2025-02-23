@@ -1,7 +1,7 @@
 # Application Library Management 
 ## Author
 Group Duyen Anh Te
-  1. Ngo Duc Thinh - 23020571
+  1. Ngo Duc Thinh - 23020574
   2. Pham Thanh Tu - 23020569
   3. Pham Cong Minh - 230205
 
